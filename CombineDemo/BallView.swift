@@ -11,7 +11,7 @@ import SwiftUI
 struct BallView: View {
     var forgroundColor: Color
     var backgroundColor: Color
-    @State var text: String
+    @Binding var text: String
     
     var body: some View {
         Text($text.value)
@@ -27,7 +27,7 @@ struct BallView: View {
 #if DEBUG
 struct BallView_Previews: PreviewProvider {
     static var previews: some View {
-        BallView(forgroundColor: .white, backgroundColor: .red, text: "B")
+        BallView(forgroundColor: .white, backgroundColor: .red, text: .constant("B"))
     }
 }
 #endif

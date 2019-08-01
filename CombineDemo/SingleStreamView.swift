@@ -7,30 +7,37 @@
 //
 
 import SwiftUI
-
+import Combine
 struct SingleStreamView: View {
     @State var percent: CGFloat = 0
     
     @State var text = ""
-    
-    @State var counter = 0
+            
+    @State var cancellable: Cancellable?
     
     var body: some View {
         VStack {
             BallTunnelView(percent: $percent, text: $text)
             
             HStack {
-                Button("Next") {
-                    self.percent = 0
-                    self.counter += 1
-                    self.text = String(self.counter)
-                    withAnimation(.easeInOut(duration: 1.5)) {
-                        self.percent = 1
+                Button("Subscribe") {
+                    self.cancellable = CombineService.shared.intervalSerialNumberPublisher()
+                        .sink(receiveCompletion: { (_) in
+                    }) { (value) in
+                        self.text = String(value)
+                        self.percent = 0
+                        withAnimation(.easeInOut(duration: 1.5)) {
+                                                self.percent = 1
+                                            }
+                        
                     }
+                    
+                    print(self.cancellable!)
                 }
                 
-                Button("Reset") {
-                    self.counter = 0
+                Button("Cancel") {
+                    self.cancellable?.cancel()
+                    self.percent = 0                    
                 }
             }
         }

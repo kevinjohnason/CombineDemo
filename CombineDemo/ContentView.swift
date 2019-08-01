@@ -11,14 +11,20 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        SingleStreamView()
+        NavigationView {
+            List {
+                NavigationLink(destination: SingleStreamView()) {
+                    MenuRow(detailViewName: "Serial Stream")
+                }
+            }
+        }.navigationBarTitle(Text("Combine Demo"))
     }
 }
 
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().previewDevice(PreviewDevice(rawValue: "iPad Pro (9.7-inch)"))
+        ContentView()//.previewDevice(PreviewDevice(rawValue: "iPad Pro (9.7-inch)"))
     }
 }
 #endif

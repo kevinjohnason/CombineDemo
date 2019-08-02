@@ -9,12 +9,17 @@
 import SwiftUI
 
 struct ContentView: View {
+        
+    let publisher = CombineService.shared.commonPublisher
     
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: SingleStreamView()) {
+                NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(publisher: publisher))) {
                     MenuRow(detailViewName: "Serial Stream")
+                }
+                NavigationLink(destination: MergeStreamView()) {
+                    MenuRow(detailViewName: "Merge Stream")
                 }
             }
         }

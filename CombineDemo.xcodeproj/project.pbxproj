@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		316A347A22F4B9D4002D24AA /* MergeStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347922F4B9D4002D24AA /* MergeStreamView.swift */; };
 		31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
 		7C38B58922F216190062EE99 /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58822F216190062EE99 /* BallTunnelView.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		316A347922F4B9D4002D24AA /* MergeStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeStreamView.swift; sourceTree = "<group>"; };
 		31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamViewModel.swift; sourceTree = "<group>"; };
 		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
 		7C38B58822F216190062EE99 /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				7C38B58822F216190062EE99 /* BallTunnelView.swift */,
 				31826A8222F3AC1C00A163A6 /* SinglgSteamView */,
 				7C38B58C22F255F40062EE99 /* CombineService.swift */,
+				316A347922F4B9D4002D24AA /* MergeStreamView.swift */,
 			);
 			path = CombineDemo;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
+				316A347A22F4B9D4002D24AA /* MergeStreamView.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
 				31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */,

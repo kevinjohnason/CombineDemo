@@ -9,28 +9,20 @@
 import SwiftUI
 import Combine
 
-
-extension AnyTransition {
-    static var moveAndFade: AnyTransition {
-        AnyTransition.move(edge: .trailing)
-    }
-    
-
-}
-
 struct SingleStreamView: View {
         
-    @ObservedObject var viewModel = SingleStreamViewModel()
+    @ObservedObject var viewModel: SingleStreamViewModel
+    
+    var color: Color = .green
     
     var body: some View {
         VStack {
-            BallTunnelView(percent: $viewModel.percent, text: $viewModel.text)            
+            BallTunnelView(percent: $viewModel.percent, text: $viewModel.text, color: color, animationSecond: viewModel.animationSeconds)
             
             HStack {
                 Button("Subscribe") {
                     self.viewModel.subscribe()
                 }
-                
                 Button("Cancel") {
                     self.viewModel.cancel()
                 }
@@ -42,7 +34,8 @@ struct SingleStreamView: View {
 #if DEBUG
 struct SingleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleStreamView().previewDevice(PreviewDevice(rawValue: "iPad Pro (9.7-inch)"))
+        SingleStreamView(viewModel: SingleStreamViewModel(publisher: CombineService.shared.commonPublisher))
+        //.previewDevice(PreviewDevice(rawValue: "iPad Pro (9.7-inch)"))
     }
 }
 #endif

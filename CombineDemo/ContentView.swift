@@ -17,7 +17,8 @@ struct ContentView: View {
                     MenuRow(detailViewName: "Serial Stream")
                 }
             }
-        }.navigationBarTitle(Text("Combine Demo"))
+        }
+        .navigationBarTitle(Text("Combine Demo").foregroundColor(.green))
     }
 }
 

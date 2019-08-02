@@ -18,9 +18,9 @@ class CombineService {
     
     func intervalSerialNumberPublisher() -> AnyPublisher<Int, Error> {
         let publisher1 = Just(1).tryMap { $0 }.delay(for: 0, scheduler: DispatchQueue.main)
-        let publisher2 = Just(2).tryMap { $0 }.delay(for: 1, scheduler: DispatchQueue.main)
-        let publisher3 = Just(3).tryMap { $0 }.delay(for: 2, scheduler: DispatchQueue.main)
-        let publisher4 = Just(4).tryMap { $0 }.delay(for: 3, scheduler: DispatchQueue.main)
+        let publisher2 = Just(2).tryMap { $0 }.delay(for: 2, scheduler: DispatchQueue.main)
+        let publisher3 = Just(3).tryMap { $0 }.delay(for: 4, scheduler: DispatchQueue.main)
+        let publisher4 = Just(4).tryMap { $0 }.delay(for: 6, scheduler: DispatchQueue.main)
         return Publishers.MergeMany([publisher1, publisher2, publisher3, publisher4]).tryMap { $0 }.eraseToAnyPublisher()
     }
     

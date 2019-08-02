@@ -12,19 +12,32 @@ struct BallTunnelView: View {
     
     @Binding var percent: CGFloat
     @Binding var text: String
-        
+    
     var offset: CGFloat {
         return -50 + percent * 500
     }
     
+    @State var animate: Bool  = false
+    
+    
+    var offsetAnimation: Animation? {
+        if percent == 0 {
+            return nil
+        }
+        return .easeInOut(duration: 1.5)
+    }
+    
     var body: some View {
         BallView(forgroundColor: .white, backgroundColor: .green, text: $text)
-        .offset(x: offset)
-        .padding()
-        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-        .background(Color.gray)
+                    .animation(nil)
+                    .offset(x: offset)
+                    .animation(offsetAnimation)
+                    .padding()
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    .background(Color.gray)
+         
     }
-        
+    
 }
 
 #if DEBUG

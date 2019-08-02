@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
 		7C38B58922F216190062EE99 /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58822F216190062EE99 /* BallTunnelView.swift */; };
 		7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58A22F254350062EE99 /* SingleStreamView.swift */; };
@@ -21,10 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuRow.swift; path = ../../../../../../System/Volumes/Data/Users/KevinMinority/Development/CombineDemo/CombineDemo/Menu/MenuRow.swift; sourceTree = "<group>"; };
-		7C38B58822F216190062EE99 /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BallTunnelView.swift; path = ../../../../../System/Volumes/Data/Users/KevinMinority/Development/CombineDemo/CombineDemo/BallTunnelView.swift; sourceTree = "<group>"; };
-		7C38B58A22F254350062EE99 /* SingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleStreamView.swift; path = ../../../../../System/Volumes/Data/Users/KevinMinority/Development/CombineDemo/CombineDemo/SingleStreamView.swift; sourceTree = "<group>"; };
-		7C38B58C22F255F40062EE99 /* CombineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CombineService.swift; path = ../../../../../System/Volumes/Data/Users/KevinMinority/Development/CombineDemo/CombineDemo/CombineService.swift; sourceTree = "<group>"; };
+		31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamViewModel.swift; sourceTree = "<group>"; };
+		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
+		7C38B58822F216190062EE99 /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
+		7C38B58A22F254350062EE99 /* SingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamView.swift; sourceTree = "<group>"; };
+		7C38B58C22F255F40062EE99 /* CombineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineService.swift; sourceTree = "<group>"; };
 		7C7A761822F1FF13007B76F9 /* CombineDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombineDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C7A761B22F1FF13007B76F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C7A761D22F1FF13007B76F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31826A8222F3AC1C00A163A6 /* SinglgSteamView */ = {
+			isa = PBXGroup;
+			children = (
+				7C38B58A22F254350062EE99 /* SingleStreamView.swift */,
+				31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */,
+			);
+			path = SinglgSteamView;
+			sourceTree = "<group>";
+		};
 		7C1F1C2022F2954F0018DDA5 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,7 +95,7 @@
 				7C7A762322F1FF15007B76F9 /* Preview Content */,
 				7C7A762F22F202C2007B76F9 /* BallView.swift */,
 				7C38B58822F216190062EE99 /* BallTunnelView.swift */,
-				7C38B58A22F254350062EE99 /* SingleStreamView.swift */,
+				31826A8222F3AC1C00A163A6 /* SinglgSteamView */,
 				7C38B58C22F255F40062EE99 /* CombineService.swift */,
 			);
 			path = CombineDemo;
@@ -172,6 +183,7 @@
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
+				31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */,
 				7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */,
 				7C7A762022F1FF13007B76F9 /* ContentView.swift in Sources */,
 				7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */,

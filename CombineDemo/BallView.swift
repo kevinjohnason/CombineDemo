@@ -18,9 +18,8 @@ struct BallView: View {
         .foregroundColor(forgroundColor)
         .padding()
         .background(backgroundColor)
-        .clipShape(Circle())
-        //.overlay(Circle().stroke(Color.white, lineWidth: 2))
-        //.shadow(radius: 1)
+        .clipShape(Circle())            
+        .shadow(radius: 1)
     }
 }
 

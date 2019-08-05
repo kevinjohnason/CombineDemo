@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-
+import Combine
 struct ContentView: View {
         
     let publisher = CombineService.shared.commonPublisher
@@ -18,12 +18,20 @@ struct ContentView: View {
                 NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(publisher: publisher))) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
-                NavigationLink(destination: MergeStreamView()) {
+                NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Error> in
+                    Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
+                }) {
                     MenuRow(detailViewName: "Merge Stream")
                 }
-            }
+                NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Error> in
+                    numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
+                }) {
+                    MenuRow(detailViewName: "FlatMap Stream")
+                }
+            }.navigationBarTitle(Text("Combine Demo"))
         }
-        .navigationBarTitle(Text("Combine Demo").foregroundColor(.green))
+        
+
     }
 }
 

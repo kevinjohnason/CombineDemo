@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		316A347A22F4B9D4002D24AA /* MergeStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347922F4B9D4002D24AA /* MergeStreamView.swift */; };
+		3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */; };
+		3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */; };
+		316A347C22F4DE44002D24AA /* AdvancedBallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* AdvancedBallTunnelView.swift */; };
 		31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
 		7C38B58922F216190062EE99 /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58822F216190062EE99 /* BallTunnelView.swift */; };
@@ -23,7 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		316A347922F4B9D4002D24AA /* MergeStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeStreamView.swift; sourceTree = "<group>"; };
+		3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStreamView.swift; sourceTree = "<group>"; };
+		3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoButton.swift; sourceTree = "<group>"; };
+		316A347B22F4DE44002D24AA /* AdvancedBallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBallTunnelView.swift; sourceTree = "<group>"; };
 		31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamViewModel.swift; sourceTree = "<group>"; };
 		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
 		7C38B58822F216190062EE99 /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
@@ -51,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3163E60B22F8B66B00E0FDF2 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		31826A8222F3AC1C00A163A6 /* SinglgSteamView */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +99,7 @@
 		7C7A761A22F1FF13007B76F9 /* CombineDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3163E60B22F8B66B00E0FDF2 /* UI */,
 				7C1F1C2022F2954F0018DDA5 /* Menu */,
 				7C7A761B22F1FF13007B76F9 /* AppDelegate.swift */,
 				7C7A761D22F1FF13007B76F9 /* SceneDelegate.swift */,
@@ -97,9 +110,10 @@
 				7C7A762322F1FF15007B76F9 /* Preview Content */,
 				7C7A762F22F202C2007B76F9 /* BallView.swift */,
 				7C38B58822F216190062EE99 /* BallTunnelView.swift */,
-				31826A8222F3AC1C00A163A6 /* SinglgSteamView */,
+				316A347B22F4DE44002D24AA /* AdvancedBallTunnelView.swift */,
 				7C38B58C22F255F40062EE99 /* CombineService.swift */,
-				316A347922F4B9D4002D24AA /* MergeStreamView.swift */,
+				31826A8222F3AC1C00A163A6 /* SinglgSteamView */,
+				3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */,
 			);
 			path = CombineDemo;
 			sourceTree = "<group>";
@@ -184,14 +198,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
-				316A347A22F4B9D4002D24AA /* MergeStreamView.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
+				316A347C22F4DE44002D24AA /* AdvancedBallTunnelView.swift in Sources */,
 				31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */,
 				7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */,
 				7C7A762022F1FF13007B76F9 /* ContentView.swift in Sources */,
+				3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */,
 				7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */,
 				7C38B58922F216190062EE99 /* BallTunnelView.swift in Sources */,
+				3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */,
 				7C7A763022F202C2007B76F9 /* BallView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

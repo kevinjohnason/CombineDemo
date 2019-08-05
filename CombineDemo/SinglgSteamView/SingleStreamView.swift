@@ -10,21 +10,27 @@ import SwiftUI
 import Combine
 
 struct SingleStreamView: View {
-        
+    
     @ObservedObject var viewModel: SingleStreamViewModel
     
     var color: Color = .green
     
+    var displayActionButtons: Bool = true
+    
     var body: some View {
         VStack {
-            BallTunnelView(percent: $viewModel.percent, text: $viewModel.text, color: color, animationSecond: viewModel.animationSeconds)
+            //BallTunnelView(percent: $viewModel.percent, text: $viewModel.text, color: color, animationSecond: viewModel.animationSeconds)
+            AdvancedBallTunnelView(percent: $viewModel.percent, text: $viewModel.text, historialTexts: $viewModel.previousTexts, color: color, animationSecond: viewModel.animationSeconds)
             
-            HStack {
-                Button("Subscribe") {
-                    self.viewModel.subscribe()
-                }
-                Button("Cancel") {
-                    self.viewModel.cancel()
+            if displayActionButtons {
+                HStack {
+                    CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {
+                      self.viewModel.subscribe()
+                    }
+                    
+                    CombineDemoButton(text: "Cancel", backgroundColor: .red) {
+                      self.viewModel.cancel()
+                    }
                 }
             }
         }

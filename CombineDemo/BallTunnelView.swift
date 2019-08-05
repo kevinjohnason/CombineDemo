@@ -18,7 +18,7 @@ struct BallTunnelView: View {
     
     var animationSecond: Double = 2
     
-    var ballRadius: CGFloat = 75
+    var ballRadius: CGFloat = 300
     
     var offsetAnimation: Animation? {
         if percent == 0 {
@@ -34,13 +34,13 @@ struct BallTunnelView: View {
     var body: some View {
         GeometryReader { tunnelGeometry in
             BallView(forgroundColor: .white, backgroundColor: self.color, text: self.$text)
-                .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
+            .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
             .animation(nil)
             .offset(x: self.offset(from: tunnelGeometry))
             .animation(self.offsetAnimation)
-                    .padding()
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .background(Color(red: 232/255.0, green: 232/255.0, blue: 232/255.0))
+            .padding()
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .background(Color(red: 232/255.0, green: 232/255.0, blue: 232/255.0))
         }
          
     }

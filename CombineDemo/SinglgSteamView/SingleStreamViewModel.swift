@@ -12,15 +12,18 @@ import Combine
 
 
 class SingleStreamViewModel: ObservableObject {
-        
+    
     let objectWillChange: AnyPublisher<Void, Never>
     let objectWillChangeSubject = PassthroughSubject<Void, Never>()
     let publisher: AnyPublisher<String, Error>
     let animationSeconds: Double = 1.5
     var percent: CGFloat = 0
     var text: String = ""
-    
     var cancellable: Cancellable? = nil
+    var previousTexts: [String] = []
+    var showHistory: Bool = true
+    
+    var displayCancellable: Cancellable? = nil
     
     init(publisher: AnyPublisher<String, Error>) {
         objectWillChange = objectWillChangeSubject.eraseToAnyPublisher()
@@ -29,14 +32,21 @@ class SingleStreamViewModel: ObservableObject {
     
     func subscribe() {
         self.cancellable = publisher.sink(receiveCompletion: { (_) in
-                                       }) { (value) in
-                                        self.display(text: value)
-                                   }
+        }) { (value) in
+            self.display(text: value)
+        }
+    }
+    
+    func cancel() {
+        self.cancellable?.cancel()
+        self.percent = 0
+        self.previousTexts.removeAll()
+        self.objectWillChangeSubject.send(())
     }
     
     private var pendingValues: [String] = []
     
-            
+    
     private func display(text: String, checkPending: Bool = true) {
         if checkPending {
             pendingValues.append(text)
@@ -46,27 +56,24 @@ class SingleStreamViewModel: ObservableObject {
         }
         self.text = text
         self.percent = 0
-        self.objectWillChangeSubject.send(())
+        self.objectWillChangeSubject.send(())                                        
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.percent = 1
-            self.objectWillChangeSubject.send(())            
+            self.objectWillChangeSubject.send(())
+            DispatchQueue.main.asyncAfter(deadline: .now() + self.animationSeconds + 0.1) {
+                self.previousTexts.append(text)
+                self.objectWillChangeSubject.send(())
+            }
             if self.pendingValues.count > 0 {
                 self.pendingValues.remove(at: 0)
-                if self.pendingValues.count > 0 {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + self.animationSeconds + 0.1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + self.animationSeconds + 0.1) {
+                    if self.pendingValues.count > 0 {
                         self.display(text: self.pendingValues[0], checkPending: false)
                     }
                 }
             }
         }
-    }
-    
-    
-    func cancel() {
-        self.cancellable?.cancel()
-        self.percent = 0
-        self.objectWillChangeSubject.send(())
-        self.pendingValues.removeAll()
     }
     
     

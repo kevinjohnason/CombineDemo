@@ -18,8 +18,8 @@ struct OperationStreamView: View {
     let mergeStreamViewModel: SingleStreamViewModel
     
     init(streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
-        numberStreamViewModel = SingleStreamViewModel(title: "numberPublisher: Just([1,2,3,4])", publisher: numberPublisher)
-        letterStreamViewModel = SingleStreamViewModel(title: "letterPublisher: Just([A,B,C,D])", publisher: letterPublisher)
+        numberStreamViewModel = SingleStreamViewModel(title: "Serial([1,2,3,4])", publisher: numberPublisher)
+        letterStreamViewModel = SingleStreamViewModel(title: "Serial([A,B,C,D])", publisher: letterPublisher)
         mergesPublisher = streamOperator(numberPublisher, letterPublisher)
         mergeStreamViewModel = SingleStreamViewModel(title: "Publishers.Merge(numberPublisher, letterPublisher)", publisher: self.mergesPublisher)
     }

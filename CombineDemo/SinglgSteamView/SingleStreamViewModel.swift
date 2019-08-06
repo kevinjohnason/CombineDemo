@@ -45,7 +45,7 @@ class SingleStreamViewModel: ObservableObject {
              self?.percent = 1
              self?.objectWillChangeSubject.send(())
              future(.success(text))
-         }.eraseToAnyPublisher()
+            }.eraseToAnyPublisher()
     }
     
     func subscribe() {
@@ -55,12 +55,10 @@ class SingleStreamViewModel: ObservableObject {
         .flatMap {
             self.start(text: $0)
         }.delay(for: 1.6, scheduler: DispatchQueue.main)
-            .sink(receiveCompletion: { (error) in
-                
-            }) {
-                self.previousTexts.append($0)
-                self.objectWillChangeSubject.send(())
-        }
+        .sink(receiveValue: {
+            self.previousTexts.append($0)
+            self.objectWillChangeSubject.send(())
+        })
     }
     
     func cancel() {

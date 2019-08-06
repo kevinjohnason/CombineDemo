@@ -15,10 +15,11 @@ struct SingleStreamView: View {
     
     var color: Color = .green
     
-    var displayActionButtons: Bool = true
+    var displayActionButtons: Bool = true        
     
     var body: some View {
         VStack {
+            Text(viewModel.title)
             //BallTunnelView(percent: $viewModel.percent, text: $viewModel.text, color: color, animationSecond: viewModel.animationSeconds)
             AdvancedBallTunnelView(percent: $viewModel.percent, text: $viewModel.text, historialTexts: $viewModel.previousTexts, color: color, animationSecond: viewModel.animationSeconds)
             
@@ -40,7 +41,7 @@ struct SingleStreamView: View {
 #if DEBUG
 struct SingleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleStreamView(viewModel: SingleStreamViewModel(publisher: CombineService.shared.commonPublisher))
+        SingleStreamView(viewModel: SingleStreamViewModel(title:"", publisher: CombineService.shared.commonPublisher))
         //.previewDevice(PreviewDevice(rawValue: "iPad Pro (9.7-inch)"))
     }
 }

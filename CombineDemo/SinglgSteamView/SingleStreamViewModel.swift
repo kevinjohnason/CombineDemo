@@ -13,6 +13,7 @@ import Combine
 
 class SingleStreamViewModel: ObservableObject {
     
+    let title: String
     let objectWillChange: AnyPublisher<Void, Never>
     let objectWillChangeSubject = PassthroughSubject<Void, Never>()
     let publisher: AnyPublisher<String, Error>
@@ -21,19 +22,44 @@ class SingleStreamViewModel: ObservableObject {
     var text: String = ""
     var cancellable: Cancellable? = nil
     var previousTexts: [String] = []
-    var showHistory: Bool = true
-    
+    var showHistory: Bool = true            
     var displayCancellable: Cancellable? = nil
     
-    init(publisher: AnyPublisher<String, Error>) {
+    init(title: String, publisher: AnyPublisher<String, Error>) {
+        self.title = title
         objectWillChange = objectWillChangeSubject.eraseToAnyPublisher()
         self.publisher = publisher
     }
     
+    func reset(text: String) -> AnyPublisher<String, Error> {
+        return Future<String, Error> {[weak self] future in
+            self?.text = text
+            self?.percent = 0
+            self?.objectWillChangeSubject.send(())
+            future(.success(text))
+        }.eraseToAnyPublisher()
+    }
+    
+    func start(text: String) -> AnyPublisher<String, Error> {
+        return Future<String, Error> {[weak self] future in
+             self?.percent = 1
+             self?.objectWillChangeSubject.send(())
+             future(.success(text))
+         }.eraseToAnyPublisher()
+    }
+    
     func subscribe() {
-        self.cancellable = publisher.sink(receiveCompletion: { (_) in
-        }) { (value) in
-            self.display(text: value)
+        self.cancellable = publisher.flatMap {
+            self.reset(text: $0)
+        }.delay(for: 0.2, scheduler: DispatchQueue.main)
+        .flatMap {
+            self.start(text: $0)
+        }.delay(for: 1.6, scheduler: DispatchQueue.main)
+            .sink(receiveCompletion: { (error) in
+                
+            }) {
+                self.previousTexts.append($0)
+                self.objectWillChangeSubject.send(())
         }
     }
     
@@ -43,38 +69,5 @@ class SingleStreamViewModel: ObservableObject {
         self.previousTexts.removeAll()
         self.objectWillChangeSubject.send(())
     }
-    
-    private var pendingValues: [String] = []
-    
-    
-    private func display(text: String, checkPending: Bool = true) {
-        if checkPending {
-            pendingValues.append(text)
-            if pendingValues.count > 1 {
-                return
-            }
-        }
-        self.text = text
-        self.percent = 0
-        self.objectWillChangeSubject.send(())                                        
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.percent = 1
-            self.objectWillChangeSubject.send(())
-            DispatchQueue.main.asyncAfter(deadline: .now() + self.animationSeconds + 0.1) {
-                self.previousTexts.append(text)
-                self.objectWillChangeSubject.send(())
-            }
-            if self.pendingValues.count > 0 {
-                self.pendingValues.remove(at: 0)
-                DispatchQueue.main.asyncAfter(deadline: .now() + self.animationSeconds + 0.1) {
-                    if self.pendingValues.count > 0 {
-                        self.display(text: self.pendingValues[0], checkPending: false)
-                    }
-                }
-            }
-        }
-    }
-    
     
 }

@@ -15,17 +15,17 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(publisher: publisher))) {
+                NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(title: "", publisher: publisher)).navigationBarTitle("Serial Stream")) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
                 NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Error> in
                     Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
-                }) {
+                }.navigationBarTitle("Merge")) {
                     MenuRow(detailViewName: "Merge Stream")
                 }
                 NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Error> in
                     numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
-                }) {
+                }.navigationBarTitle("FlatMap")) {
                     MenuRow(detailViewName: "FlatMap Stream")
                 }
             }.navigationBarTitle(Text("Combine Demo"))

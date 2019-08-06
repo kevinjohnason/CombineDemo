@@ -18,10 +18,10 @@ struct OperationStreamView: View {
     let mergeStreamViewModel: SingleStreamViewModel
     
     init(streamOperator: (AnyPublisher<String, Error>, AnyPublisher<String, Error>) -> AnyPublisher<String, Error>) {
-        numberStreamViewModel = SingleStreamViewModel(publisher: numberPublisher)
-        letterStreamViewModel = SingleStreamViewModel(publisher: letterPublisher)
+        numberStreamViewModel = SingleStreamViewModel(title: "numberPublisher: Just([1,2,3,4])", publisher: numberPublisher)
+        letterStreamViewModel = SingleStreamViewModel(title: "letterPublisher: Just([A,B,C,D])", publisher: letterPublisher)
         mergesPublisher = streamOperator(numberPublisher, letterPublisher)
-        mergeStreamViewModel = SingleStreamViewModel(publisher: self.mergesPublisher)
+        mergeStreamViewModel = SingleStreamViewModel(title: "Publishers.Merge(numberPublisher, letterPublisher)", publisher: self.mergesPublisher)
     }
     
     var body: some View {
@@ -41,7 +41,7 @@ struct OperationStreamView: View {
                                 self.letterStreamViewModel.cancel()
                                 self.mergeStreamViewModel.cancel()
                     }
-            }
+            }            
         }
     }
 }

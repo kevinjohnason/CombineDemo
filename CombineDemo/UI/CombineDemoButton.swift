@@ -17,7 +17,7 @@ struct CombineDemoButton: View {
     let buttonAction: () -> Void
     
     var body: some View {
-            Button(text, action: buttonAction)
+        Button(text, action: buttonAction).font(.footnote)
                            .padding(10)
                            .foregroundColor(Color.white)
                            .background(backgroundColor)

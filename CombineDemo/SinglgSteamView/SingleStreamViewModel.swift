@@ -16,7 +16,7 @@ class SingleStreamViewModel: ObservableObject {
     let title: String
     let objectWillChange: AnyPublisher<Void, Never>
     let objectWillChangeSubject = PassthroughSubject<Void, Never>()
-    let publisher: AnyPublisher<String, Error>
+    let publisher: AnyPublisher<String, Never>
     let animationSeconds: Double = 1.5
     var percent: CGFloat = 0
     var text: String = ""
@@ -25,14 +25,14 @@ class SingleStreamViewModel: ObservableObject {
     var showHistory: Bool = true            
     var displayCancellable: Cancellable? = nil
     
-    init(title: String, publisher: AnyPublisher<String, Error>) {
+    init(title: String, publisher: AnyPublisher<String, Never>) {
         self.title = title
         objectWillChange = objectWillChangeSubject.eraseToAnyPublisher()
         self.publisher = publisher
     }
     
-    func reset(text: String) -> AnyPublisher<String, Error> {
-        return Future<String, Error> {[weak self] future in
+    func reset(text: String) -> AnyPublisher<String, Never> {
+        return Future<String, Never> {[weak self] future in
             self?.text = text
             self?.percent = 0
             self?.objectWillChangeSubject.send(())
@@ -40,8 +40,8 @@ class SingleStreamViewModel: ObservableObject {
         }.eraseToAnyPublisher()
     }
     
-    func start(text: String) -> AnyPublisher<String, Error> {
-        return Future<String, Error> {[weak self] future in
+    func start(text: String) -> AnyPublisher<String, Never> {
+        return Future<String, Never> {[weak self] future in
              self?.percent = 1
              self?.objectWillChangeSubject.send(())
              future(.success(text))

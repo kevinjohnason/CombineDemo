@@ -18,12 +18,12 @@ struct ContentView: View {
                 NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(title: "", publisher: publisher)).navigationBarTitle("Serial Stream")) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
-                NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Error> in
+                NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                     Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
                 }.navigationBarTitle("Merge")) {
                     MenuRow(detailViewName: "Merge Stream")
                 }
-                NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Error> in
+                NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                     numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
                 }.navigationBarTitle("FlatMap")) {
                     MenuRow(detailViewName: "FlatMap Stream")

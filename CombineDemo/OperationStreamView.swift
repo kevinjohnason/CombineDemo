@@ -12,12 +12,12 @@ import Combine
 struct OperationStreamView: View {
     let numberPublisher = CombineService.shared.commonPublisher.share().eraseToAnyPublisher()
     let letterPublisher = CombineService.shared.serialLetterPublisher().share().eraseToAnyPublisher()
-    let mergesPublisher: AnyPublisher<String, Error>
+    let mergesPublisher: AnyPublisher<String, Never>
     let numberStreamViewModel: SingleStreamViewModel
     let letterStreamViewModel: SingleStreamViewModel
     let mergeStreamViewModel: SingleStreamViewModel
     
-    init(streamOperator: (AnyPublisher<String, Error>, AnyPublisher<String, Error>) -> AnyPublisher<String, Error>) {
+    init(streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
         numberStreamViewModel = SingleStreamViewModel(title: "numberPublisher: Just([1,2,3,4])", publisher: numberPublisher)
         letterStreamViewModel = SingleStreamViewModel(title: "letterPublisher: Just([A,B,C,D])", publisher: letterPublisher)
         mergesPublisher = streamOperator(numberPublisher, letterPublisher)
@@ -49,8 +49,8 @@ struct OperationStreamView: View {
 #if DEBUG
 struct FlatMapStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        OperationStreamView { (_, _) -> AnyPublisher<String, Error> in
-            Just("").tryMap { $0 }.eraseToAnyPublisher()
+        OperationStreamView { (_, _) -> AnyPublisher<String, Never> in
+            Just("").eraseToAnyPublisher()
         }
     }
 }

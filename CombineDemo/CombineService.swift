@@ -12,27 +12,27 @@ import Combine
 class CombineService {
     static let shared = CombineService()
     
-    lazy var commonPublisher: AnyPublisher<String, Error> = self.serialNumberPublisher().map { String($0) }.eraseToAnyPublisher()
+    lazy var commonPublisher: AnyPublisher<String, Never> = self.serialNumberPublisher().map { String($0) }.eraseToAnyPublisher()
     
-    func customSerialNumberPublisher() -> AnyPublisher<Int, Error> {
+    func customSerialNumberPublisher() -> AnyPublisher<Int, Never> {
         SerialNumberPublisher().eraseToAnyPublisher()
     }
     
-    func serialNumberPublisher() -> AnyPublisher<Int, Error> {
-        let publisher1 = Just(1).tryMap { $0 }.delay(for: 0, scheduler: DispatchQueue.main)
-        let publisher2 = Just(2).tryMap { $0 }.delay(for: 2, scheduler: DispatchQueue.main)
-        let publisher3 = Just(3).tryMap { $0 }.delay(for: 4, scheduler: DispatchQueue.main)
-        let publisher4 = Just(4).tryMap { $0 }.delay(for: 6, scheduler: DispatchQueue.main)
-        return Publishers.MergeMany([publisher1, publisher2, publisher3, publisher4]).tryMap { $0 }.eraseToAnyPublisher()
+    func serialNumberPublisher() -> AnyPublisher<Int, Never> {
+        let publisher1 = Just(1).delay(for: 0, scheduler: DispatchQueue.main)
+        let publisher2 = Just(2).delay(for: 2, scheduler: DispatchQueue.main)
+        let publisher3 = Just(3).delay(for: 4, scheduler: DispatchQueue.main)
+        let publisher4 = Just(4).delay(for: 6, scheduler: DispatchQueue.main)
+        return Publishers.MergeMany([publisher1, publisher2, publisher3, publisher4]).eraseToAnyPublisher()
     }
     
     
-    func serialLetterPublisher() -> AnyPublisher<String, Error> {
-        let publisher1 = Just("A").tryMap { $0 }.delay(for: 0, scheduler: DispatchQueue.main)
-        let publisher2 = Just("B").tryMap { $0 }.delay(for: 2, scheduler: DispatchQueue.main)
-        let publisher3 = Just("C").tryMap { $0 }.delay(for: 4, scheduler: DispatchQueue.main)
-        let publisher4 = Just("D").tryMap { $0 }.delay(for: 6, scheduler: DispatchQueue.main)
-        return Publishers.MergeMany([publisher1, publisher2, publisher3, publisher4]).tryMap { $0 }.eraseToAnyPublisher()
+    func serialLetterPublisher() -> AnyPublisher<String, Never> {
+        let publisher1 = Just("A").delay(for: 0, scheduler: DispatchQueue.main)
+        let publisher2 = Just("B").delay(for: 2, scheduler: DispatchQueue.main)
+        let publisher3 = Just("C").delay(for: 4, scheduler: DispatchQueue.main)
+        let publisher4 = Just("D").delay(for: 6, scheduler: DispatchQueue.main)
+        return Publishers.MergeMany([publisher1, publisher2, publisher3, publisher4]).eraseToAnyPublisher()
     }
     
     
@@ -46,7 +46,7 @@ class SerialNumberPublisher: Publisher {
     }
     typealias Output = Int
     
-    typealias Failure = Error
+    typealias Failure = Never
     
     let numbers: [Int] = [1, 2, 3, 4]
         

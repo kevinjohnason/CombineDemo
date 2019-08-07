@@ -10,18 +10,18 @@ import SwiftUI
 import Combine
 
 struct OperationStreamView: View {
-    let numberPublisher = CombineService.shared.commonPublisher.share().eraseToAnyPublisher()
-    let letterPublisher = CombineService.shared.serialLetterPublisher().share().eraseToAnyPublisher()
+    let numberPublisher = CombineService.shared.commonPublisher.eraseToAnyPublisher()
+    let letterPublisher = CombineService.shared.serialLetterPublisher().eraseToAnyPublisher()
     let mergesPublisher: AnyPublisher<String, Never>
     let numberStreamViewModel: SingleStreamViewModel
     let letterStreamViewModel: SingleStreamViewModel
-    let mergeStreamViewModel: SingleStreamViewModel
+    let operatorStreamViewModel: SingleStreamViewModel
     
     init(streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
         numberStreamViewModel = SingleStreamViewModel(title: "Serial([1,2,3,4])", publisher: numberPublisher)
         letterStreamViewModel = SingleStreamViewModel(title: "Serial([A,B,C,D])", publisher: letterPublisher)
         mergesPublisher = streamOperator(numberPublisher, letterPublisher)
-        mergeStreamViewModel = SingleStreamViewModel(title: "Publishers.Merge(numberPublisher, letterPublisher)", publisher: self.mergesPublisher)
+        operatorStreamViewModel = SingleStreamViewModel(title: "Publishers.Merge(numberPublisher, letterPublisher)", publisher: self.mergesPublisher)
     }
     
     var body: some View {
@@ -29,18 +29,18 @@ struct OperationStreamView: View {
             SingleStreamView(viewModel: numberStreamViewModel)
             SingleStreamView(viewModel: letterStreamViewModel, color: .red)
             Spacer(minLength: 80)
-            SingleStreamView(viewModel: mergeStreamViewModel, color: .yellow, displayActionButtons: false)
+            SingleStreamView(viewModel: operatorStreamViewModel, color: .yellow, displayActionButtons: false)
             HStack {
                 CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {
                     self.numberStreamViewModel.subscribe()
                     self.letterStreamViewModel.subscribe()
-                    self.mergeStreamViewModel.subscribe()
-                                   }
+                    self.operatorStreamViewModel.subscribe()
+                }
                 CombineDemoButton(text: "Cancel", backgroundColor: .red) {
-                                self.numberStreamViewModel.cancel()
-                                self.letterStreamViewModel.cancel()
-                                self.mergeStreamViewModel.cancel()
-                    }
+                    self.numberStreamViewModel.cancel()
+                    self.letterStreamViewModel.cancel()
+                    self.operatorStreamViewModel.cancel()
+                }
             }            
         }
     }

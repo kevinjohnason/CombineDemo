@@ -12,29 +12,34 @@ import Combine
 class CombineService {
     static let shared = CombineService()
     
-    lazy var commonPublisher: AnyPublisher<String, Never> = self.serialNumberPublisher().map { String($0) }.eraseToAnyPublisher()
+    lazy var commonPublisher: AnyPublisher<String, Never> = self.serialNumberPublisher()
     
     func customSerialNumberPublisher() -> AnyPublisher<Int, Never> {
         SerialNumberPublisher().eraseToAnyPublisher()
     }
     
-    func serialNumberPublisher() -> AnyPublisher<Int, Never> {
-        let publisher1 = Just(1).delay(for: 0, scheduler: DispatchQueue.main)
-        let publisher2 = Just(2).delay(for: 2, scheduler: DispatchQueue.main)
-        let publisher3 = Just(3).delay(for: 4, scheduler: DispatchQueue.main)
-        let publisher4 = Just(4).delay(for: 6, scheduler: DispatchQueue.main)
-        return Publishers.MergeMany([publisher1, publisher2, publisher3, publisher4]).eraseToAnyPublisher()
+    func serialNumberPublisher() -> AnyPublisher<String, Never> {
+        return Publishers.Sequence(sequence: 1...4).map { String($0) }.eraseToAnyPublisher()
     }
-    
-    
+        
     func serialLetterPublisher() -> AnyPublisher<String, Never> {
-        let publisher1 = Just("A").delay(for: 0, scheduler: DispatchQueue.main)
-        let publisher2 = Just("B").delay(for: 2, scheduler: DispatchQueue.main)
-        let publisher3 = Just("C").delay(for: 4, scheduler: DispatchQueue.main)
-        let publisher4 = Just("D").delay(for: 6, scheduler: DispatchQueue.main)
-        return Publishers.MergeMany([publisher1, publisher2, publisher3, publisher4]).eraseToAnyPublisher()
+        return Publishers.Sequence(sequence: ["A", "B", "C", "D"]).eraseToAnyPublisher()
     }
     
+    func interval<T>(arr: [T], seconds: Double) -> AnyPublisher<T, Never> {
+        let intervalPublishers = arr.map { Just($0).delay(for: .seconds(seconds), scheduler: DispatchQueue.main).eraseToAnyPublisher() }
+        
+        var publisher: AnyPublisher<T, Never>?
+        
+        for intervalPublisher in intervalPublishers {
+            if publisher == nil {
+                publisher = intervalPublisher
+                continue
+            }
+            publisher = publisher?.append(intervalPublisher).eraseToAnyPublisher()
+        }
+        return publisher!
+    }
     
 }
 

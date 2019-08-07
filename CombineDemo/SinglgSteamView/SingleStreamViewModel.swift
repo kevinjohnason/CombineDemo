@@ -24,47 +24,73 @@ class SingleStreamViewModel: ObservableObject {
     var previousTexts: [String] = []
     var showHistory: Bool = true            
     var displayCancellable: Cancellable? = nil
+    let animatingValues: CurrentValueSubject<[String], Never> = CurrentValueSubject([])
+    
+    var animationCancellable: Cancellable? = nil
     
     init(title: String, publisher: AnyPublisher<String, Never>) {
         self.title = title
         objectWillChange = objectWillChangeSubject.eraseToAnyPublisher()
         self.publisher = publisher
+        setupAnimationSubscriber()
     }
     
-    func reset(text: String) -> AnyPublisher<String, Never> {
-        return Future<String, Never> {[weak self] future in
-            self?.text = text
+    func setupAnimationSubscriber() {
+        animationCancellable = animatingValues
+            .throttle(for: .seconds(0.1), scheduler: DispatchQueue.main, latest: true)
+            .filter { $0.count > 0 }
+            .flatMap { self.reset(texts: $0) }
+            .delay(for: .seconds(0.2), scheduler: DispatchQueue.main)
+            .flatMap { self.start(texts: $0) }
+            .delay(for: .seconds(animationSeconds), scheduler: DispatchQueue.main)
+            .flatMap { self.finish(texts: $0) }
+            .sink {
+                self.animatingValues.send($0)
+            }
+    }
+    
+    func reset(texts: [String]) -> AnyPublisher<[String], Never> {
+        return Future<[String], Never> {[weak self] future in
+            self?.text = texts[0]
             self?.percent = 0
             self?.objectWillChangeSubject.send(())
-            future(.success(text))
+            future(.success(texts))
         }.eraseToAnyPublisher()
     }
     
-    func start(text: String) -> AnyPublisher<String, Never> {
-        return Future<String, Never> {[weak self] future in
+    func start(texts: [String]) -> AnyPublisher<[String], Never> {
+        return Future<[String], Never> {[weak self] future in
              self?.percent = 1
              self?.objectWillChangeSubject.send(())
-             future(.success(text))
+            future(.success(texts))
             }.eraseToAnyPublisher()
     }
     
+    func finish(texts: [String]) -> AnyPublisher<[String], Never> {
+        return Future<[String], Never> {[weak self] future in
+            self?.previousTexts.append(texts[0])
+            var newTexts = texts
+            newTexts.removeFirst(1)
+            self?.objectWillChangeSubject.send(())
+            future(.success(newTexts))
+            }.eraseToAnyPublisher()
+    }
+    
+        
     func subscribe() {
-        self.cancellable = publisher.flatMap {
-            self.reset(text: $0)
-        }.delay(for: 0.2, scheduler: DispatchQueue.main)
-        .flatMap {
-            self.start(text: $0)
-        }.delay(for: 1.6, scheduler: DispatchQueue.main)
-        .sink(receiveValue: {
-            self.previousTexts.append($0)
-            self.objectWillChangeSubject.send(())
-        })
+        self.cancellable = publisher
+                            .sink(receiveValue: {
+                                var currentAnimatedValues = self.animatingValues.value
+                                currentAnimatedValues.append($0)
+                                self.animatingValues.send(currentAnimatedValues)
+                            })
     }
     
     func cancel() {
         self.cancellable?.cancel()
         self.percent = 0
         self.previousTexts.removeAll()
+        self.animatingValues.send([])
         self.objectWillChangeSubject.send(())
     }
     

@@ -13,7 +13,7 @@ struct DoubleBallTunnelView: View {
     @Binding var text1: String
     @Binding var text2: String
     @State var animate: Bool  = false
-    @Binding var historialTexts: [String]
+    @Binding var historialTexts: [(String, String)]
     var color: Color = .green
     
     var animationSecond: Double = 2
@@ -40,9 +40,9 @@ struct DoubleBallTunnelView: View {
                           .animation(self.offsetAnimation).zIndex(99)
                       Spacer()
                       HStack(spacing: 0) {
-                          ForEach(self.historialTexts.reversed(), id: \.self) { text in
-                              BallView(forgroundColor: .white, backgroundColor: self.color, text: .constant(text))
-                                  .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
+                        ForEach(self.historialTexts.reversed(), id: \.self.0) { text in
+                            DoubleBallView(forgroundColor: .white, backgroundColor: self.color, text1: .constant(text.0), text2: .constant(text.1))
+                                .frame(width: self.ballRadius * 2, height: self.ballRadius * 2, alignment: .center)
                           }
                       }.animation(nil)
                   }.padding([.top, .bottom], 5)

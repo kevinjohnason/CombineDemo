@@ -21,7 +21,7 @@ struct ContentView: View {
                 NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(title: "Publishers.Sequence([\"1\", \"2\", \"3\", \"4\")", publisher: publisher)).navigationBarTitle("Serial Stream")) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
-                NavigationLink(destination: DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.map { $0 * 10 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.map { $0 * 2 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
                     publisher.map { Int($0)! }.map { String($0 * 2) }.eraseToAnyPublisher()
                 })) {
                     MenuRow(detailViewName: "Map Stream")

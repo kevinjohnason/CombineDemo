@@ -44,7 +44,7 @@ struct DoubleBallTunnelView: View {
                             DoubleBallView(forgroundColor: .white, backgroundColor: self.color, text1: .constant(text.0), text2: .constant(text.1))
                                 .frame(width: self.ballRadius * 2, height: self.ballRadius, alignment: .center)
                           }
-                      }.animation(nil)
+                      }
                   }.padding([.top, .bottom], 5)
               .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
               .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))

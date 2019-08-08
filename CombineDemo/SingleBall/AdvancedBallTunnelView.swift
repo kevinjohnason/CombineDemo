@@ -21,7 +21,7 @@ struct AdvancedBallTunnelView: View {
     
     var offsetAnimation: Animation? {
         if percent == 0 {
-            return nil
+            return .none
         }
         return .easeInOut(duration: animationSecond)
     }
@@ -42,10 +42,9 @@ struct AdvancedBallTunnelView: View {
                     HStack(spacing: 0) {
                         ForEach(self.historialTexts.reversed(), id: \.self) { text in
                             BallView(forgroundColor: .white, backgroundColor: self.color, text: .constant(text))
-                                .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
+                                .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)                                
                         }
-                        
-                    }.animation(nil)
+                    }
                 }.padding([.top, .bottom], 5)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
             .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))

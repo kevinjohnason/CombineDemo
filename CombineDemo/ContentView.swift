@@ -40,6 +40,9 @@ struct ContentView: View {
                     numberPublisher.append(letterPublisher).eraseToAnyPublisher()
                 }.navigationBarTitle("Append")) {
                     MenuRow(detailViewName: "Append Stream")
+                }                
+                NavigationLink(destination: CombineStreamView()) {
+                    MenuRow(detailViewName: "Combine Stream")
                 }
             }.navigationBarTitle(Text("Combine Demo"))
         }

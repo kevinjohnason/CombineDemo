@@ -12,23 +12,23 @@ import Combine
 struct OperationStreamView: View {
     let numberPublisher = CombineService.shared.commonPublisher.eraseToAnyPublisher()
     let letterPublisher = CombineService.shared.serialLetterPublisher().eraseToAnyPublisher()
-    let mergesPublisher: AnyPublisher<String, Never>
+    let operatorPublisher: AnyPublisher<String, Never>
     let numberStreamViewModel: SingleStreamViewModel
     let letterStreamViewModel: SingleStreamViewModel
     let operatorStreamViewModel: SingleStreamViewModel
     
-    init(streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
-        numberStreamViewModel = SingleStreamViewModel(title: "Serial([1,2,3,4])", publisher: numberPublisher)
-        letterStreamViewModel = SingleStreamViewModel(title: "Serial([A,B,C,D])", publisher: letterPublisher)
-        mergesPublisher = streamOperator(numberPublisher, letterPublisher)
-        operatorStreamViewModel = SingleStreamViewModel(title: "Publishers.Merge(numberPublisher, letterPublisher)", publisher: self.mergesPublisher)
+    init(title: String, streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
+        numberStreamViewModel = SingleStreamViewModel(title: "A: Serial([1,2,3,4])", publisher: numberPublisher)
+        letterStreamViewModel = SingleStreamViewModel(title: "B: Serial([A,B,C,D])", publisher: letterPublisher)
+        operatorPublisher = streamOperator(numberPublisher, letterPublisher)
+        operatorStreamViewModel = SingleStreamViewModel(title: title, publisher: self.operatorPublisher)
     }
     
     var body: some View {
         VStack {
             SingleStreamView(viewModel: numberStreamViewModel)
             SingleStreamView(viewModel: letterStreamViewModel, color: .red)
-            Spacer(minLength: 80)
+            Spacer(minLength: 40)
             SingleStreamView(viewModel: operatorStreamViewModel, color: .yellow, displayActionButtons: false)
             HStack {
                 CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {
@@ -41,7 +41,7 @@ struct OperationStreamView: View {
                     self.letterStreamViewModel.cancel()
                     self.operatorStreamViewModel.cancel()
                 }
-            }            
+            }.padding()
         }
     }
 }
@@ -49,7 +49,7 @@ struct OperationStreamView: View {
 #if DEBUG
 struct FlatMapStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        OperationStreamView { (_, _) -> AnyPublisher<String, Never> in
+        OperationStreamView(title: "") { (_, _) -> AnyPublisher<String, Never> in
             Just("").eraseToAnyPublisher()
         }
     }

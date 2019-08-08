@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */; };
 		3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */; };
 		3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */; };
 		316A347C22F4DE44002D24AA /* AdvancedBallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* AdvancedBallTunnelView.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStreamView.swift; sourceTree = "<group>"; };
 		3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStreamView.swift; sourceTree = "<group>"; };
 		3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoButton.swift; sourceTree = "<group>"; };
 		316A347B22F4DE44002D24AA /* AdvancedBallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBallTunnelView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				7C38B58C22F255F40062EE99 /* CombineService.swift */,
 				31826A8222F3AC1C00A163A6 /* SinglgSteamView */,
 				3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */,
+				3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */,
 			);
 			path = CombineDemo;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
+				3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */,
 				316A347C22F4DE44002D24AA /* AdvancedBallTunnelView.swift in Sources */,
 				31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */,
 				7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */,

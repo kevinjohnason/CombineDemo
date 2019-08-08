@@ -20,23 +20,22 @@ class SingleStreamViewModel: ObservableObject {
     let animationSeconds: Double = 1.5
     var percent: CGFloat = 0
     var text: String = ""
-    var cancellable: Cancellable? = nil
+    var userCancellable: Cancellable? = nil
     var previousTexts: [String] = []
     var showHistory: Bool = true            
     var displayCancellable: Cancellable? = nil
-    let animatingValues: CurrentValueSubject<[String], Never> = CurrentValueSubject([])
-    
+    @Published var animatingValues: [String] = []
     var animationCancellable: Cancellable? = nil
     
     init(title: String, publisher: AnyPublisher<String, Never>) {
         self.title = title
         objectWillChange = objectWillChangeSubject.eraseToAnyPublisher()
         self.publisher = publisher
-        setupAnimationSubscriber()
     }
     
     func setupAnimationSubscriber() {
-        animationCancellable = animatingValues
+        animationCancellable =
+            $animatingValues
             .throttle(for: .seconds(0.1), scheduler: DispatchQueue.main, latest: true)
             .filter { $0.count > 0 }
             .flatMap { self.reset(texts: $0) }
@@ -44,9 +43,8 @@ class SingleStreamViewModel: ObservableObject {
             .flatMap { self.start(texts: $0) }
             .delay(for: .seconds(animationSeconds), scheduler: DispatchQueue.main)
             .flatMap { self.finish(texts: $0) }
-            .sink {
-                self.animatingValues.send($0)
-            }
+            .eraseToAnyPublisher()
+            .assign(to:\SingleStreamViewModel.animatingValues, on: self)
     }
     
     func reset(texts: [String]) -> AnyPublisher<[String], Never> {
@@ -78,19 +76,22 @@ class SingleStreamViewModel: ObservableObject {
     
         
     func subscribe() {
-        self.cancellable = publisher
-                            .sink(receiveValue: {
-                                var currentAnimatedValues = self.animatingValues.value
-                                currentAnimatedValues.append($0)
-                                self.animatingValues.send(currentAnimatedValues)
-                            })
+        setupAnimationSubscriber()
+        userCancellable =
+            publisher
+                .map {
+                    var animatingValues = self.animatingValues
+                    animatingValues.append($0)
+                    return animatingValues
+            }.assign(to:\SingleStreamViewModel.animatingValues, on: self)
     }
     
     func cancel() {
-        self.cancellable?.cancel()
+        self.animationCancellable?.cancel()
+        self.userCancellable?.cancel()
         self.percent = 0
         self.previousTexts.removeAll()
-        self.animatingValues.send([])
+        self.animatingValues.removeAll()
         self.objectWillChangeSubject.send(())
     }
     

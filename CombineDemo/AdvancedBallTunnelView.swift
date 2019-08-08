@@ -37,7 +37,7 @@ struct AdvancedBallTunnelView: View {
                     BallView(forgroundColor: .white, backgroundColor: self.color, text: self.$text)
                         .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
                         .offset(x: self.offset(from: tunnelGeometry))
-                        .animation(self.offsetAnimation)
+                        .animation(self.offsetAnimation).zIndex(99)
                     Spacer()
                     HStack(spacing: 0) {
                         ForEach(self.historialTexts.reversed(), id: \.self) { text in
@@ -46,9 +46,9 @@ struct AdvancedBallTunnelView: View {
                         }
                         
                     }.animation(nil)
-                }.padding([.top, .bottom])
+                }.padding([.top, .bottom], 5)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-            .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))            
+            .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))
         }
     }
 }

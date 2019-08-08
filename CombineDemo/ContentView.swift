@@ -14,19 +14,32 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(title: "", publisher: publisher)).navigationBarTitle("Serial Stream")) {
+            List {                
+                NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(title: "Just(\"A\")", publisher: Just("A").eraseToAnyPublisher())).navigationBarTitle("Single Value")) {
+                           MenuRow(detailViewName: "Single Value")
+                    }
+                NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(title: "Publishers.Sequence([\"1\", \"2\", \"3\", \"4\")", publisher: publisher)).navigationBarTitle("Serial Stream")) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
-                NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.map { $0 * 10 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+                    publisher.map { Int($0)! }.map { String($0 * 2) }.eraseToAnyPublisher()
+                })) {
+                    MenuRow(detailViewName: "Map Stream")
+                }
+                NavigationLink(destination: OperationStreamView(title: "Publishers.Merge(A, B)") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                     Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
                 }.navigationBarTitle("Merge")) {
                     MenuRow(detailViewName: "Merge Stream")
                 }
-                NavigationLink(destination: OperationStreamView { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: OperationStreamView(title: "A.flatMap { _ in B } ") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                     numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
                 }.navigationBarTitle("FlatMap")) {
                     MenuRow(detailViewName: "FlatMap Stream")
+                }
+                NavigationLink(destination: OperationStreamView(title: "A.append(B) ") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                    numberPublisher.append(letterPublisher).eraseToAnyPublisher()
+                }.navigationBarTitle("Append")) {
+                    MenuRow(detailViewName: "Append Stream")
                 }
             }.navigationBarTitle(Text("Combine Demo"))
         }

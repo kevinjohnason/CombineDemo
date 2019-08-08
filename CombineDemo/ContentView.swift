@@ -41,7 +41,7 @@ struct ContentView: View {
                 }.navigationBarTitle("Append")) {
                     MenuRow(detailViewName: "Append Stream")
                 }                
-                NavigationLink(destination: combinSingleStreamView().navigationBarTitle("Zip")) {
+                NavigationLink(destination: combineResultStreamView().navigationBarTitle("Zip")) {
                     MenuRow(detailViewName: "Combine Stream")
                 }
             }.navigationBarTitle(Text("Combine Demo"))
@@ -54,6 +54,12 @@ struct ContentView: View {
         return CombineSingleStreamView(viewModel:
             CombineSingleStreamViewModel(title: "Zip", publisher: combineLatestPublisher))
                 
+    }
+    
+    func combineResultStreamView() -> CombineResultStreamView {
+        CombineResultStreamView(title: "Zip") { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in
+            Publishers.Zip(numberPublisher, letterPublisher).eraseToAnyPublisher()
+        }
     }
 }
 

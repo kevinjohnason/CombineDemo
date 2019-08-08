@@ -28,21 +28,21 @@ struct DoubleBallTunnelView: View {
     }
     
     func offset(from tunnelGeometry: GeometryProxy) -> CGFloat {
-        return -ballRadius * 3 / 2 + (tunnelGeometry.size.width +  ballRadius * 2)  * percent
+        return -ballRadius * 3 * 2 / 2 + (tunnelGeometry.size.width +  ballRadius * 2 * 2)  * percent
     }
     
     var body: some View {
               GeometryReader { tunnelGeometry in
                   HStack(spacing: 0) {
                     DoubleBallView(forgroundColor: .white, backgroundColor: self.color, text1: self.$text1, text2: self.$text2)
-                          .frame(width: self.ballRadius * 2, height: self.ballRadius * 2, alignment: .center)
+                          .frame(width: self.ballRadius * 2, height: self.ballRadius, alignment: .center)
                           .offset(x: self.offset(from: tunnelGeometry))
                           .animation(self.offsetAnimation).zIndex(99)
                       Spacer()
                       HStack(spacing: 0) {
                         ForEach(self.historialTexts.reversed(), id: \.self.0) { text in
                             DoubleBallView(forgroundColor: .white, backgroundColor: self.color, text1: .constant(text.0), text2: .constant(text.1))
-                                .frame(width: self.ballRadius * 2, height: self.ballRadius * 2, alignment: .center)
+                                .frame(width: self.ballRadius * 2, height: self.ballRadius, alignment: .center)
                           }
                       }.animation(nil)
                   }.padding([.top, .bottom], 5)

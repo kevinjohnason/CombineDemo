@@ -14,8 +14,8 @@ import Combine
 class SingleStreamViewModel: ObservableObject {
     
     let title: String
-    let objectWillChange: AnyPublisher<Void, Never>
-    let objectWillChangeSubject = PassthroughSubject<Void, Never>()
+    let objectWillChange: PassthroughSubject<Void, Never> =
+                    PassthroughSubject<Void, Never>()
     let publisher: AnyPublisher<String, Never>
     let animationSeconds: Double = 1.5
     var percent: CGFloat = 0
@@ -29,7 +29,6 @@ class SingleStreamViewModel: ObservableObject {
     
     init(title: String, publisher: AnyPublisher<String, Never>) {
         self.title = title
-        objectWillChange = objectWillChangeSubject.eraseToAnyPublisher()
         self.publisher = publisher
     }
     
@@ -51,7 +50,7 @@ class SingleStreamViewModel: ObservableObject {
         return Future<[String], Never> {[weak self] future in
             self?.text = texts[0]
             self?.percent = 0
-            self?.objectWillChangeSubject.send(())
+            self?.objectWillChange.send(())
             future(.success(texts))
         }.eraseToAnyPublisher()
     }
@@ -59,7 +58,7 @@ class SingleStreamViewModel: ObservableObject {
     func start(texts: [String]) -> AnyPublisher<[String], Never> {
         return Future<[String], Never> {[weak self] future in
              self?.percent = 1
-             self?.objectWillChangeSubject.send(())
+             self?.objectWillChange.send(())
             future(.success(texts))
             }.eraseToAnyPublisher()
     }
@@ -69,7 +68,7 @@ class SingleStreamViewModel: ObservableObject {
             self?.previousTexts.append(texts[0])
             var newTexts = texts
             newTexts.removeFirst(1)
-            self?.objectWillChangeSubject.send(())
+            self?.objectWillChange.send(())
             future(.success(newTexts))
             }.eraseToAnyPublisher()
     }
@@ -92,7 +91,7 @@ class SingleStreamViewModel: ObservableObject {
         self.percent = 0
         self.previousTexts.removeAll()
         self.animatingValues.removeAll()
-        self.objectWillChangeSubject.send(())
+        self.objectWillChange.send(())
     }
     
 }

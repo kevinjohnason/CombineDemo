@@ -18,7 +18,7 @@ struct SingleStreamView: View {
     var displayActionButtons: Bool = true        
     
     var body: some View {
-        VStack(spacing: 30) {
+        VStack(spacing: 30) {            
             Spacer()
             Text(viewModel.title)
                 .font(.system(.headline, design: .monospaced))

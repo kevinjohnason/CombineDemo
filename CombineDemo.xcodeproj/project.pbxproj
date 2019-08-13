@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */; };
+		313841752302202700D45341 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313841742302202700D45341 /* TestView.swift */; };
 		3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */; };
 		3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */; };
 		316518B322FBE8C600C8535D /* DoubleBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518B222FBE8C600C8535D /* DoubleBallView.swift */; };
@@ -15,10 +16,9 @@
 		316518B722FBEA6900C8535D /* CombineSingleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518B622FBEA6900C8535D /* CombineSingleStreamView.swift */; };
 		316518BA22FC894C00C8535D /* CombineSingleStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518B922FC894C00C8535D /* CombineSingleStreamViewModel.swift */; };
 		316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */; };
-		316A347C22F4DE44002D24AA /* AdvancedBallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* AdvancedBallTunnelView.swift */; };
+		316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* BallTunnelView.swift */; };
 		31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
-		7C38B58922F216190062EE99 /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58822F216190062EE99 /* BallTunnelView.swift */; };
 		7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58A22F254350062EE99 /* SingleStreamView.swift */; };
 		7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58C22F255F40062EE99 /* CombineService.swift */; };
 		7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A761B22F1FF13007B76F9 /* AppDelegate.swift */; };
@@ -32,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStreamView.swift; sourceTree = "<group>"; };
+		313841742302202700D45341 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStreamView.swift; sourceTree = "<group>"; };
 		3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoButton.swift; sourceTree = "<group>"; };
 		316518B222FBE8C600C8535D /* DoubleBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleBallView.swift; sourceTree = "<group>"; };
@@ -39,10 +40,9 @@
 		316518B622FBEA6900C8535D /* CombineSingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineSingleStreamView.swift; sourceTree = "<group>"; };
 		316518B922FC894C00C8535D /* CombineSingleStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineSingleStreamViewModel.swift; sourceTree = "<group>"; };
 		316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineResultStreamView.swift; sourceTree = "<group>"; };
-		316A347B22F4DE44002D24AA /* AdvancedBallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBallTunnelView.swift; sourceTree = "<group>"; };
+		316A347B22F4DE44002D24AA /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
 		31826A8022F3AC1300A163A6 /* SingleStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamViewModel.swift; sourceTree = "<group>"; };
 		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
-		7C38B58822F216190062EE99 /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
 		7C38B58A22F254350062EE99 /* SingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamView.swift; sourceTree = "<group>"; };
 		7C38B58C22F255F40062EE99 /* CombineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineService.swift; sourceTree = "<group>"; };
 		7C7A761822F1FF13007B76F9 /* CombineDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombineDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,23 +75,22 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		316518B022FBE8A100C8535D /* SingleBall */ = {
+		316518B022FBE8A100C8535D /* SingleBallViews */ = {
 			isa = PBXGroup;
 			children = (
 				7C7A762F22F202C2007B76F9 /* BallView.swift */,
-				7C38B58822F216190062EE99 /* BallTunnelView.swift */,
-				316A347B22F4DE44002D24AA /* AdvancedBallTunnelView.swift */,
+				316A347B22F4DE44002D24AA /* BallTunnelView.swift */,
 			);
-			path = SingleBall;
+			path = SingleBallViews;
 			sourceTree = "<group>";
 		};
-		316518B122FBE8AB00C8535D /* DoubleBallView */ = {
+		316518B122FBE8AB00C8535D /* DoubleBallViews */ = {
 			isa = PBXGroup;
 			children = (
 				316518B222FBE8C600C8535D /* DoubleBallView.swift */,
 				316518B422FBE98100C8535D /* DoubleBallTunnelView.swift */,
 			);
-			path = DoubleBallView;
+			path = DoubleBallViews;
 			sourceTree = "<group>";
 		};
 		316518B822FC892700C8535D /* CombineSingleStreamView */ = {
@@ -150,12 +149,13 @@
 				7C7A762922F1FF15007B76F9 /* Info.plist */,
 				7C38B58C22F255F40062EE99 /* CombineService.swift */,
 				7C7A762322F1FF15007B76F9 /* Preview Content */,
-				316518B022FBE8A100C8535D /* SingleBall */,
+				316518B022FBE8A100C8535D /* SingleBallViews */,
 				31826A8222F3AC1C00A163A6 /* SingleSteamView */,
 				3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */,
 				3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */,
-				316518B122FBE8AB00C8535D /* DoubleBallView */,
+				316518B122FBE8AB00C8535D /* DoubleBallViews */,
 				316518B822FC892700C8535D /* CombineSingleStreamView */,
+				313841742302202700D45341 /* TestView.swift */,
 			);
 			path = CombineDemo;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
 				3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */,
-				316A347C22F4DE44002D24AA /* AdvancedBallTunnelView.swift in Sources */,
+				316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */,
 				31826A8122F3AC1300A163A6 /* SingleStreamViewModel.swift in Sources */,
 				316518BA22FC894C00C8535D /* CombineSingleStreamViewModel.swift in Sources */,
 				316518B722FBEA6900C8535D /* CombineSingleStreamView.swift in Sources */,
@@ -252,8 +252,8 @@
 				316518B322FBE8C600C8535D /* DoubleBallView.swift in Sources */,
 				3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */,
 				7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */,
-				7C38B58922F216190062EE99 /* BallTunnelView.swift in Sources */,
 				3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */,
+				313841752302202700D45341 /* TestView.swift in Sources */,
 				7C7A763022F202C2007B76F9 /* BallView.swift in Sources */,
 				316518B522FBE98100C8535D /* DoubleBallTunnelView.swift in Sources */,
 				316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */,

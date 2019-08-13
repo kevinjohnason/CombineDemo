@@ -44,6 +44,9 @@ struct ContentView: View {
                 NavigationLink(destination: combineResultStreamView().navigationBarTitle("Zip")) {
                     MenuRow(detailViewName: "Combine Stream")
                 }
+                NavigationLink(destination: TestView().navigationBarTitle("Test")) {
+                    MenuRow(detailViewName: "Test View")
+                }
             }.navigationBarTitle(Text("Combine Demo"))
         }
         

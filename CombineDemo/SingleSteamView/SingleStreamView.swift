@@ -18,13 +18,12 @@ struct SingleStreamView: View {
     var displayActionButtons: Bool = true        
     
     var body: some View {
-        VStack(spacing: 30) {            
+        VStack(spacing: 30) {
             Spacer()
             Text(viewModel.title)
                 .font(.system(.headline, design: .monospaced))
-                .lineLimit(nil).padding()                
-            //BallTunnelView(percent: $viewModel.percent, text: $viewModel.text, color: color, animationSecond: viewModel.animationSeconds)
-            AdvancedBallTunnelView(percent: $viewModel.percent, text: $viewModel.text, historialTexts: $viewModel.previousTexts, color: color, animationSecond: viewModel.animationSeconds)
+                .lineLimit(nil).padding()
+            BallTunnelView(values: $viewModel.values, color: color, animationSecond: viewModel.animationSeconds)
             if displayActionButtons {
                 HStack {
                     CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {

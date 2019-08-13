@@ -12,7 +12,7 @@ import Combine
 class CombineService {
     static let shared = CombineService()
     
-    lazy var commonPublisher: AnyPublisher<String, Never> = self.serialNumberPublisher()
+    lazy var commonPublisher: AnyPublisher<String, Never> = self.serialNumberPublisher(seconds: 1)
     
     func customSerialNumberPublisher() -> AnyPublisher<Int, Never> {
         SerialNumberPublisher().eraseToAnyPublisher()
@@ -21,12 +21,20 @@ class CombineService {
     func serialNumberPublisher() -> AnyPublisher<String, Never> {
         return Publishers.Sequence(sequence: 1...4).map { String($0) }.eraseToAnyPublisher()
     }
+    
+    func serialNumberPublisher(seconds: Double) -> AnyPublisher<String, Never> {
+        return interval([1, 2, 3, 4], seconds: seconds).map { String($0) }.eraseToAnyPublisher()
+    }
         
     func serialLetterPublisher() -> AnyPublisher<String, Never> {
         return Publishers.Sequence(sequence: ["A", "B", "C", "D"]).eraseToAnyPublisher()
     }
     
-    func interval<T>(arr: [T], seconds: Double) -> AnyPublisher<T, Never> {
+    func serialLetterPublisher(seconds: Double) -> AnyPublisher<String, Never> {
+        return interval(["A", "B", "C", "D"], seconds: seconds).eraseToAnyPublisher()
+    }
+    
+    func interval<T>(_ arr: [T], seconds: Double) -> AnyPublisher<T, Never> {
         let intervalPublishers = arr.map { Just($0).delay(for: .seconds(seconds), scheduler: DispatchQueue.main).eraseToAnyPublisher() }
         
         var publisher: AnyPublisher<T, Never>?

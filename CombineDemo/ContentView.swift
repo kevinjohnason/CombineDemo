@@ -41,25 +41,36 @@ struct ContentView: View {
                 }.navigationBarTitle("Append")) {
                     MenuRow(detailViewName: "Append Stream")
                 }                
-                NavigationLink(destination: combineResultStreamView().navigationBarTitle("Zip")) {
+                NavigationLink(destination: zipResultStreamView().navigationBarTitle("Zip")) {
                     MenuRow(detailViewName: "Combine Stream")
                 }
+                NavigationLink(destination: OperationStreamView(title: "A.append(B) ") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                    numberPublisher.append(letterPublisher).eraseToAnyPublisher()
+                }.navigationBarTitle("Append")) {
+                    MenuRow(detailViewName: "Append Stream")
+                }
+                NavigationLink(destination: scanResultStreamView().navigationBarTitle("Scan")) {
+                    MenuRow(detailViewName: "Scan Stream")
+                }
+                
             }.navigationBarTitle(Text("Combine Demo"))
         }
         
     }
     
-    func combinSingleStreamView() -> CombineSingleStreamView {
-        let combineLatestPublisher = Publishers.Zip(publisher, CombineService.shared.serialLetterPublisher()).eraseToAnyPublisher()
-        return CombineSingleStreamView(viewModel:
-            StreamViewModel<(String, String)>(title: "Zip", publisher: combineLatestPublisher))
-                
-    }
     
-    func combineResultStreamView() -> CombineResultStreamView {
+    func zipResultStreamView() -> CombineResultStreamView {
         CombineResultStreamView(title: "Zip") { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in
             Publishers.Zip(numberPublisher, letterPublisher).eraseToAnyPublisher()
         }
+    }
+    
+    func scanResultStreamView() -> DoubleStreamView {
+        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.scan(0) { $0 + $1 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+            publisher.map { Int($0)! }.scan(0) {
+                $0 + $1
+            }.map { String($0) }.eraseToAnyPublisher()
+        })
     }
 }
 

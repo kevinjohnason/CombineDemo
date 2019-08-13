@@ -15,6 +15,8 @@ struct BallView: View {
     
     var body: some View {
         Text($text.value)
+        .font(.system(size: 14))
+        .bold()
         .foregroundColor(forgroundColor)
         .padding()
         .background(backgroundColor)

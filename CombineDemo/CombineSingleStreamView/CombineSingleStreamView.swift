@@ -21,7 +21,7 @@ struct CombineSingleStreamView: View {
             .font(.system(.headline, design: .monospaced))
             .lineLimit(nil).padding()
             
-            DoubleBallTunnelView(percent: $viewModel.percent, text1: $viewModel.text1, text2: $viewModel.text2, animate: true, historialTexts: $viewModel.previousTexts, color: .green, animationSecond: viewModel.animationSeconds)
+            DoubleBallTunnelView(values: $viewModel.values, color: .green, animationSecond: viewModel.animationSeconds)
             
             if displayActionButtons {
                 HStack {

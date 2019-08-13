@@ -8,18 +8,6 @@
 
 import SwiftUI
 
-
-
-extension AnyTransition {
-    static var moveAndFade: AnyTransition {
-        let insertion = AnyTransition.move(edge: .trailing)
-            .combined(with: .opacity)
-        let removal = AnyTransition.scale
-            .combined(with: .opacity)
-        return .asymmetric(insertion: insertion, removal: removal)
-    }
-}
-
 struct BallTunnelView: View {
     @State var animate: Bool  = false
     @Binding var values: [String]
@@ -36,7 +24,7 @@ struct BallTunnelView: View {
                 ForEach(self.values.reversed(), id: \.self) { text in
                     BallView(forgroundColor: .white, backgroundColor: self.color, text: .constant(text))
                         .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
-                        .transition(.offset(x: -tunnelGeometry.size.width, y: 0))
+                        .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }
             }
             .frame(minWidth: tunnelGeometry.size.width, minHeight: self.ballRadius, alignment: .trailing)

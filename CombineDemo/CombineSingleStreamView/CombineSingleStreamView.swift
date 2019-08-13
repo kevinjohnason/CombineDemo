@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 struct CombineSingleStreamView: View {
     
-    @ObservedObject var viewModel: CombineSingleStreamViewModel
+    @ObservedObject var viewModel: StreamViewModel<(String, String)>
     
     var displayActionButtons: Bool = true
     
@@ -44,7 +44,7 @@ struct CombineSingleStreamView: View {
 #if DEBUG
 struct CombineSingleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        CombineSingleStreamView(viewModel: CombineSingleStreamViewModel(title: "", publisher: Empty().eraseToAnyPublisher()))
+        CombineSingleStreamView(viewModel: StreamViewModel<(String, String)>(title: "", publisher: Empty().eraseToAnyPublisher()))
     }
 }
 #endif

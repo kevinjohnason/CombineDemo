@@ -12,15 +12,15 @@ struct CombineResultStreamView: View {
     let numberPublisher = CombineService.shared.commonPublisher.eraseToAnyPublisher()
     let letterPublisher = CombineService.shared.serialLetterPublisher().eraseToAnyPublisher()
     let operatorPublisher: AnyPublisher<(String, String), Never>
-    let numberStreamViewModel: SingleStreamViewModel
-    let letterStreamViewModel: SingleStreamViewModel
-    let resultStreamViewModel: CombineSingleStreamViewModel
+    let numberStreamViewModel: StreamViewModel<String>
+    let letterStreamViewModel: StreamViewModel<String>
+    let resultStreamViewModel: StreamViewModel<(String, String)>
     
     init(title: String, streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<(String, String), Never>) {
-        numberStreamViewModel = SingleStreamViewModel(title: "A: Serial([1,2,3,4])", publisher: numberPublisher)
-        letterStreamViewModel = SingleStreamViewModel(title: "B: Serial([A,B,C,D])", publisher: letterPublisher)
+        numberStreamViewModel = StreamViewModel(title: "A: Serial([1,2,3,4])", publisher: numberPublisher)
+        letterStreamViewModel = StreamViewModel(title: "B: Serial([A,B,C,D])", publisher: letterPublisher)
         operatorPublisher = streamOperator(numberPublisher, letterPublisher)
-        resultStreamViewModel = CombineSingleStreamViewModel(title: title, publisher: self.operatorPublisher)
+        resultStreamViewModel = StreamViewModel(title: title, publisher: self.operatorPublisher)
     }
     
     var body: some View {

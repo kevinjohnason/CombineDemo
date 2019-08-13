@@ -15,10 +15,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {                
-                NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(title: "Just(\"A\")", publisher: Just("A").eraseToAnyPublisher())).navigationBarTitle("Single Value")) {
+                NavigationLink(destination: SingleStreamView(viewModel: StreamViewModel(title: "Just(\"A\")", publisher: Just("A").eraseToAnyPublisher())).navigationBarTitle("Single Value")) {
                            MenuRow(detailViewName: "Single Value")
                     }
-                NavigationLink(destination: SingleStreamView(viewModel: SingleStreamViewModel(title: "Publishers.Sequence([\"1\", \"2\", \"3\", \"4\")", publisher: publisher)).navigationBarTitle("Serial Stream")) {
+                NavigationLink(destination: SingleStreamView(viewModel: StreamViewModel(title: "Publishers.Sequence([\"1\", \"2\", \"3\", \"4\")", publisher: publisher)).navigationBarTitle("Serial Stream")) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
                 NavigationLink(destination: DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.map { $0 * 2 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
@@ -52,7 +52,7 @@ struct ContentView: View {
     func combinSingleStreamView() -> CombineSingleStreamView {
         let combineLatestPublisher = Publishers.Zip(publisher, CombineService.shared.serialLetterPublisher()).eraseToAnyPublisher()
         return CombineSingleStreamView(viewModel:
-            CombineSingleStreamViewModel(title: "Zip", publisher: combineLatestPublisher))
+            StreamViewModel<(String, String)>(title: "Zip", publisher: combineLatestPublisher))
                 
     }
     

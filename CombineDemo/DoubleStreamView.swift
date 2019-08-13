@@ -9,12 +9,12 @@
 import SwiftUI
 import Combine
 struct DoubleStreamView: View {
-    let streamViewModel1: SingleStreamViewModel
-    let streamViewModel2: SingleStreamViewModel
+    let streamViewModel1: StreamViewModel<String>
+    let streamViewModel2: StreamViewModel<String>
     
     init(title1: String, title2: String, publisher: AnyPublisher<String, Never>,  convertingPublisher: (AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
-        streamViewModel1 = SingleStreamViewModel(title: title1, publisher: publisher)
-        streamViewModel2 = SingleStreamViewModel(title: title2, publisher: convertingPublisher(publisher))
+        streamViewModel1 = StreamViewModel(title: title1, publisher: publisher)
+        streamViewModel2 = StreamViewModel(title: title2, publisher: convertingPublisher(publisher))
     }
     
     var body: some View {

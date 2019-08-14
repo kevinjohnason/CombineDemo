@@ -63,10 +63,8 @@ struct ContentView: View {
     }
     
     func dropUntilStreamView() -> DoubleStreamView {
-        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.drop { $0 <= 2 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
-            publisher.drop {
-                Int($0)! <= 2
-            }.eraseToAnyPublisher()
+        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.dropFirst(2)", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+            publisher.dropFirst(2).eraseToAnyPublisher()
         })
     }
     

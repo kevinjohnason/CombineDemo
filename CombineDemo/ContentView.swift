@@ -44,20 +44,31 @@ struct ContentView: View {
                 NavigationLink(destination: zipResultStreamView().navigationBarTitle("Zip")) {
                     MenuRow(detailViewName: "Combine Stream")
                 }
-                NavigationLink(destination: OperationStreamView(title: "A.append(B) ") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: OperationStreamView(title: "A.append(B)") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                     numberPublisher.append(letterPublisher).eraseToAnyPublisher()
                 }.navigationBarTitle("Append")) {
                     MenuRow(detailViewName: "Append Stream")
                 }
-                NavigationLink(destination: scanResultStreamView().navigationBarTitle("Scan")) {
+                NavigationLink(destination: scanResultStreamView()
+                    .navigationBarTitle("Scan")) {
                     MenuRow(detailViewName: "Scan Stream")
                 }
-                
+                NavigationLink(destination: dropUntilStreamView()
+                    .navigationBarTitle("Drop")) {
+                    MenuRow(detailViewName: "Drop Stream")
+                }
             }.navigationBarTitle(Text("Combine Demo"))
         }
         
     }
     
+    func dropUntilStreamView() -> DoubleStreamView {
+        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.drop { $0 <= 2 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+            publisher.drop {
+                Int($0)! <= 2
+            }.eraseToAnyPublisher()
+        })
+    }
     
     func zipResultStreamView() -> CombineResultStreamView {
         CombineResultStreamView(title: "Zip") { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in

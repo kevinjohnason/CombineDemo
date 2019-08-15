@@ -19,7 +19,7 @@ struct DoubleStreamView: View {
     
     var body: some View {
         VStack {
-            SingleStreamView(viewModel: streamViewModel1)
+            SingleStreamView(viewModel: streamViewModel1, displayActionButtons: false)
             SingleStreamView(viewModel: streamViewModel2, color: .red, displayActionButtons: false)
             HStack {
                 CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {

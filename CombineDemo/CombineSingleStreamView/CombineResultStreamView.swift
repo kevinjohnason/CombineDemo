@@ -25,8 +25,8 @@ struct CombineResultStreamView: View {
     
     var body: some View {
         VStack {
-            SingleStreamView(viewModel: numberStreamViewModel)
-            SingleStreamView(viewModel: letterStreamViewModel, color: .red)
+            SingleStreamView(viewModel: numberStreamViewModel, displayActionButtons: false)
+            SingleStreamView(viewModel: letterStreamViewModel, color: .red, displayActionButtons: false)
             Spacer()
             CombineSingleStreamView(viewModel: resultStreamViewModel, displayActionButtons: false)
             

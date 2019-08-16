@@ -8,9 +8,8 @@
 
 import SwiftUI
 
-struct BallTunnelView: View {
-    @State var animate: Bool  = false
-    @Binding var values: [String]
+struct BallTunnelView: View {    
+    @Binding var values: [TimeSeriesValue<String>]
     var color: Color = .green
     
     var animationSecond: Double = 2
@@ -21,8 +20,8 @@ struct BallTunnelView: View {
         GeometryReader { tunnelGeometry in
             HStack(spacing: 0) {
                 Spacer()
-                ForEach(self.values.reversed(), id: \.self) { text in
-                    BallView(forgroundColor: .white, backgroundColor: self.color, text: .constant(text))
+                ForEach(self.values.reversed()) { value in
+                    BallView(forgroundColor: .white, backgroundColor: self.color, text: .constant(value.value))
                         .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
                         .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }

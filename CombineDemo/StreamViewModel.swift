@@ -15,7 +15,7 @@ class StreamViewModel<T>: ObservableObject {
     
     let title: String
     let publisher: AnyPublisher<T, Never>
-    @Published var values: [T] = []
+    @Published var values: [TimeSeriesValue<T>] = []
     let animationSeconds: Double = 1.5
     var cancellable: Cancellable? = nil
     
@@ -27,7 +27,7 @@ class StreamViewModel<T>: ObservableObject {
     func subscribe() {
         cancellable = publisher
             .sink(receiveValue: { [weak self] (value) in
-                self?.values.append(value)
+                self?.values.append(TimeSeriesValue(value: value))
             })
     }
     
@@ -36,4 +36,15 @@ class StreamViewModel<T>: ObservableObject {
         self.values.removeAll()
     }
     
+}
+
+
+struct TimeSeriesValue<T>: Identifiable {
+    var value: T
+    var id: Date
+    
+    init(value: T) {
+        self.id = Date()
+        self.value = value
+    }
 }

@@ -29,7 +29,7 @@ struct SingleStreamView: View {
                     CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {
                       self.viewModel.subscribe()
                     }
-                    
+
                     CombineDemoButton(text: "Cancel", backgroundColor: .red) {
                       self.viewModel.cancel()
                     }

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DoubleBallTunnelView: View {
-    @Binding var values: [(String, String)]
+    @Binding var values: [TimeSeriesValue<(String, String)>]
     var color: Color = .green
     
     var animationSecond: Double = 2
@@ -20,8 +20,8 @@ struct DoubleBallTunnelView: View {
         GeometryReader { tunnelGeometry in
             HStack(spacing: 0) {
                 Spacer()
-                ForEach(self.values.reversed(), id: \.self.0) { text in
-                    DoubleBallView(forgroundColor: .white, backgroundColor: self.color, text1: .constant(text.0), text2: .constant(text.1))
+                ForEach(self.values.reversed()) { value in
+                    DoubleBallView(forgroundColor: .white, backgroundColor: self.color, text1: .constant(value.value.0), text2: .constant(value.value.1))
                         .frame(width: self.ballRadius * 2, height: self.ballRadius, alignment: .center)
                         .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }

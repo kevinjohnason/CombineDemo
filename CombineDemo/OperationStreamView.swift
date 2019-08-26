@@ -11,7 +11,7 @@ import Combine
 
 struct OperationStreamView: View {
     let numberPublisher = CombineService.shared.commonPublisher.eraseToAnyPublisher()
-    let letterPublisher = CombineService.shared.serialLetterPublisher().eraseToAnyPublisher()
+    let letterPublisher = CombineService.shared.serialLetterPublisher(seconds: 1).eraseToAnyPublisher()
     let operatorPublisher: AnyPublisher<String, Never>
     let numberStreamViewModel: StreamViewModel<String>
     let letterStreamViewModel: StreamViewModel<String>

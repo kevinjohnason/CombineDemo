@@ -20,8 +20,10 @@ struct CombineDemoButton: View {
         Button(text, action: buttonAction).font(.footnote)
                            .padding(10)
                            .foregroundColor(Color.white)
+                           .frame(minWidth: 80)
                            .background(backgroundColor)
-                           .cornerRadius(10)
+                           .cornerRadius(12)
+            
     }
 }
 

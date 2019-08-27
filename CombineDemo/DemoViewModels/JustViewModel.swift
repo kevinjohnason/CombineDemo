@@ -10,7 +10,7 @@ import Foundation
 import Combine
 class JustViewModel: StreamViewModel<String> {
     
-    required init() {
+    init() {        
         super.init(title: "Just(\"A\")", publisher: Just("A").eraseToAnyPublisher())
     }
     

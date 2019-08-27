@@ -12,13 +12,15 @@ struct ContentView: View {
         
     let publisher = CombineService.shared.commonPublisher
     
+    let streamModel = StreamModel(title: "Publishers.Sequence([1, 2, 3, 4)", items: ["1", "2", "3", "4"])
+    
     var body: some View {
         NavigationView {
             List {                
                 NavigationLink(destination: SingleStreamView(viewModel: JustViewModel()).navigationBarTitle("Single Value")) {
                            MenuRow(detailViewName: "Single Value")
                     }
-                NavigationLink(destination: SingleStreamView(viewModel: StreamViewModel(title: "Publishers.Sequence([\"1\", \"2\", \"3\", \"4\")", publisher: publisher)).navigationBarTitle("Serial Stream")) {
+                NavigationLink(destination: SingleStreamView(viewModel: streamModel.toViewModel()).navigationBarTitle("Serial Stream")) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
                 NavigationLink(destination: filterStreamView()

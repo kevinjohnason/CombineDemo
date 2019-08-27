@@ -15,16 +15,16 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {                
-                NavigationLink(destination: SingleStreamView(viewModel: StreamViewModel(title: "Just(\"A\")", publisher: Just("A").eraseToAnyPublisher())).navigationBarTitle("Single Value")) {
+                NavigationLink(destination: SingleStreamView(viewModel: JustViewModel()).navigationBarTitle("Single Value")) {
                            MenuRow(detailViewName: "Single Value")
                     }
                 NavigationLink(destination: SingleStreamView(viewModel: StreamViewModel(title: "Publishers.Sequence([\"1\", \"2\", \"3\", \"4\")", publisher: publisher)).navigationBarTitle("Serial Stream")) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
-//                NavigationLink(destination: filterStreamView()
-//                    .navigationBarTitle("Filter")) {
-//                    MenuRow(detailViewName: "Filter Stream")
-//                }
+                NavigationLink(destination: filterStreamView()
+                    .navigationBarTitle("Filter")) {
+                    MenuRow(detailViewName: "Filter Stream")
+                }
                 NavigationLink(destination: dropFirstStreamView()
                     .navigationBarTitle("Drop")) {
                     MenuRow(detailViewName: "Drop Stream")

@@ -14,7 +14,7 @@ struct BallView: View {
     @Binding var text: String
     
     var body: some View {
-        Text($text.value)
+        Text(text)
         .font(.system(size: 14))
         .bold()
         .foregroundColor(forgroundColor)

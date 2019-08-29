@@ -10,14 +10,13 @@ import SwiftUI
 import Combine
 struct UpdateStreamView: View {
     
-    @ObservedObject var viewModel: UpdateStreamViewModel = UpdateStreamViewModel()
-    
+    @ObservedObject var viewModel: UpdateStreamViewModel
+        
     let tunnelPadding: CGFloat = 5
     
     var body: some View {
         
         VStack {
-            
             HStack {
                 Button("Cancel") {
                     self.viewModel.streamName = ""
@@ -31,6 +30,7 @@ struct UpdateStreamView: View {
             
             VStack(alignment: .center, spacing: 10) {
                 TextField("Stream Name", text: $viewModel.streamName).font(.headline).padding()
+                TextField("Stream Description", text: $viewModel.streamDescription).font(.body).padding()
                 BallTunnelView(values: self.$viewModel.values, color: .red, padding: 5)
                     .overlayPreferenceValue(TunnelPreferenceKey.self) { preferences in
                         GeometryReader { reader in
@@ -60,6 +60,6 @@ struct UpdateStreamView: View {
 
 struct UpdateStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateStreamView()
+        UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: StreamModel<String>(name: "", description: nil, stream: [])))
     }
 }

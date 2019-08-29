@@ -9,7 +9,11 @@
 import Foundation
 
 class DynamicStreamViewModel<T: Codable>: StreamViewModel<T> {
+    
+    let streamModel: StreamModel<T>
+    
     init(streamModel: StreamModel<T>) {
-        super.init(title: streamModel.name, publisher: streamModel.toPublisher())
-    }    
+        self.streamModel = streamModel
+        super.init(title: streamModel.name, description: streamModel.description ?? "", publisher: streamModel.toPublisher())        
+    }
 }

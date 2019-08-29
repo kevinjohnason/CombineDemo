@@ -12,15 +12,16 @@ struct ContentView: View {
         
     let publisher = CombineService.shared.commonPublisher
     
+    let serialStreamModel = DataService.shared.currentStream
+    
     var body: some View {
         NavigationView {
             List {
                 NavigationLink(destination: SingleStreamView(viewModel: JustViewModel()).navigationBarTitle("Single Value")) {
-                            
                            MenuRow(detailViewName: "Single Value")
                     }
-                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: DataService.shared.currentStream)).navigationBarTitle("Serial Stream")) {
-                     MenuRow(detailViewName: "Serial Stream")
+                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: serialStreamModel))) {
+                    MenuRow(detailViewName: serialStreamModel.name)
                  }
 //                NavigationLink(destination: filterStreamView()
 //                    .navigationBarTitle("Filter")) {
@@ -57,7 +58,7 @@ struct ContentView: View {
                     .navigationBarTitle("Scan")) {
                     MenuRow(detailViewName: "Scan Stream")
                 }
-                NavigationLink(destination: UpdateStreamView()) {
+                NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: DataService.shared.currentStream))) {
                     MenuRow(detailViewName: "Update Stream")
                 }
             }.navigationBarTitle(Text("Combine Demo"))

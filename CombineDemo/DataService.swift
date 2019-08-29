@@ -13,21 +13,42 @@ class DataService {
     var currentStream: StreamModel<String>
         {
         get {
+            let defaullModel = StreamModel<String>(name: "default stream", description: nil, stream: [])
             guard let data = UserDefaults.standard.data(forKey: "currentStream") else {
-                return StreamModel<String>(name: "default stream", stream: [])
+                return defaullModel
             }
-            return try! JSONDecoder().decode(StreamModel<String>.self, from: data)
+            guard let model = try? JSONDecoder().decode(StreamModel<String>.self, from: data) else {
+                return defaullModel
+            }
+            return model
         } set {
             UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "currentStream")
+        }
+    }
+    
+    
+    var storedStreams: [StreamModel<String>] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "storedStreams") else {
+                return []
+            }
+            guard let streams = try? JSONDecoder().decode([StreamModel<String>].self, from: data) else {
+                return []
+            }
+            return streams
+        } set {
+            UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "storedStreams")
         }
     }
 
 }
 
 
-struct StreamModel<T: Codable>: Codable {
-    let name: String
-    let stream: [StreamItem<T>]
+struct StreamModel<T: Codable>: Codable, Identifiable {
+    let id = UUID()
+    var name: String
+    var description: String?
+    var stream: [StreamItem<T>]
 }
 
 struct StreamItem<T: Codable>: Codable {

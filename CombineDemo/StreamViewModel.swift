@@ -14,13 +14,15 @@ import Combine
 class StreamViewModel<T>: ObservableObject {
     
     let title: String
+    let description: String
     let publisher: AnyPublisher<T, Never>
     @Published var values: [TimeSeriesValue<T>] = []
     let animationSeconds: Double = 1.5
     var cancellable: Cancellable? = nil
     
-    init(title: String, publisher: AnyPublisher<T, Never>) {
+    init(title: String, description: String = "", publisher: AnyPublisher<T, Never>) {
         self.title = title
+        self.description = description
         self.publisher = publisher
     }
     

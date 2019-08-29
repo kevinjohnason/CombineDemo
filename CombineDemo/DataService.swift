@@ -32,4 +32,5 @@ struct StreamModel<T: Codable>: Codable {
 
 struct StreamItem<T: Codable>: Codable {
     let value: T
+    var delay: Double? = nil
 }

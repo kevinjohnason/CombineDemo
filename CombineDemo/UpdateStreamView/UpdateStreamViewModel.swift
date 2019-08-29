@@ -11,7 +11,7 @@ import SwiftUI
 
 class UpdateStreamViewModel: ObservableObject {
     
-    @Published var streamOptions: [BallViewModel]    
+    @Published var streamOptions: [BallViewModel]
     
     @Published var streamName: String
     
@@ -29,7 +29,7 @@ class UpdateStreamViewModel: ObservableObject {
     func save() {
         DataService.shared.currentStream =
         StreamModel<String>(name: streamName, stream: values.map {
-            StreamItem(value: $0.value)
+            StreamItem(value: $0.value, delay: 1)
         })        
     }
     

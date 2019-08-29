@@ -24,7 +24,7 @@ struct UpdateStreamView: View {
                     self.viewModel.values.removeAll()
                 }
                 Spacer()
-                Button("Save") {
+                Button("Save") {                                        
                     self.viewModel.save()
                 }
             }.padding()

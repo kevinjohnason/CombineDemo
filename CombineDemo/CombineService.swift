@@ -14,8 +14,8 @@ class CombineService {
     
     lazy var commonPublisher: AnyPublisher<String, Never> = self.serialNumberPublisher(seconds: 1)
     
-    func customSerialNumberPublisher() -> AnyPublisher<Int, Never> {
-        SerialNumberPublisher().eraseToAnyPublisher()
+    var savedStreamPublisher: AnyPublisher<String, Never> {
+        DataService.shared.currentStream.toPublisher()
     }
     
     func serialNumberPublisher() -> AnyPublisher<String, Never> {
@@ -25,7 +25,7 @@ class CombineService {
     func serialNumberPublisher(seconds: Double) -> AnyPublisher<String, Never> {
         return interval([1, 2, 3, 4], seconds: seconds).map { String($0) }.eraseToAnyPublisher()
     }
-        
+    
     func serialLetterPublisher() -> AnyPublisher<String, Never> {
         return Publishers.Sequence(sequence: ["A", "B", "C", "D"]).eraseToAnyPublisher()
     }
@@ -62,13 +62,13 @@ class SerialNumberPublisher: Publisher {
     typealias Failure = Never
     
     let numbers: [Int] = [1, 2, 3, 4]
-        
+    
     func receive<S>(subscriber: S) where S : Subscriber, SerialNumberPublisher.Failure == S.Failure, SerialNumberPublisher.Output == S.Input {
         numbers.enumerated().forEach { (arg) in
             let (offset, element) = arg
             DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(offset * 2)) {
-            let test = subscriber.receive(element)
-            Swift.print(test)
+                let test = subscriber.receive(element)
+                Swift.print(test)
                 if offset >= self.numbers.count {
                     subscriber.receive(completion: .finished)
                 }
@@ -77,3 +77,22 @@ class SerialNumberPublisher: Publisher {
     }
 }
 
+
+extension StreamModel where T: Codable {
+    
+    func toPublisher()  -> AnyPublisher<T, Never>  {
+        let intervalPublishers =
+                   self.stream.map { Just($0.value).delay(for: .seconds($0.delay ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()  }
+               
+               var publisher: AnyPublisher<T, Never>?
+               
+               for intervalPublisher in intervalPublishers {
+                   if publisher == nil {
+                       publisher = intervalPublisher
+                       continue
+                   }
+                   publisher = publisher?.append(intervalPublisher).eraseToAnyPublisher()
+               }
+               return publisher!
+    }
+}

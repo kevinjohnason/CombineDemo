@@ -21,6 +21,7 @@
 		316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* BallTunnelView.swift */; };
 		31826A8122F3AC1300A163A6 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* StreamViewModel.swift */; };
 		31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCA23175BBF00347B55 /* DataService.swift */; };
+		31F1DFCD2317916400347B55 /* DynamicStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
 		7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58A22F254350062EE99 /* SingleStreamView.swift */; };
 		7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58C22F255F40062EE99 /* CombineService.swift */; };
@@ -50,6 +51,7 @@
 		31826A8022F3AC1300A163A6 /* StreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewModel.swift; sourceTree = "<group>"; };
 		3191BC0A23076CD200D89FDA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		31F1DFCA23175BBF00347B55 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicStreamViewModel.swift; sourceTree = "<group>"; };
 		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
 		7C38B58A22F254350062EE99 /* SingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamView.swift; sourceTree = "<group>"; };
 		7C38B58C22F255F40062EE99 /* CombineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineService.swift; sourceTree = "<group>"; };
@@ -174,9 +176,11 @@
 				7C7A762622F1FF15007B76F9 /* LaunchScreen.storyboard */,
 				7C7A762922F1FF15007B76F9 /* Info.plist */,
 				7C38B58C22F255F40062EE99 /* CombineService.swift */,
+				31F1DFCA23175BBF00347B55 /* DataService.swift */,
 				7C7A762322F1FF15007B76F9 /* Preview Content */,
 				316518B022FBE8A100C8535D /* SingleBallViews */,
 				31826A8022F3AC1300A163A6 /* StreamViewModel.swift */,
+				31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */,
 				31826A8222F3AC1C00A163A6 /* SingleSteamView */,
 				3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */,
 				3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */,
@@ -185,7 +189,6 @@
 				7C707495230BB2A7003960A6 /* DemoViewModels */,
 				313841742302202700D45341 /* TestView.swift */,
 				31157E002315D36200CEFE3C /* UpdateStreamView */,
-				31F1DFCA23175BBF00347B55 /* DataService.swift */,
 			);
 			path = CombineDemo;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				31157DFF2315D35A00CEFE3C /* UpdateStreamViewModel.swift in Sources */,
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
+				31F1DFCD2317916400347B55 /* DynamicStreamViewModel.swift in Sources */,
 				7C707497230BB2C6003960A6 /* JustViewModel.swift in Sources */,
 				31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,

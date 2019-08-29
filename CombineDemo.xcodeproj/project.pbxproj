@@ -20,6 +20,7 @@
 		316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */; };
 		316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* BallTunnelView.swift */; };
 		31826A8122F3AC1300A163A6 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* StreamViewModel.swift */; };
+		31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCA23175BBF00347B55 /* DataService.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
 		7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58A22F254350062EE99 /* SingleStreamView.swift */; };
 		7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58C22F255F40062EE99 /* CombineService.swift */; };
@@ -48,6 +49,7 @@
 		316A347B22F4DE44002D24AA /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
 		31826A8022F3AC1300A163A6 /* StreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewModel.swift; sourceTree = "<group>"; };
 		3191BC0A23076CD200D89FDA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		31F1DFCA23175BBF00347B55 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
 		7C38B58A22F254350062EE99 /* SingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamView.swift; sourceTree = "<group>"; };
 		7C38B58C22F255F40062EE99 /* CombineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineService.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				7C707495230BB2A7003960A6 /* DemoViewModels */,
 				313841742302202700D45341 /* TestView.swift */,
 				31157E002315D36200CEFE3C /* UpdateStreamView */,
+				31F1DFCA23175BBF00347B55 /* DataService.swift */,
 			);
 			path = CombineDemo;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				7C707497230BB2C6003960A6 /* JustViewModel.swift in Sources */,
+				31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
 				3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */,
 				316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */,

@@ -21,10 +21,10 @@ struct ContentView: View {
                 NavigationLink(destination: SingleStreamView(viewModel: StreamViewModel(title: "Publishers.Sequence([\"1\", \"2\", \"3\", \"4\")", publisher: publisher)).navigationBarTitle("Serial Stream")) {
                     MenuRow(detailViewName: "Serial Stream")
                 }
-                NavigationLink(destination: filterStreamView()
-                    .navigationBarTitle("Filter")) {
-                    MenuRow(detailViewName: "Filter Stream")
-                }
+//                NavigationLink(destination: filterStreamView()
+//                    .navigationBarTitle("Filter")) {
+//                    MenuRow(detailViewName: "Filter Stream")
+//                }
                 NavigationLink(destination: dropFirstStreamView()
                     .navigationBarTitle("Drop")) {
                     MenuRow(detailViewName: "Drop Stream")
@@ -43,7 +43,7 @@ struct ContentView: View {
                     numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
                 }.navigationBarTitle("FlatMap")) {
                     MenuRow(detailViewName: "FlatMap Stream")
-                }     
+                }
                 NavigationLink(destination: zipResultStreamView().navigationBarTitle("Zip")) {
                     MenuRow(detailViewName: "Zip Stream")
                 }
@@ -55,6 +55,9 @@ struct ContentView: View {
                 NavigationLink(destination: scanResultStreamView()
                     .navigationBarTitle("Scan")) {
                     MenuRow(detailViewName: "Scan Stream")
+                }
+                NavigationLink(destination: UpdateStreamView()) {
+                    MenuRow(detailViewName: "Update Stream")
                 }
             }.navigationBarTitle(Text("Combine Demo"))
         }

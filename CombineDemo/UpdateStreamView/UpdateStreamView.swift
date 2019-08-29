@@ -25,10 +25,9 @@ struct UpdateStreamView: View {
                 }
                 Spacer()
                 Button("Save") {
-                    
+                    self.viewModel.save()
                 }
             }.padding()
-            
             
             VStack(alignment: .center, spacing: 10) {
                 TextField("Stream Name", text: $viewModel.streamName).font(.headline).padding()

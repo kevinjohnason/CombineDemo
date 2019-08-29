@@ -19,7 +19,18 @@ class UpdateStreamViewModel: ObservableObject {
     
     init() {
         self.streamOptions = (1...8).map { BallViewModel(value: String($0)) }
-        self.streamName = ""
-        self.values = []
+        let stream = DataService.shared.currentStream        
+        self.streamName = stream.name
+        self.values = stream.stream.map {
+            TimeSeriesValue(value: $0.value)
+        }
     }
+    
+    func save() {
+        DataService.shared.currentStream =
+        StreamModel<String>(name: streamName, stream: values.map {
+            StreamItem(value: $0.value)
+        })        
+    }
+    
 }

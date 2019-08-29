@@ -21,7 +21,7 @@ struct DoubleBallTunnelView: View {
             HStack(spacing: 0) {
                 Spacer()
                 ForEach(self.values.reversed()) { value in
-                    DoubleBallView(forgroundColor: .white, backgroundColor: self.color, text1: .constant(value.value.0), text2: .constant(value.value.1))
+                    DoubleBallView(forgroundColor: .white, backgroundColor: self.color, ballViewModel1: .constant(BallViewModel(value: value.value.0)), ballViewModel2: .constant(BallViewModel(value: value.value.1)))
                         .frame(width: self.ballRadius * 2, height: self.ballRadius, alignment: .center)
                         .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }

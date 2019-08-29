@@ -8,6 +8,22 @@
 
 import SwiftUI
 
+
+struct TunnelPreferenceData {
+    let bounds: Anchor<CGRect>?
+}
+
+struct TunnelPreferenceKey: PreferenceKey {
+    static var defaultValue: TunnelPreferenceData = TunnelPreferenceData(bounds: nil)
+    
+    static func reduce(value: inout TunnelPreferenceData, nextValue: () -> TunnelPreferenceData) {
+        value = nextValue()
+    }
+    typealias Value = TunnelPreferenceData
+}
+
+
+
 struct BallTunnelView: View {    
     @Binding var values: [TimeSeriesValue<String>]
     var color: Color = .green
@@ -15,21 +31,25 @@ struct BallTunnelView: View {
     var animationSecond: Double = 2
     
     var ballRadius: CGFloat = 48
-        
+    
+    var padding: CGFloat = 5
+    
     var body: some View {
         GeometryReader { tunnelGeometry in
             HStack(spacing: 0) {
                 Spacer()
                 ForEach(self.values.reversed()) { value in
-                    BallView(forgroundColor: .white, backgroundColor: self.color, text: .constant(value.value))
+                    BallView(forgroundColor: .white, backgroundColor: self.color, viewModel: BallViewModel(value: value.value))
                         .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
                         .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }
             }
             .frame(minWidth: tunnelGeometry.size.width, minHeight: self.ballRadius, alignment: .trailing)
-            .padding([.top, .bottom], 5)
-            .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding([.top, .bottom], self.padding)            
             .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))
+            .anchorPreference(key: TunnelPreferenceKey.self, value: .bounds, transform: {
+                TunnelPreferenceData(bounds: $0)
+            })
             .animation(.easeInOut(duration: self.animationSecond))
         }
     }

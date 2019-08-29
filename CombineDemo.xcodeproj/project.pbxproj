@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31157DFD2315AD7600CEFE3C /* UpdateStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31157DFC2315AD7600CEFE3C /* UpdateStreamView.swift */; };
+		31157DFF2315D35A00CEFE3C /* UpdateStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31157DFE2315D35A00CEFE3C /* UpdateStreamViewModel.swift */; };
 		3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */; };
+		312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B0D1E2315DD75004E3C0E /* BallViewModel.swift */; };
 		313841752302202700D45341 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313841742302202700D45341 /* TestView.swift */; };
 		3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */; };
 		3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */; };
@@ -31,7 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31157DFC2315AD7600CEFE3C /* UpdateStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStreamView.swift; sourceTree = "<group>"; };
+		31157DFE2315D35A00CEFE3C /* UpdateStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStreamViewModel.swift; sourceTree = "<group>"; };
 		3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStreamView.swift; sourceTree = "<group>"; };
+		312B0D1E2315DD75004E3C0E /* BallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallViewModel.swift; sourceTree = "<group>"; };
 		313841742302202700D45341 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStreamView.swift; sourceTree = "<group>"; };
 		3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoButton.swift; sourceTree = "<group>"; };
@@ -68,6 +74,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31157E002315D36200CEFE3C /* UpdateStreamView */ = {
+			isa = PBXGroup;
+			children = (
+				31157DFC2315AD7600CEFE3C /* UpdateStreamView.swift */,
+				31157DFE2315D35A00CEFE3C /* UpdateStreamViewModel.swift */,
+			);
+			path = UpdateStreamView;
+			sourceTree = "<group>";
+		};
 		3163E60B22F8B66B00E0FDF2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				7C7A762F22F202C2007B76F9 /* BallView.swift */,
+				312B0D1E2315DD75004E3C0E /* BallViewModel.swift */,
 				316A347B22F4DE44002D24AA /* BallTunnelView.swift */,
 			);
 			path = SingleBallViews;
@@ -166,6 +182,7 @@
 				316518B822FC892700C8535D /* CombineSingleStreamView */,
 				7C707495230BB2A7003960A6 /* DemoViewModels */,
 				313841742302202700D45341 /* TestView.swift */,
+				31157E002315D36200CEFE3C /* UpdateStreamView */,
 			);
 			path = CombineDemo;
 			sourceTree = "<group>";
@@ -249,6 +266,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31157DFD2315AD7600CEFE3C /* UpdateStreamView.swift in Sources */,
+				31157DFF2315D35A00CEFE3C /* UpdateStreamViewModel.swift in Sources */,
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				7C707497230BB2C6003960A6 /* JustViewModel.swift in Sources */,
@@ -265,6 +284,7 @@
 				3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */,
 				313841752302202700D45341 /* TestView.swift in Sources */,
 				7C7A763022F202C2007B76F9 /* BallView.swift in Sources */,
+				312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */,
 				316518B522FBE98100C8535D /* DoubleBallTunnelView.swift in Sources */,
 				316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */,
 			);

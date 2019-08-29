@@ -18,17 +18,7 @@ struct TestView: View {
     
     var body: some View {
         VStack {
-            Button("Tap here") {
-                
-                withAnimation(.spring()) {
-                    self.enable.toggle()
-                }
-
-            }
-            if enable {
-                Text("Hello World!")
-                    .transition(.move(edge: .leading))
-            }
+            BallView(forgroundColor: .white, backgroundColor: .green, viewModel: BallViewModel(value: "1"))
         }
     }
 }

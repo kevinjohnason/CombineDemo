@@ -11,14 +11,14 @@ import Combine
 struct DoubleBallView: View {
     var forgroundColor: Color
     var backgroundColor: Color
-    @Binding var text1: String
-    @Binding var text2: String
+    @Binding var ballViewModel1: BallViewModel
+    @Binding var ballViewModel2: BallViewModel
         
     
     var body: some View {
         HStack(spacing: 0) {
-            BallView(forgroundColor: forgroundColor, backgroundColor: backgroundColor, text: $text1)
-            BallView(forgroundColor: forgroundColor, backgroundColor: backgroundColor, text: $text2)
+            BallView(forgroundColor: forgroundColor, backgroundColor: backgroundColor, viewModel: ballViewModel1)
+            BallView(forgroundColor: forgroundColor, backgroundColor: backgroundColor, viewModel: ballViewModel2)
         }
     }
 }
@@ -27,7 +27,8 @@ struct DoubleBallView: View {
 struct DoubleBallView_Previews: PreviewProvider {
     static var previews: some View {
         DoubleBallView(forgroundColor: .black, backgroundColor: .red,
-                       text1: .constant(""), text2: .constant(""))
+                       ballViewModel1: .constant(BallViewModel(value: "")),
+                       ballViewModel2: .constant(BallViewModel(value: "")))
     }
 }
 #endif

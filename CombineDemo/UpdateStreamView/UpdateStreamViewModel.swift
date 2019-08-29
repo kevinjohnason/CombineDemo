@@ -13,7 +13,13 @@ class UpdateStreamViewModel: ObservableObject {
     
     @Published var streamOptions: [BallViewModel]    
     
-    init(streamOptions: [BallViewModel]) {
-        self.streamOptions = streamOptions        
+    @Published var streamName: String
+    
+    @Published var values: [TimeSeriesValue<String>]
+    
+    init() {
+        self.streamOptions = (1...8).map { BallViewModel(value: String($0)) }
+        self.streamName = ""
+        self.values = []
     }
 }

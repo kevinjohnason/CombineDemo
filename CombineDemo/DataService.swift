@@ -40,6 +40,15 @@ class DataService {
             UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "storedStreams")
         }
     }
+    
+    func loadStream(id: UUID) -> StreamModel<String> {
+        guard let stream = DataService.shared.storedStreams.first(where: {
+            $0.id == id
+        }) else {
+            return StreamModel(id: UUID(), name: "Default Stream", description: nil, stream: [])
+        }
+        return stream
+    }
 
 }
 

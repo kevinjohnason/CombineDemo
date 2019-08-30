@@ -44,7 +44,7 @@ struct SingleStreamView: View {
             return AnyView(EmptyView())
         }
         let navigationLink = NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: dynamicStreamViewModel.streamModel), updateCompleted: {
-            dynamicStreamViewModel.update()
+            dynamicStreamViewModel.reload()
         })) {
             Text("Edit")
         }        

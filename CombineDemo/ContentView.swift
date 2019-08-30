@@ -18,7 +18,7 @@ struct ContentView: View {
                 NavigationLink(destination: SingleStreamView(viewModel: JustViewModel()).navigationBarTitle("Single Value")) {
                            MenuRow(detailViewName: "Single Value")
                     }                
-                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: DataService.shared.storedStreams[0]))) {
+                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamId: DataService.shared.storedStreams[0].id))) {
                     MenuRow(detailViewName: DataService.shared.storedStreams[0].name)
                  }
 //                NavigationLink(destination: filterStreamView()

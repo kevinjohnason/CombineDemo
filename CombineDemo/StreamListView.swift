@@ -16,7 +16,7 @@ struct StreamListView: View {
         }
     }
     
-    @State var alertInDisplay: Bool = false
+    @State var deleteAlertInDisplay: Bool = false
     
     var body: some View {
         ForEach(storedStreams) { stream in
@@ -28,9 +28,7 @@ struct StreamListView: View {
                 return
             }
             if self.storedStreams[removingIndex].isDefault {
-                self.alert(isPresented: self.$alertInDisplay) { () -> Alert in
-                    Alert(title: Text("test alert"), message: Text("test message"), dismissButton: .cancel())
-                }
+                self.deleteAlertInDisplay = true
                 return
             }
             self.storedStreams.remove(at: removingIndex)
@@ -38,6 +36,8 @@ struct StreamListView: View {
             var storedStreams = self.storedStreams
             storedStreams.move(fromOffsets: source, toOffset: destination)
             self.storedStreams = storedStreams
+        }.alert(isPresented: $deleteAlertInDisplay) { () -> Alert in
+            Alert(title: Text("Don't do that"), message: Text("You can't delete default streams"), dismissButton: .cancel())
         }
     }
 }

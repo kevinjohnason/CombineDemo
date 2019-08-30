@@ -18,10 +18,10 @@ struct OperationStreamView: View {
     let operatorStreamViewModel: StreamViewModel<String>
     
     init(title: String, streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
-        numberStreamViewModel = StreamViewModel(title: "A: Serial([1,2,3,4])", publisher: numberPublisher)
-        letterStreamViewModel = StreamViewModel(title: "B: Serial([A,B,C,D])", publisher: letterPublisher)
+        numberStreamViewModel = StreamViewModel(title: "A: Serial([1,2,3,4])", description: "A: Serial([1,2,3,4])",  publisher: numberPublisher)
+        letterStreamViewModel = StreamViewModel(title: "B: Serial([A,B,C,D])", description: "B: Serial([A,B,C,D])", publisher: letterPublisher)
         operatorPublisher = streamOperator(numberPublisher, letterPublisher)
-        operatorStreamViewModel = StreamViewModel(title: title, publisher: self.operatorPublisher)
+        operatorStreamViewModel = StreamViewModel(title: title, description: title, publisher: self.operatorPublisher)
     }
     
     var body: some View {

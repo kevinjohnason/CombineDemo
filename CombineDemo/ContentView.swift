@@ -52,9 +52,6 @@ struct ContentView: View {
                     .navigationBarTitle("Scan")) {
                     MenuRow(detailViewName: "Scan Stream")
                 }
-                NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: DataService.shared.currentStream))) {
-                    MenuRow(detailViewName: "Update Stream")
-                }
             }.navigationBarTitle("Streams")
             .navigationBarItems(leading: EditButton(), trailing: createStreamView)            
         }

@@ -13,8 +13,8 @@ struct DoubleStreamView: View {
     let streamViewModel2: StreamViewModel<String>
     
     init(title1: String, title2: String, publisher: AnyPublisher<String, Never>,  convertingPublisher: (AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
-        streamViewModel1 = StreamViewModel(title: title1, publisher: publisher)
-        streamViewModel2 = StreamViewModel(title: title2, publisher: convertingPublisher(publisher))
+        streamViewModel1 = StreamViewModel(title: title1, description: title1, publisher: publisher)
+        streamViewModel2 = StreamViewModel(title: title2, description: title2, publisher: convertingPublisher(publisher))
     }
     
     var body: some View {

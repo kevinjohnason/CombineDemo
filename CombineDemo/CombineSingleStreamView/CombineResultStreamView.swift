@@ -17,8 +17,8 @@ struct CombineResultStreamView: View {
     let resultStreamViewModel: StreamViewModel<(String, String)>
     
     init(title: String, streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<(String, String), Never>) {
-        numberStreamViewModel = StreamViewModel(title: "A: Serial([1,2,3,4])", publisher: numberPublisher)
-        letterStreamViewModel = StreamViewModel(title: "B: Serial([A,B,C,D])", publisher: letterPublisher)
+        numberStreamViewModel = StreamViewModel(title: "A: Serial([1,2,3,4])", description: "A: Serial([1,2,3,4])", publisher: numberPublisher)
+        letterStreamViewModel = StreamViewModel(title: "B: Serial([A,B,C,D])", description: "B: Serial([A,B,C,D])", publisher: letterPublisher)
         operatorPublisher = streamOperator(numberPublisher, letterPublisher)
         resultStreamViewModel = StreamViewModel(title: title, publisher: self.operatorPublisher)
     }

@@ -30,9 +30,9 @@ class UpdateStreamViewModel: ObservableObject {
     
     @Published var streamLetterOptions: [BallViewModel]
         
-    @Published var streamName: String
+    var streamName: String
     
-    @Published var streamDescription: String
+    var streamDescription: String
     
     @Published var values: [TimeSeriesValue<String>]
     

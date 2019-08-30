@@ -15,8 +15,7 @@ struct SingleStreamView: View {
     
     var color: Color = .green
     
-    var displayActionButtons: Bool = true
-        
+    var displayActionButtons: Bool = true        
     
     var body: some View {
         VStack(spacing: 30) {

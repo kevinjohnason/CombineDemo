@@ -13,9 +13,9 @@ import Combine
 
 class StreamViewModel<T>: ObservableObject {
     
-    let title: String
-    let description: String
-    let publisher: AnyPublisher<T, Never>
+    var title: String
+    var description: String
+    var publisher: AnyPublisher<T, Never>
     @Published var values: [TimeSeriesValue<T>] = []
     let animationSeconds: Double = 1.5
     var cancellable: Cancellable? = nil

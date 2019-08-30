@@ -10,18 +10,16 @@ import SwiftUI
 import Combine
 struct ContentView: View {
         
-    let publisher = CombineService.shared.commonPublisher
-    
-    let serialStreamModel = DataService.shared.currentStream
+    let publisher = CombineService.shared.commonPublisher        
     
     var body: some View {
         NavigationView {
             List {
                 NavigationLink(destination: SingleStreamView(viewModel: JustViewModel()).navigationBarTitle("Single Value")) {
                            MenuRow(detailViewName: "Single Value")
-                    }
-                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: serialStreamModel))) {
-                    MenuRow(detailViewName: serialStreamModel.name)
+                    }                
+                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: DataService.shared.storedStreams[0]))) {
+                    MenuRow(detailViewName: DataService.shared.storedStreams[0].name)
                  }
 //                NavigationLink(destination: filterStreamView()
 //                    .navigationBarTitle("Filter")) {

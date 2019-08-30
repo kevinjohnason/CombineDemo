@@ -11,20 +11,26 @@ import Combine
 struct UpdateStreamView: View {
     
     @ObservedObject var viewModel: UpdateStreamViewModel
-        
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     let tunnelPadding: CGFloat = 5
+    
+    var updateCompleted: (() -> Void)?
     
     var body: some View {
         
         VStack {
             HStack {
-                Button("Cancel") {
+                Button("Clear") {
                     self.viewModel.streamName = ""
                     self.viewModel.values.removeAll()
                 }
                 Spacer()
-                Button("Save") {                                        
+                Button("Save") {
                     self.viewModel.save()
+                    self.updateCompleted?()
+                    self.presentationMode.wrappedValue.dismiss()
                 }
             }.padding()
             
@@ -52,7 +58,7 @@ struct UpdateStreamView: View {
                             }.offset(x: 0, y: reader[preferences.bounds!].height * 2)
                         }
                 }
-            }.frame(maxHeight: 150)
+                }.frame(maxHeight: 150)
             
         }
     }
@@ -60,6 +66,6 @@ struct UpdateStreamView: View {
 
 struct UpdateStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: StreamModel<String>(name: "", description: nil, stream: [])))
+        UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: StreamModel<String>(id: UUID(), name: "", description: nil, stream: [])))
     }
 }

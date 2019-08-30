@@ -13,7 +13,7 @@ class DataService {
     var currentStream: StreamModel<String>
         {
         get {
-            let defaullModel = StreamModel<String>(name: "default stream", description: nil, stream: [])
+            let defaullModel = StreamModel<String>(id: UUID(), name: "default stream", description: nil, stream: [])
             guard let data = UserDefaults.standard.data(forKey: "currentStream") else {
                 return defaullModel
             }
@@ -45,7 +45,7 @@ class DataService {
 
 
 struct StreamModel<T: Codable>: Codable, Identifiable {
-    let id = UUID()
+    let id: UUID
     var name: String
     var description: String?
     var stream: [StreamItem<T>]

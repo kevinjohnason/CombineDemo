@@ -45,7 +45,7 @@ class UpdateStreamViewModel: ObservableObject {
             storedStreams[storedStreamIndex] = updatingStoredStream
         } else {
             let newStreamModel =
-                 StreamModel<String>(name: streamName, description: streamDescription, stream: newStream)
+                StreamModel<String>(id: UUID(), name: streamName, description: streamDescription, stream: newStream)
             storedStreams.append(newStreamModel)
         }
         DataService.shared.storedStreams = storedStreams

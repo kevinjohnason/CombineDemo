@@ -11,7 +11,7 @@ import Combine
 class JustViewModel: StreamViewModel<String> {
     
     required init() {
-        super.init(title: "Just(\"A\")", publisher: Just("A").eraseToAnyPublisher())
+        super.init(title: "Single Value", description: "Just(\"A\")", publisher: Just("A").eraseToAnyPublisher())
     }
     
 }

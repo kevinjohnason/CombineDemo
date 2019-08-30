@@ -14,13 +14,9 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
+            
             List {
-                NavigationLink(destination: SingleStreamView(viewModel: JustViewModel()).navigationBarTitle("Single Value")) {
-                           MenuRow(detailViewName: "Single Value")
-                    }                
-                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamId: DataService.shared.storedStreams[0].id))) {
-                    MenuRow(detailViewName: DataService.shared.storedStreams[0].name)
-                 }
+                StreamListView()
 //                NavigationLink(destination: filterStreamView()
 //                    .navigationBarTitle("Filter")) {
 //                    MenuRow(detailViewName: "Filter Stream")
@@ -59,9 +55,16 @@ struct ContentView: View {
                 NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: DataService.shared.currentStream))) {
                     MenuRow(detailViewName: "Update Stream")
                 }
-            }.navigationBarTitle(Text("Combine Demo"))
+            }.navigationBarTitle("Streams")
+            .navigationBarItems(leading: EditButton(), trailing: createStreamView)            
         }
         
+    }
+    
+    var createStreamView: some View {
+        NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: StreamModel<String>.new()))) {
+            Image(systemName: "plus.circle").font(Font.system(size: 30))
+        }
     }
     
     func filterStreamView() -> DoubleStreamView {

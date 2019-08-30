@@ -17,27 +17,19 @@ struct StreamListView: View {
     }
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(storedStreams) { stream in
-                    NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamId: stream.id))) {
-                           MenuRow(detailViewName: stream.name)
-                    }
-                }.onDelete { (index) in
-                    guard let removingItem = index.first else {
-                        return
-                    }
-                    self.storedStreams.remove(at: removingItem)
-                }
+        ForEach(storedStreams) { stream in
+            NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamId: stream.id))) {
+                MenuRow(detailViewName: stream.name)
             }
-            .navigationBarTitle("Streams")
-            .navigationBarItems(trailing: createStreamView)
-        }
-    }
-    
-    var createStreamView: some View {
-        NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: StreamModel<String>.new()))) {
-            Image(systemName: "plus.circle").font(Font.system(size: 30))
+        }.onDelete { (index) in
+            guard let removingIndex = index.first else {
+                return
+            }
+            self.storedStreams.remove(at: removingIndex)
+        }.onMove { (source, destination) in
+            var storedStreams = self.storedStreams
+            storedStreams.move(fromOffsets: source, toOffset: destination)
+            self.storedStreams = storedStreams
         }
     }
 }

@@ -14,10 +14,10 @@ struct CombineResultStreamView: View {
     let letterStreamViewModel: StreamViewModel<String>
     let resultStreamViewModel: StreamViewModel<(String, String)>
     
-    init(title: String, publisher1: AnyPublisher<String, Never>, publisher2: AnyPublisher<String, Never>, streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<(String, String), Never>) {
-        numberStreamViewModel = StreamViewModel(title: "A: Serial([1,2,3,4])", description: "A: Serial([1,2,3,4])", publisher: publisher1)
-        letterStreamViewModel = StreamViewModel(title: "B: Serial([A,B,C,D])", description: "B: Serial([A,B,C,D])", publisher: publisher2)
-        operatorPublisher = streamOperator(publisher1, publisher2)
+    init(title: String, stream1Id: UUID, stream2Id: UUID, streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<(String, String), Never>) {        
+        numberStreamViewModel = DynamicStreamViewModel(streamId: stream1Id)
+        letterStreamViewModel = DynamicStreamViewModel(streamId: stream2Id)
+        operatorPublisher = streamOperator(numberStreamViewModel.publisher, letterStreamViewModel.publisher)
         resultStreamViewModel = StreamViewModel(title: title, publisher: self.operatorPublisher)
     }
     
@@ -47,7 +47,7 @@ struct CombineResultStreamView: View {
 #if DEBUG
 struct CombineResultStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        CombineResultStreamView(title: "", publisher1: CombineService.shared.commonPublisher, publisher2: CombineService.shared.commonPublisher) { (_, _) -> AnyPublisher<(String, String), Never> in
+        CombineResultStreamView(title: "", stream1Id: UUID(), stream2Id: UUID()) { (_, _) -> AnyPublisher<(String, String), Never> in
             return Empty().eraseToAnyPublisher()
         }
     }

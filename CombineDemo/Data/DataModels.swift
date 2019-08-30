@@ -10,13 +10,13 @@ import Foundation
 
 struct StreamModel<T: Codable>: Codable, Identifiable {
     let id: UUID
-    var name: String
+    var name: String?
     var description: String?
     var stream: [StreamItem<T>]
     var isDefault: Bool = false
     
     static func new<T>() -> StreamModel<T> {
-        StreamModel<T>(id: UUID(), name: "Default Stream", description: nil, stream: [])
+        StreamModel<T>(id: UUID(), name: nil, description: nil, stream: [])
     }
 }
 

@@ -21,7 +21,7 @@ struct StreamListView: View {
     var body: some View {
         ForEach(storedStreams) { stream in
             NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamId: stream.id))) {
-                MenuRow(detailViewName: stream.name)
+                MenuRow(detailViewName: stream.name ?? "")
             }
         }.onDelete { (index) in
             guard let removingIndex = index.first else {

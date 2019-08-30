@@ -14,7 +14,7 @@ class DynamicStreamViewModel: StreamViewModel<String> {
     
     var streamModel: StreamModel<String> {
         didSet {
-            self.title = self.streamModel.name
+            self.title = self.streamModel.name ?? ""
             self.description = self.streamModel.description ?? ""
             self.publisher = self.streamModel.toPublisher()
         }
@@ -23,7 +23,7 @@ class DynamicStreamViewModel: StreamViewModel<String> {
     init(streamId: UUID) {
         self.streamId = streamId
         self.streamModel = DataService.shared.loadStream(id: streamId)
-        super.init(title: streamModel.name, description: streamModel.description ?? "", publisher: self.streamModel.toPublisher())
+        super.init(title: streamModel.name ?? "", description: streamModel.description ?? "", publisher: self.streamModel.toPublisher())
     }
     
     func reload() {

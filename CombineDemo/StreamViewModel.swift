@@ -13,8 +13,19 @@ import Combine
 
 class StreamViewModel<T>: ObservableObject {
     
-    var title: String
-    var description: String
+    var title: String {
+        didSet {
+            updatableTitle = title
+        }
+    }
+    
+    @Published var updatableTitle: String
+    var description: String {
+        didSet {
+            updatableDescription = description
+        }
+    }
+    @Published var updatableDescription: String
     var publisher: AnyPublisher<T, Never>
     @Published var values: [TimeSeriesValue<T>] = []
     let animationSeconds: Double = 1.5
@@ -22,7 +33,9 @@ class StreamViewModel<T>: ObservableObject {
     
     init(title: String, description: String = "", publisher: AnyPublisher<T, Never>) {
         self.title = title
+        self.updatableTitle = title
         self.description = description
+        self.updatableDescription = description
         self.publisher = publisher
     }
     

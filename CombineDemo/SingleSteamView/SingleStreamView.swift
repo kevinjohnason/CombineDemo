@@ -16,13 +16,15 @@ struct SingleStreamView: View {
     var color: Color = .green
     
     var displayActionButtons: Bool = true
+        
     
     var body: some View {
         VStack(spacing: 30) {
             Spacer()
-            Text(viewModel.description)
+            Text(viewModel.updatableDescription)
                 .font(.system(.headline, design: .monospaced))
                 .lineLimit(nil).padding()
+            
             BallTunnelView(values: $viewModel.values, color: color, animationSecond: viewModel.animationSeconds)
             if displayActionButtons {
                 HStack {
@@ -35,7 +37,7 @@ struct SingleStreamView: View {
                 }.padding()
             }
             Spacer()
-        }.navigationBarTitle(viewModel.title)
+        }.navigationBarTitle(viewModel.updatableTitle)
         .navigationBarItems(trailing: trailingBarItem)
     }
     
@@ -55,7 +57,7 @@ struct SingleStreamView: View {
 #if DEBUG
 struct SingleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleStreamView(viewModel: StreamViewModel(title:"", publisher: CombineService.shared.commonPublisher))
+        SingleStreamView(viewModel: StreamViewModel(title: "", publisher: CombineService.shared.commonPublisher))
         //.previewDevice(PreviewDevice(rawValue: "iPad Pro (9.7-inch)"))
     }
 }

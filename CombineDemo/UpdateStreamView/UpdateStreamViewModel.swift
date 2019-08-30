@@ -9,10 +9,27 @@
 import Foundation
 import SwiftUI
 
+extension ClosedRange where Bound == Unicode.Scalar {
+    static let asciiPrintable: ClosedRange = " "..."~"
+    var range: ClosedRange<UInt32>  { return lowerBound.value...upperBound.value }
+    var scalars: [Unicode.Scalar]   { return range.compactMap(Unicode.Scalar.init) }
+    var characters: [Character]     { return scalars.map(Character.init) }
+    var string: String              { return String(scalars) }
+}
+
+extension String {
+    init<S: Sequence>(_ sequence: S) where S.Element == Unicode.Scalar {
+        self.init(UnicodeScalarView(sequence))
+    }
+}
+
+
 class UpdateStreamViewModel: ObservableObject {
     
-    @Published var streamOptions: [BallViewModel]
+    @Published var streamNumberOptions: [BallViewModel]
     
+    @Published var streamLetterOptions: [BallViewModel]
+        
     @Published var streamName: String
     
     @Published var streamDescription: String
@@ -23,11 +40,13 @@ class UpdateStreamViewModel: ObservableObject {
     
     init(streamModel: StreamModel<String>) {
         self.streamModel = streamModel
-        self.streamOptions = (1...8).map { BallViewModel(value: String($0)) }
+        self.streamNumberOptions = (1...8).map { BallViewModel(value: String($0)) }
+        self.streamLetterOptions = ("A"..."H").characters.map { BallViewModel(value: String($0)) }
         self.streamName = streamModel.name
         self.streamDescription = streamModel.description ?? ""
         self.values = streamModel.stream.map {
-            TimeSeriesValue(value: $0.value)
+            print("adding \($0.value) to tunnel")
+            return TimeSeriesValue(value: $0.value)
         }
     }
     

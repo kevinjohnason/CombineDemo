@@ -39,28 +39,47 @@ struct UpdateStreamView: View {
                 BallTunnelView(values: self.$viewModel.values, color: .red, padding: 5)
                     .overlayPreferenceValue(TunnelPreferenceKey.self) { preferences in
                         GeometryReader { reader in
-                            HStack {
-                                ForEach(self.viewModel.streamOptions) { option in
-                                    BallView(forgroundColor: .white, backgroundColor: .red, draggable: true, viewModel: option) { location in
-                                        guard let boundsAnchor = preferences.bounds else {
-                                            return
+                            VStack(spacing: 30) {
+                                HStack {
+                                    ForEach(self.viewModel.streamNumberOptions) { option in
+                                        BallView(forgroundColor: .white, backgroundColor: .red, draggable: true, viewModel: option) { location in
+                                            guard let boundsAnchor = preferences.bounds else {
+                                                return
+                                            }
+                                            let tunnelBounds = reader[boundsAnchor]
+                                            let height = tunnelBounds.height
+                                            let lowerY = height * 1
+                                            let higherY = height * 2
+                                            if location.y <= -lowerY  && location.y >= -higherY  {
+                                                self.viewModel.values.append(TimeSeriesValue(value: option.value))
+                                            }
                                         }
-                                        let tunnelBounds = reader[boundsAnchor]
-                                        let height = tunnelBounds.height
-                                        let lowerY = height * 1
-                                        let higherY = height * 2
-                                        if location.y <= -lowerY  && location.y >= -higherY  {
-                                            self.viewModel.values.append(TimeSeriesValue(value: option.value))
+                                    }
+                                }
+                                HStack {
+                                    ForEach(self.viewModel.streamLetterOptions) { option in
+                                        BallView(forgroundColor: .white, backgroundColor: .green, draggable: true, viewModel: option) { location in
+                                            guard let boundsAnchor = preferences.bounds else {
+                                                return
+                                            }
+                                            let tunnelBounds = reader[boundsAnchor]
+                                            let height = tunnelBounds.height
+                                            let lowerY = height * 1
+                                            let higherY = height * 2
+                                            if location.y <= -lowerY  && location.y >= -higherY  {
+                                                self.viewModel.values.append(TimeSeriesValue(value: option.value))
+                                            }
                                         }
                                     }
                                 }
                             }.offset(x: 0, y: reader[preferences.bounds!].height * 2)
                         }
                 }
-                }.frame(maxHeight: 150)
-            
+            }
+            Spacer()
         }
     }
+    
 }
 
 struct UpdateStreamView_Previews: PreviewProvider {

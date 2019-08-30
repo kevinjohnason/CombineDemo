@@ -64,8 +64,8 @@ struct UpdateStreamView: View {
                                             }
                                             let tunnelBounds = reader[boundsAnchor]
                                             let height = tunnelBounds.height
-                                            let lowerY = height * 1
-                                            let higherY = height * 2
+                                            let lowerY = height * 2
+                                            let higherY = height * 3
                                             if location.y <= -lowerY  && location.y >= -higherY  {
                                                 self.viewModel.values.append(TimeSeriesValue(value: option.value))
                                             }
@@ -78,7 +78,7 @@ struct UpdateStreamView: View {
             }
             Spacer()
         }
-    }
+    }        
     
 }
 

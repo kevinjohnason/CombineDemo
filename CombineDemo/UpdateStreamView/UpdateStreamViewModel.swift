@@ -40,8 +40,14 @@ class UpdateStreamViewModel: ObservableObject {
     
     init(streamModel: StreamModel<String>) {
         self.streamModel = streamModel
-        self.streamNumberOptions = (1...8).map { BallViewModel(value: String($0)) }
-        self.streamLetterOptions = ("A"..."H").characters.map { BallViewModel(value: String($0)) }
+        self.streamNumberOptions = (1...8).map {
+            print("generating \($0)")
+            return BallViewModel(value: String($0))
+        }
+        self.streamLetterOptions = ("A"..."H").characters.map {
+            print("generating \($0)")
+            return BallViewModel(value: String($0))
+        }
         self.streamName = streamModel.name
         self.streamDescription = streamModel.description ?? ""
         self.values = streamModel.stream.map {

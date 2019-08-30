@@ -21,6 +21,8 @@
 		316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* BallTunnelView.swift */; };
 		31826A8122F3AC1300A163A6 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* StreamViewModel.swift */; };
 		31A9655423199EA7009C2C16 /* StreamListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A9655323199EA7009C2C16 /* StreamListView.swift */; };
+		31A965572319D5D3009C2C16 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A965562319D5D3009C2C16 /* DataModels.swift */; };
+		31A9655B2319D849009C2C16 /* ButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A9655A2319D849009C2C16 /* ButtonModifier.swift */; };
 		31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCA23175BBF00347B55 /* DataService.swift */; };
 		31F1DFCD2317916400347B55 /* DynamicStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
@@ -51,6 +53,8 @@
 		31826A8022F3AC1300A163A6 /* StreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewModel.swift; sourceTree = "<group>"; };
 		3191BC0A23076CD200D89FDA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		31A9655323199EA7009C2C16 /* StreamListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListView.swift; sourceTree = "<group>"; };
+		31A965562319D5D3009C2C16 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
+		31A9655A2319D849009C2C16 /* ButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifier.swift; sourceTree = "<group>"; };
 		31F1DFCA23175BBF00347B55 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicStreamViewModel.swift; sourceTree = "<group>"; };
 		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
@@ -87,12 +91,13 @@
 			path = UpdateStreamView;
 			sourceTree = "<group>";
 		};
-		3163E60B22F8B66B00E0FDF2 /* UI */ = {
+		3163E60B22F8B66B00E0FDF2 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
 				3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */,
+				31A9655A2319D849009C2C16 /* ButtonModifier.swift */,
 			);
-			path = UI;
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		316518B022FBE8A100C8535D /* SingleBallViews */ = {
@@ -131,6 +136,35 @@
 			path = SingleSteamView;
 			sourceTree = "<group>";
 		};
+		31A965552319D5C3009C2C16 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				31F1DFCA23175BBF00347B55 /* DataService.swift */,
+				31A965562319D5D3009C2C16 /* DataModels.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		31A965582319D74A009C2C16 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				7C7A762122F1FF15007B76F9 /* Assets.xcassets */,
+				7C7A762622F1FF15007B76F9 /* LaunchScreen.storyboard */,
+				7C7A762922F1FF15007B76F9 /* Info.plist */,
+				7C7A761B22F1FF13007B76F9 /* AppDelegate.swift */,
+				7C7A761D22F1FF13007B76F9 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		31A965592319D7D1009C2C16 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7C38B58C22F255F40062EE99 /* CombineService.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		7C1F1C2022F2954F0018DDA5 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,18 +193,14 @@
 		7C7A761A22F1FF13007B76F9 /* CombineDemo */ = {
 			isa = PBXGroup;
 			children = (
-				3163E60B22F8B66B00E0FDF2 /* UI */,
+				31A965582319D74A009C2C16 /* Application */,
+				7C7A762322F1FF15007B76F9 /* Preview Content */,
+				3163E60B22F8B66B00E0FDF2 /* Styles */,
 				7C1F1C2022F2954F0018DDA5 /* Menu */,
-				7C7A761B22F1FF13007B76F9 /* AppDelegate.swift */,
-				7C7A761D22F1FF13007B76F9 /* SceneDelegate.swift */,
+				31A965552319D5C3009C2C16 /* Data */,
+				31A965592319D7D1009C2C16 /* Utilities */,
 				7C7A761F22F1FF13007B76F9 /* ContentView.swift */,
 				31A9655323199EA7009C2C16 /* StreamListView.swift */,
-				7C7A762122F1FF15007B76F9 /* Assets.xcassets */,
-				7C7A762622F1FF15007B76F9 /* LaunchScreen.storyboard */,
-				7C7A762922F1FF15007B76F9 /* Info.plist */,
-				7C38B58C22F255F40062EE99 /* CombineService.swift */,
-				31F1DFCA23175BBF00347B55 /* DataService.swift */,
-				7C7A762322F1FF15007B76F9 /* Preview Content */,
 				316518B022FBE8A100C8535D /* SingleBallViews */,
 				31826A8022F3AC1300A163A6 /* StreamViewModel.swift */,
 				31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */,
@@ -273,10 +303,12 @@
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
 				3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */,
 				316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */,
+				31A965572319D5D3009C2C16 /* DataModels.swift in Sources */,
 				31826A8122F3AC1300A163A6 /* StreamViewModel.swift in Sources */,
 				316518B722FBEA6900C8535D /* CombineSingleStreamView.swift in Sources */,
 				7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */,
 				7C7A762022F1FF13007B76F9 /* ContentView.swift in Sources */,
+				31A9655B2319D849009C2C16 /* ButtonModifier.swift in Sources */,
 				316518B322FBE8C600C8535D /* DoubleBallView.swift in Sources */,
 				3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */,
 				7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */,
@@ -426,7 +458,7 @@
 				DEVELOPMENT_ASSET_PATHS = "CombineDemo/Preview\\ Content";
 				DEVELOPMENT_TEAM = KXLAX969HP;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = CombineDemo/Info.plist;
+				INFOPLIST_FILE = CombineDemo/Application/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -446,7 +478,7 @@
 				DEVELOPMENT_ASSET_PATHS = "CombineDemo/Preview\\ Content";
 				DEVELOPMENT_TEAM = KXLAX969HP;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = CombineDemo/Info.plist;
+				INFOPLIST_FILE = CombineDemo/Application/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

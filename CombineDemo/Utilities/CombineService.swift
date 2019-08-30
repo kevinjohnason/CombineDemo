@@ -82,18 +82,40 @@ extension StreamModel where T: Codable {
     
     func toPublisher()  -> AnyPublisher<T, Never>  {
         let intervalPublishers =
-                   self.stream.map { Just($0.value).delay(for: .seconds($0.delay ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()  }
-               
-               var publisher: AnyPublisher<T, Never>?
-               
-               for intervalPublisher in intervalPublishers {
-                   if publisher == nil {
-                       publisher = intervalPublisher
-                       continue
-                   }
-                   publisher = publisher?.append(intervalPublisher).eraseToAnyPublisher()
-               }
+            self.stream.map { $0.toPublisher() }
+        
+        var publisher: AnyPublisher<T, Never>?
+        
+        for intervalPublisher in intervalPublishers {
+            if publisher == nil {
+                publisher = intervalPublisher
+                continue
+            }
+            publisher = publisher?.append(intervalPublisher).eraseToAnyPublisher()
+        }
         
         return publisher ?? Empty().eraseToAnyPublisher()
+    }
+    
+}
+
+extension StreamItem where T: Codable {
+    func toPublisher()  -> AnyPublisher<T, Never>  {
+        var publisher: AnyPublisher<T, Never> = Just(value).eraseToAnyPublisher()
+        var currentOperator = self.operatorItem
+        while currentOperator != nil {
+            guard let loopOperator = currentOperator else {
+                break
+            }
+            switch loopOperator.type {
+            case .delay:
+                publisher = publisher.delay(for: .seconds(loopOperator.value ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()
+            default:
+                break
+            }
+            currentOperator = loopOperator.next
+        }
+        
+        return publisher
     }
 }

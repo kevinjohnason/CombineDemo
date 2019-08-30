@@ -58,7 +58,7 @@ class UpdateStreamViewModel: ObservableObject {
     
     func save() {               
         let newStream = values.map {
-            StreamItem(value: $0.value, delay: 1)
+            StreamItem(value: $0.value, operatorItem: OperatorItem(type: .delay, value: 1))
         }
         var storedStreams = DataService.shared.storedStreams
                         

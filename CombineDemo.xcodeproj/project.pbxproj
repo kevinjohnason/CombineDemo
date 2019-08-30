@@ -20,6 +20,7 @@
 		316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */; };
 		316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* BallTunnelView.swift */; };
 		31826A8122F3AC1300A163A6 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* StreamViewModel.swift */; };
+		31A9655423199EA7009C2C16 /* StreamListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A9655323199EA7009C2C16 /* StreamListView.swift */; };
 		31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCA23175BBF00347B55 /* DataService.swift */; };
 		31F1DFCD2317916400347B55 /* DynamicStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
@@ -50,6 +51,7 @@
 		316A347B22F4DE44002D24AA /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
 		31826A8022F3AC1300A163A6 /* StreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewModel.swift; sourceTree = "<group>"; };
 		3191BC0A23076CD200D89FDA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		31A9655323199EA7009C2C16 /* StreamListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamListView.swift; sourceTree = "<group>"; };
 		31F1DFCA23175BBF00347B55 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicStreamViewModel.swift; sourceTree = "<group>"; };
 		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				7C7A761B22F1FF13007B76F9 /* AppDelegate.swift */,
 				7C7A761D22F1FF13007B76F9 /* SceneDelegate.swift */,
 				7C7A761F22F1FF13007B76F9 /* ContentView.swift */,
+				31A9655323199EA7009C2C16 /* StreamListView.swift */,
 				7C7A762122F1FF15007B76F9 /* Assets.xcassets */,
 				7C7A762622F1FF15007B76F9 /* LaunchScreen.storyboard */,
 				7C7A762922F1FF15007B76F9 /* Info.plist */,
@@ -290,6 +293,7 @@
 				3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */,
 				7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */,
 				3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */,
+				31A9655423199EA7009C2C16 /* StreamListView.swift in Sources */,
 				313841752302202700D45341 /* TestView.swift in Sources */,
 				7C7A763022F202C2007B76F9 /* BallView.swift in Sources */,
 				312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */,

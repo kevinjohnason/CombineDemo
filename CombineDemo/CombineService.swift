@@ -93,6 +93,7 @@ extension StreamModel where T: Codable {
                    }
                    publisher = publisher?.append(intervalPublisher).eraseToAnyPublisher()
                }
-               return publisher!
+        
+        return publisher ?? Empty().eraseToAnyPublisher()
     }
 }

@@ -45,7 +45,7 @@ class DataService {
         guard let stream = DataService.shared.storedStreams.first(where: {
             $0.id == id
         }) else {
-            return StreamModel(id: UUID(), name: "Default Stream", description: nil, stream: [])
+            return StreamModel<String>.new()
         }
         return stream
     }
@@ -58,6 +58,11 @@ struct StreamModel<T: Codable>: Codable, Identifiable {
     var name: String
     var description: String?
     var stream: [StreamItem<T>]
+    
+    
+    static func new<T>() -> StreamModel<T> {
+        StreamModel<T>(id: UUID(), name: "Default Stream", description: nil, stream: [])
+    }
 }
 
 struct StreamItem<T: Codable>: Codable {

@@ -22,8 +22,7 @@ struct UpdateStreamView: View {
         
         VStack {
             HStack {
-                Button("Clear") {
-                    self.viewModel.streamName = ""
+                Button("Clear") {                    
                     self.viewModel.values.removeAll()
                 }
                 Spacer()

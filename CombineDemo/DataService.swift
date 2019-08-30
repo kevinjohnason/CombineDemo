@@ -26,16 +26,15 @@ class DataService {
         }
     }
     
-    
     var storedStreams: [StreamModel<String>] {
         get {
             guard let data = UserDefaults.standard.data(forKey: "storedStreams") else {
-                return []
+                return self.appendDefaultStreamsIfNeeded(streams: [])
             }
             guard let streams = try? JSONDecoder().decode([StreamModel<String>].self, from: data) else {
-                return []
+                return self.appendDefaultStreamsIfNeeded(streams: [])
             }
-            return streams
+            return self.appendDefaultStreamsIfNeeded(streams: streams)
         } set {
             UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "storedStreams")
         }
@@ -49,6 +48,24 @@ class DataService {
         }
         return stream
     }
+    
+    func appendDefaultStreamsIfNeeded(streams: [StreamModel<String>]) -> [StreamModel<String>] {
+        guard (streams.filter { $0.isDefault }).count == 0 else {
+            return streams
+        }
+        let streamA = (1...4).map { StreamItem(value: String($0), delay: 1) }
+        let serialStreamA = StreamModel(id: UUID(), name: "Serial Stream A",
+                                       description: "Sequence(1, 2, 3, 4)", stream: streamA, isDefault: true)
+        
+        let streamB = ["A", "B", "C", "D"].map { StreamItem(value: $0, delay: 1) }
+        let serialStreamB = StreamModel(id: UUID(), name: "Serial Stream B",
+                                       description: "Sequence(A, B, C, D)", stream: streamB, isDefault: true)
+        var newStreams = streams
+        newStreams.append(serialStreamA)
+        newStreams.append(serialStreamB)
+        self.storedStreams = newStreams
+        return newStreams
+    }
 
 }
 
@@ -58,7 +75,7 @@ struct StreamModel<T: Codable>: Codable, Identifiable {
     var name: String
     var description: String?
     var stream: [StreamItem<T>]
-    
+    var isDefault: Bool = false
     
     static func new<T>() -> StreamModel<T> {
         StreamModel<T>(id: UUID(), name: "Default Stream", description: nil, stream: [])

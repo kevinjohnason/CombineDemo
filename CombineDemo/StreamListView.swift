@@ -16,6 +16,8 @@ struct StreamListView: View {
         }
     }
     
+    @State var alertInDisplay: Bool = false
+    
     var body: some View {
         ForEach(storedStreams) { stream in
             NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamId: stream.id))) {
@@ -23,6 +25,12 @@ struct StreamListView: View {
             }
         }.onDelete { (index) in
             guard let removingIndex = index.first else {
+                return
+            }
+            if self.storedStreams[removingIndex].isDefault {
+                self.alert(isPresented: self.$alertInDisplay) { () -> Alert in
+                    Alert(title: Text("test alert"), message: Text("test message"), dismissButton: .cancel())
+                }
                 return
             }
             self.storedStreams.remove(at: removingIndex)

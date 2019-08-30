@@ -18,13 +18,14 @@ class StreamViewModel<T>: ObservableObject {
             updatableTitle = title
         }
     }
-    
+    // Simply to work around XCode bug that doesn't comipled a publishable title
     @Published var updatableTitle: String
     var description: String {
         didSet {
             updatableDescription = description
         }
     }
+    // Simply to work around XCode bug that doesn't comipled a publishable description
     @Published var updatableDescription: String
     var publisher: AnyPublisher<T, Never>
     @Published var values: [TimeSeriesValue<T>] = []

@@ -8,24 +8,27 @@
 
 import SwiftUI
 import Combine
-struct ContentView: View {
-        
-    let publisher = CombineService.shared.commonPublisher        
+struct ContentView: View {            
+    
+    let streamA = DataService.shared.storedStreams.first(where: { $0.isDefault })?.toPublisher() ?? CombineService.shared.commonPublisher
+    
+    let streamB = DataService.shared.storedStreams.last(where: { $0.isDefault })?.toPublisher() ?? CombineService.shared.commonPublisher
+    
     
     var body: some View {
         NavigationView {
             
             List {
                 StreamListView()
-//                NavigationLink(destination: filterStreamView()
-//                    .navigationBarTitle("Filter")) {
-//                    MenuRow(detailViewName: "Filter Stream")
-//                }
+                NavigationLink(destination: filterStreamView()
+                    .navigationBarTitle("Filter")) {
+                    MenuRow(detailViewName: "Filter Stream")
+                }
                 NavigationLink(destination: dropFirstStreamView()
                     .navigationBarTitle("Drop")) {
                     MenuRow(detailViewName: "Drop Stream")
                 }
-                NavigationLink(destination: DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.map { $0 * 2 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.map { $0 * 2 }", publisher: self.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
                     publisher.map { Int($0)! }.map { String($0 * 2) }.eraseToAnyPublisher()
                 })) {
                     MenuRow(detailViewName: "Map Stream")
@@ -65,25 +68,25 @@ struct ContentView: View {
     }
     
     func filterStreamView() -> DoubleStreamView {
-        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.filter { $0 != 3 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.filter { $0 != 3 }", publisher: self.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.filter { $0 != "3" }.eraseToAnyPublisher()
         })
     }
     
     func dropFirstStreamView() -> DoubleStreamView {
-        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.dropFirst(2)", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.dropFirst(2)", publisher: self.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.dropFirst(2).eraseToAnyPublisher()
         })
     }
     
     func zipResultStreamView() -> CombineResultStreamView {
-        CombineResultStreamView(title: "Zip") { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in
+        CombineResultStreamView(title: "Zip", publisher1: self.streamA, publisher2: streamB) { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in
             Publishers.Zip(numberPublisher, letterPublisher).eraseToAnyPublisher()
         }
     }
     
     func scanResultStreamView() -> DoubleStreamView {
-        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.scan(0) { $0 + $1 }", publisher: publisher, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(title1: "A: Publishers.Sequence([1, 2, 3, 4])", title2: "A.scan(0) { $0 + $1 }", publisher: self.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.map { Int($0)! }.scan(0) {
                 $0 + $1
             }.map { String($0) }.eraseToAnyPublisher()

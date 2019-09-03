@@ -10,11 +10,7 @@ import SwiftUI
 
 struct StreamListView: View {
     
-    @State var storedStreams = DataService.shared.storedStreams {
-        didSet {
-            DataService.shared.storedStreams = self.storedStreams
-        }
-    }
+    @Binding var storedStreams: [StreamModel<String>]
     
     @State var deleteAlertInDisplay: Bool = false
     
@@ -44,6 +40,6 @@ struct StreamListView: View {
 
 struct StreamListView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamListView()
+        StreamListView(storedStreams: .constant([]))
     }
 }

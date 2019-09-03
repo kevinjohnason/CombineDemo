@@ -7,15 +7,41 @@
 //
 
 import Foundation
+import Combine
 
-class ContentViewModel {
+class ContentViewModel: ObservableObject {
     
-    let streamAModel = DataService.shared.storedStreams.first(where: { $0.isDefault }) ?? StreamModel<String>.new()
+    @Published var storedStreams: [StreamModel<String>] = DataService.shared.storedStreams {
+        didSet {
+            DataService.shared.storedStreams = self.storedStreams
+        }
+    }
+             
+    var streamAModel: StreamModel<String> {
+        storedStreams.first(where: { $0.isDefault }) ?? StreamModel<String>.new()
+    }
     
-    let streamBModel = DataService.shared.storedStreams.last(where: { $0.isDefault }) ?? StreamModel<String>.new()
+    var streamBModel: StreamModel<String> {
+        storedStreams.last(where: { $0.isDefault }) ?? StreamModel<String>.new()
+    }
     
-    lazy var streamA = streamAModel.toPublisher()
+    var streamA: AnyPublisher<String, Never> {
+        streamAModel.toPublisher()
+    }
     
-    lazy var streamB = streamBModel.toPublisher()
+    var streamB: AnyPublisher<String, Never> {
+        streamBModel.toPublisher()
+    }
     
+    var cancellable: Cancellable?
+    
+    init() {
+        cancellable = $storedStreams.sink { (newValues) in
+            DataService.shared.storedStreams = newValues
+        }
+    }
+    
+    deinit {
+        cancellable?.cancel()
+    }
 }

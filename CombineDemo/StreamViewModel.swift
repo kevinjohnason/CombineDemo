@@ -52,6 +52,10 @@ class StreamViewModel<T>: ObservableObject {
         self.values.removeAll()
     }
     
+    deinit {
+        cancellable?.cancel()
+    }
+    
 }
 
 

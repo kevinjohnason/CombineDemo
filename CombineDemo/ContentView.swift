@@ -10,14 +10,13 @@ import SwiftUI
 import Combine
 struct ContentView: View {            
     
-    let viewModel = ContentViewModel()
-    
-    
+    @ObservedObject var viewModel = ContentViewModel()
+        
     var body: some View {
         NavigationView {
             
             List {
-                StreamListView()
+                StreamListView(storedStreams: $viewModel.storedStreams)
                 NavigationLink(destination: filterStreamView()
                     .navigationBarTitle("Filter")) {
                     MenuRow(detailViewName: "Filter Stream")

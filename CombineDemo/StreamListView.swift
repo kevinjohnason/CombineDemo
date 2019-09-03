@@ -16,7 +16,7 @@ struct StreamListView: View {
     
     var body: some View {
         ForEach(storedStreams) { stream in
-            NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamId: stream.id))) {
+            NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: stream))) {
                 MenuRow(detailViewName: stream.name ?? "")
             }
         }.onDelete { (index) in

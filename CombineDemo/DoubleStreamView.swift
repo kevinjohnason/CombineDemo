@@ -12,8 +12,9 @@ struct DoubleStreamView: View {
     let streamViewModel1: StreamViewModel<String>
     let streamViewModel2: StreamViewModel<String>
                 
-    init(streamId: UUID, operatorTitle: String, publisher: AnyPublisher<String, Never>,  convertingPublisher: (AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
-        streamViewModel1 = DynamicStreamViewModel(streamId: streamId)
+    init(streamModel: StreamModel<String>, operatorTitle: String, publisher: AnyPublisher<String, Never>,  convertingPublisher: (AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
+        
+        streamViewModel1 = DynamicStreamViewModel(streamModel: streamModel)
         streamViewModel2 = StreamViewModel(title: operatorTitle, description: operatorTitle, publisher: convertingPublisher(publisher))
     }
     
@@ -38,7 +39,7 @@ struct DoubleStreamView: View {
 #if DEBUG
 struct DoubleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        DoubleStreamView(streamId: UUID(), operatorTitle: "", publisher: Just("").eraseToAnyPublisher()) { (_) -> AnyPublisher<String, Never> in
+        DoubleStreamView(streamModel: StreamModel<String>.new(), operatorTitle: "", publisher: Just("").eraseToAnyPublisher()) { (_) -> AnyPublisher<String, Never> in
             Just("").eraseToAnyPublisher()
         }
     }

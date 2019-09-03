@@ -25,7 +25,7 @@ struct ContentView: View {
                     .navigationBarTitle("Drop")) {
                     MenuRow(detailViewName: "Drop Stream")
                 }
-                NavigationLink(destination: DoubleStreamView(streamId: viewModel.streamAModel.id, operatorTitle: "A.map { $0 * 2 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "A.map { $0 * 2 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
                     publisher.map { Int($0)! }.map { String($0 * 2) }.eraseToAnyPublisher()
                 })) {
                     MenuRow(detailViewName: "Map Stream")
@@ -65,13 +65,13 @@ struct ContentView: View {
     }
     
     func filterStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamId: viewModel.streamAModel.id, operatorTitle: "A.filter { $0 != 3 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "A.filter { $0 != 3 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.filter { $0 != "3" }.eraseToAnyPublisher()
         })
     }
     
     func dropFirstStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamId: viewModel.streamAModel.id, operatorTitle: "A.dropFirst(2)", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "A.dropFirst(2)", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.dropFirst(2).eraseToAnyPublisher()
         })
     }
@@ -83,7 +83,7 @@ struct ContentView: View {
     }
     
     func scanResultStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamId: viewModel.streamAModel.id, operatorTitle: "A.scan(0) { $0 + $1 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "A.scan(0) { $0 + $1 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.map { Int($0)! }.scan(0) {
                 $0 + $1
             }.map { String($0) }.eraseToAnyPublisher()

@@ -30,10 +30,5 @@ class DynamicStreamViewModel: StreamViewModel<String> {
         self.streamModel = streamModel
         super.init(title: streamModel.name ?? "", description: streamModel.description ?? "", publisher: self.streamModel.toPublisher())
     }
-    
-    
-    func reload() {
-        self.streamModel = DataService.shared.loadStream(id: streamId)
-    }
         
 }

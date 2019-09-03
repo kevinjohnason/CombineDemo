@@ -15,7 +15,7 @@ struct SingleStreamView: View {
     
     var color: Color = .green
     
-    var displayActionButtons: Bool = true        
+    var displayActionButtons: Bool = true
     
     var body: some View {
         VStack(spacing: 30) {
@@ -44,9 +44,7 @@ struct SingleStreamView: View {
         guard let dynamicStreamViewModel = viewModel as? DynamicStreamViewModel else {
             return AnyView(EmptyView())
         }
-        let navigationLink = NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: dynamicStreamViewModel.streamModel), updateCompleted: {
-            dynamicStreamViewModel.reload()
-        })) {
+        let navigationLink = NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: dynamicStreamViewModel.streamModel))) {
             Text("Edit")
         }        
         return AnyView(navigationLink)

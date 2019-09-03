@@ -14,9 +14,7 @@ struct UpdateStreamView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    let tunnelPadding: CGFloat = 5
-    
-    var updateCompleted: (() -> Void)?
+    let tunnelPadding: CGFloat = 5        
     
     var body: some View {
         
@@ -27,8 +25,7 @@ struct UpdateStreamView: View {
                 }
                 Spacer()
                 Button("Save") {
-                    self.viewModel.save()
-                    self.updateCompleted?()
+                    self.viewModel.save()                    
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }.padding()

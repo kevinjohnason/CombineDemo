@@ -11,11 +11,9 @@ import Combine
 
 class ContentViewModel: ObservableObject {
     
-    @Published var storedStreams: [StreamModel<String>] = DataService.shared.storedStreams {
-        didSet {
-            DataService.shared.storedStreams = self.storedStreams
-        }
-    }
+    private var disposables = Set<AnyCancellable>()
+    
+    @Published var storedStreams: [StreamModel<String>] = DataService.shared.storedStreams
              
     var streamAModel: StreamModel<String> {
         storedStreams.first(where: { $0.isDefault }) ?? StreamModel<String>.new()
@@ -36,12 +34,13 @@ class ContentViewModel: ObservableObject {
     var cancellable: Cancellable?
     
     init() {
-        cancellable = $storedStreams.sink { (newValues) in
-            DataService.shared.storedStreams = newValues
-        }
+   
     }
     
-    deinit {
-        cancellable?.cancel()
+    func refresh() {
+        DataService.shared.storedStreamUpdated.sink { (newStream) in
+            self.storedStreams = newStream
+        }.store(in: &disposables)
     }
+    
 }

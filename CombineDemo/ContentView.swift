@@ -53,7 +53,8 @@ struct ContentView: View {
                     MenuRow(detailViewName: "Scan Stream")
                 }
             }.navigationBarTitle("Streams")
-            .navigationBarItems(leading: EditButton(), trailing: createStreamView)            
+            .navigationBarItems(leading: EditButton(), trailing: createStreamView)
+                .onAppear(perform: viewModel.refresh)
         }
         
     }

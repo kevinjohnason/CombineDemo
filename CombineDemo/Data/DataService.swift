@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Combine
 class DataService {
     static let shared = DataService()    
     var currentStream: StreamModel<String>
@@ -37,8 +37,11 @@ class DataService {
             return self.appendDefaultStreamsIfNeeded(streams: streams)
         } set {
             UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "storedStreams")
+            storedStreamUpdated.send(newValue)
         }
     }
+    
+    let storedStreamUpdated: PassthroughSubject<[StreamModel<String>], Never> = PassthroughSubject()
     
     func loadStream(id: UUID) -> StreamModel<String> {
         guard let stream = DataService.shared.storedStreams.first(where: {

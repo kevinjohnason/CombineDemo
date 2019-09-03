@@ -25,31 +25,31 @@ struct ContentView: View {
                     .navigationBarTitle("Drop")) {
                     MenuRow(detailViewName: "Drop Stream")
                 }
-                NavigationLink(destination: DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "A.map { $0 * 2 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Map",
+                                                             operatorDescription: "A.map { $0 * 2 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
                     publisher.map { Int($0)! }.map { String($0 * 2) }.eraseToAnyPublisher()
                 })) {
                     MenuRow(detailViewName: "Map Stream")
                 }
-                NavigationLink(destination: OperationStreamView(title: "Publishers.Merge(A, B)") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: OperationStreamView(title: "Merge", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                     Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
-                }.navigationBarTitle("Merge")) {
+                }) {
                     MenuRow(detailViewName: "Merge Stream")
                 }
-                NavigationLink(destination: OperationStreamView(title: "A.flatMap { _ in B } ") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: OperationStreamView(title: "FlatMap", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                     numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
-                }.navigationBarTitle("FlatMap")) {
+                }) {
                     MenuRow(detailViewName: "FlatMap Stream")
                 }
-                NavigationLink(destination: zipResultStreamView().navigationBarTitle("Zip")) {
+                NavigationLink(destination: zipResultStreamView()) {
                     MenuRow(detailViewName: "Zip Stream")
                 }
-                NavigationLink(destination: OperationStreamView(title: "A.append(B)") { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                NavigationLink(destination: OperationStreamView(title: "Append", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                     numberPublisher.append(letterPublisher).eraseToAnyPublisher()
-                }.navigationBarTitle("Append")) {
+                }) {
                     MenuRow(detailViewName: "Append Stream")
                 }
-                NavigationLink(destination: scanResultStreamView()
-                    .navigationBarTitle("Scan")) {
+                NavigationLink(destination: scanResultStreamView()) {
                     MenuRow(detailViewName: "Scan Stream")
                 }
             }.navigationBarTitle("Streams")
@@ -66,25 +66,25 @@ struct ContentView: View {
     }
     
     func filterStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "A.filter { $0 != 3 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Filter", operatorDescription: "A.filter { $0 != 3 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.filter { $0 != "3" }.eraseToAnyPublisher()
         })
     }
     
     func dropFirstStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "A.dropFirst(2)", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Drop", operatorDescription: "A.dropFirst(2)", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.dropFirst(2).eraseToAnyPublisher()
         })
     }
     
     func zipResultStreamView() -> CombineResultStreamView {
-        CombineResultStreamView(title: "Zip", stream1Id: self.viewModel.streamAModel.id, stream2Id: self.viewModel.streamBModel.id) { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in
+        CombineResultStreamView(title: "Zip", stream1Model: self.viewModel.streamAModel, stream2Model: self.viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in
             Publishers.Zip(numberPublisher, letterPublisher).eraseToAnyPublisher()
         }
     }
     
     func scanResultStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "A.scan(0) { $0 + $1 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Scan",operatorDescription: "A.scan(0) { $0 + $1 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
             publisher.map { Int($0)! }.scan(0) {
                 $0 + $1
             }.map { String($0) }.eraseToAnyPublisher()

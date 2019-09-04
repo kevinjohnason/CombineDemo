@@ -9,20 +9,18 @@
 import SwiftUI
 
 
-struct TunnelPreferenceData {
+struct BoundsPreferenceData {
     let bounds: Anchor<CGRect>?
 }
 
 struct TunnelPreferenceKey: PreferenceKey {
-    static var defaultValue: TunnelPreferenceData = TunnelPreferenceData(bounds: nil)
+    static var defaultValue: BoundsPreferenceData = BoundsPreferenceData(bounds: nil)
     
-    static func reduce(value: inout TunnelPreferenceData, nextValue: () -> TunnelPreferenceData) {
+    static func reduce(value: inout BoundsPreferenceData, nextValue: () -> BoundsPreferenceData) {
         value = nextValue()
     }
-    typealias Value = TunnelPreferenceData
+    typealias Value = BoundsPreferenceData
 }
-
-
 
 struct BallTunnelView: View {    
     @Binding var values: [TimeSeriesValue<String>]
@@ -33,7 +31,7 @@ struct BallTunnelView: View {
     var ballRadius: CGFloat = 48
     
     var padding: CGFloat = 5
-    
+
     var body: some View {
         GeometryReader { tunnelGeometry in
             HStack(spacing: 0) {
@@ -44,14 +42,22 @@ struct BallTunnelView: View {
                         .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }
             }
-            .frame(minWidth: tunnelGeometry.size.width, minHeight: self.ballRadius, alignment: .trailing)
+            .frame(minWidth: self.tunnelWidth(with: tunnelGeometry.size.width),
+                   minHeight: self.ballRadius, alignment: .leading).offset(x: self.tunnelOffset(with: tunnelGeometry.size.width))
             .padding([.top, .bottom], self.padding)            
-            .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))
+                .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))
             .anchorPreference(key: TunnelPreferenceKey.self, value: .bounds, transform: {
-                TunnelPreferenceData(bounds: $0)
-            })
-            .animation(.easeInOut(duration: self.animationSecond))
+                BoundsPreferenceData(bounds: $0)
+            }).animation(.easeInOut(duration: self.animationSecond))
         }
+    }
+    
+    func tunnelWidth(with screenWidth: CGFloat) -> CGFloat {
+        max(screenWidth, self.ballRadius * CGFloat(self.values.count))
+    }
+    
+    func tunnelOffset(with screenWidth: CGFloat) -> CGFloat {
+        (tunnelWidth(with: screenWidth) - screenWidth) / 2
     }
 }
 

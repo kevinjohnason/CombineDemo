@@ -26,7 +26,7 @@ struct DoubleBallTunnelView: View {
                         .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }
             }
-            .frame(minWidth: tunnelGeometry.size.width, minHeight: self.ballRadius, alignment: .trailing)
+            .frame(minWidth: max(tunnelGeometry.size.width, self.ballRadius * 2 * CGFloat(self.values.count)), minHeight: self.ballRadius, alignment: .trailing)
             .padding([.top, .bottom], 5)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
             .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))

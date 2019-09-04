@@ -27,34 +27,14 @@ struct UpdateStreamView: View {
                             VStack(spacing: 30) {
                                 HStack {
                                     ForEach(self.viewModel.streamNumberOptions) { option in
-                                        BallView(forgroundColor: .white, backgroundColor: .red, draggable: true, viewModel: option) { location in
-                                            guard let boundsAnchor = preferences.bounds else {
-                                                return
-                                            }
-                                            let tunnelBounds = reader[boundsAnchor]
-                                            let height = tunnelBounds.height
-                                            let lowerY = height * 1
-                                            let higherY = height * 2
-                                            if location.y <= -lowerY  && location.y >= -higherY  {
-                                                self.viewModel.values.append(TimeSeriesValue(value: option.value))
-                                            }
-                                        }
+                                        BallView(forgroundColor: .white, backgroundColor: .red, draggable: true, viewModel: option)
+                                            .gesture(self.dragBallGesture(reader: reader, ballViewModel: option))
                                     }
                                 }
                                 HStack {
                                     ForEach(self.viewModel.streamLetterOptions) { option in
-                                        BallView(forgroundColor: .white, backgroundColor: .green, draggable: true, viewModel: option) { location in
-                                            guard let boundsAnchor = preferences.bounds else {
-                                                return
-                                            }
-                                            let tunnelBounds = reader[boundsAnchor]
-                                            let height = tunnelBounds.height
-                                            let lowerY = height * 2
-                                            let higherY = height * 3
-                                            if location.y <= -lowerY  && location.y >= -higherY  {
-                                                self.viewModel.values.append(TimeSeriesValue(value: option.value))
-                                            }
-                                        }
+                                        BallView(forgroundColor: .white, backgroundColor: .green, draggable: true, viewModel: option)
+                                        .gesture(self.dragBallGesture(reader: reader, ballViewModel: option))
                                     }
                                 }
                             }.offset(x: 0, y: reader[preferences.bounds!].height * 2)
@@ -66,18 +46,37 @@ struct UpdateStreamView: View {
                 Button("Reset") {
                     self.viewModel.values.removeAll()
                 }.foregroundColor(Color.white)
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .background(Color.gray)
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .background(Color.gray)
                 Button("Save") {
                     self.viewModel.save()
                     self.presentationMode.wrappedValue.dismiss()
                 }.foregroundColor(Color.white)
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .background(Color.blue)
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .background(Color.blue)
             }
         }
-    }        
+    }
     
+    func dragBallGesture(reader: GeometryProxy, ballViewModel:  BallViewModel) -> some Gesture {
+        DragGesture(coordinateSpace: .global)
+            .onChanged({ (gestureValue) in
+                ballViewModel.offset = CGSize(width: gestureValue.translation.width,
+                                              height: gestureValue.translation.height)
+            })
+            .onEnded({ (gestureValue) in
+                ballViewModel.offset = CGSize.zero
+                guard reader.frame(in: .global).contains(gestureValue.location) else {
+                    return
+                }
+                self.viewModel.values.append(TimeSeriesValue(value: ballViewModel.value))
+                ballViewModel.isHidden = true
+                let presentAnimation =  Animation.default.delay(0.5)
+                withAnimation(presentAnimation) {
+                    ballViewModel.isHidden = false
+                }
+            })                
+    }
 }
 
 struct UpdateStreamView_Previews: PreviewProvider {

@@ -12,8 +12,7 @@ struct BallView: View {
     var forgroundColor: Color
     var backgroundColor: Color
     var draggable: Bool = false
-    @ObservedObject var viewModel: BallViewModel
-    var draggingEnded: ((CGPoint) -> Void)?
+    @ObservedObject var viewModel: BallViewModel    
     
     var body: some View {
         GeometryReader { reader in
@@ -26,16 +25,7 @@ struct BallView: View {
                 .clipShape(Circle())
                 .shadow(radius: 1)
                 .offset(self.viewModel.offset)
-                .gesture(DragGesture(coordinateSpace: .local).onChanged({ (gestureValue) in
-                    guard self.draggable else { return }
-                    let width = reader.size.width                    
-                    self.viewModel.offset = CGSize(width: gestureValue.location.x - width / 2, height: gestureValue.location.y - width / 2 )
-                }).onEnded({ (gestureValue) in
-                    guard self.draggable else { return }
-                    self.viewModel.offset = CGSize.zero
-                    self.draggingEnded?(gestureValue.location)
-                }))
-        }
+        }.opacity(viewModel.isHidden ? 0 : 1)
     }
 }
 

@@ -12,6 +12,7 @@ import SwiftUI
 class BallViewModel: ObservableObject, Identifiable {
     @Published var value: String
     let id: Date = Date()
+    @Published var isHidden: Bool = false
     @Published var offset: CGSize = .zero
     init(value: String) {
         self.value = value

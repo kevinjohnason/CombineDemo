@@ -17,19 +17,7 @@ struct UpdateStreamView: View {
     let tunnelPadding: CGFloat = 5        
     
     var body: some View {
-        
         VStack {
-            HStack {
-                Button("Clear") {                    
-                    self.viewModel.values.removeAll()
-                }
-                Spacer()
-                Button("Save") {
-                    self.viewModel.save()                    
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            }.padding()
-            
             VStack(alignment: .center, spacing: 10) {
                 TextField("Stream Name", text: $viewModel.streamName).font(.headline).padding()
                 TextField("Stream Description", text: $viewModel.streamDescription).font(.body).padding()
@@ -74,6 +62,19 @@ struct UpdateStreamView: View {
                 }
             }
             Spacer()
+            VStack(spacing: 10) {
+                Button("Reset") {
+                    self.viewModel.values.removeAll()
+                }.foregroundColor(Color.white)
+                .frame(maxWidth: .infinity, minHeight: 50)
+                .background(Color.gray)
+                Button("Save") {
+                    self.viewModel.save()
+                    self.presentationMode.wrappedValue.dismiss()
+                }.foregroundColor(Color.white)
+                .frame(maxWidth: .infinity, minHeight: 50)
+                .background(Color.blue)
+            }
         }
     }        
     

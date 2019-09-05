@@ -9,14 +9,24 @@
 import Foundation
 
 struct StreamModel<T: Codable>: Codable, Identifiable {
-    let id: UUID
+    var id: UUID
     var name: String?
     var description: String?
     var stream: [StreamItem<T>]
-    var isDefault: Bool = false
+    var isDefault: Bool
+    var operatorStreamModels: [StreamModel<T>]
+    
+    init(id: UUID = UUID(), name: String? = nil, description: String? = nil, stream: [StreamItem<T>] = [], isDefault: Bool = false, operatorStreamModels: [StreamModel<T>] = []) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.stream = stream
+        self.isDefault = isDefault
+        self.operatorStreamModels = operatorStreamModels
+    }
     
     static func new<T>() -> StreamModel<T> {
-        StreamModel<T>(id: UUID(), name: nil, description: nil, stream: [])
+        StreamModel<T>()
     }
 }
 
@@ -33,12 +43,14 @@ enum OperatorType: String, Codable {
 class OperatorItem: Codable {
     let type: OperatorType
     let value: Double?
-    let next: OperatorItem?
+    var next: OperatorItem?
+    let expression: String?
     
-    init(type: OperatorType, value: Double? = nil, next: OperatorItem? = nil) {
+    init(type: OperatorType, value: Double? = nil, expression: String? = nil, next: OperatorItem? = nil) {
         self.type = type
         self.value = value
         self.next = next
+        self.expression = expression
     }
     
 }

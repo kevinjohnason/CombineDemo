@@ -17,8 +17,7 @@ struct ContentView: View {
             
             List {
                 StreamListView(storedStreams: $viewModel.storedStreams)
-                NavigationLink(destination: filterStreamView()
-                    .navigationBarTitle("Filter")) {
+                NavigationLink(destination: filterStreamView()) {
                     MenuRow(detailViewName: "Filter Stream")
                 }
                 NavigationLink(destination: dropFirstStreamView()

@@ -16,8 +16,15 @@ struct StreamListView: View {
     
     var body: some View {
         ForEach(storedStreams) { stream in
-            NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: stream))) {
-                MenuRow(detailViewName: stream.name ?? "")
+            if stream.operatorStreamModels.count > 0 {
+                NavigationLink(destination: DoubleStreamView(streamModel: stream,
+                                                             operatorStreamModel: stream.operatorStreamModels[0])) {
+                    MenuRow(detailViewName: stream.name ?? "")
+                }
+            } else {
+                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: stream))) {
+                    MenuRow(detailViewName: stream.name ?? "")
+                }
             }
         }.onDelete { (index) in
             guard let removingIndex = index.first else {

@@ -94,6 +94,10 @@ extension StreamModel where T: Codable {
             publisher = publisher?.append(intervalPublisher).eraseToAnyPublisher()
         }
         
+        for operatorModel in self.operatorStreamModels {
+            publisher =  publisher.flatMap { _ in operatorModel.toPublisher() }?.eraseToAnyPublisher()
+        }
+        
         return publisher ?? Empty().eraseToAnyPublisher()
     }
     
@@ -110,8 +114,8 @@ extension StreamItem where T: Codable {
             switch loopOperator.type {
             case .delay:
                 publisher = publisher.delay(for: .seconds(loopOperator.value ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()
-            default:
-                break
+            case .filter:                
+                publisher = publisher.filter { NSPredicate(format: loopOperator.expression ?? "true", argumentArray: [$0 as? String ?? "", String(loopOperator.value ?? 0)]).evaluate(with: nil) }.print().eraseToAnyPublisher()
             }
             currentOperator = loopOperator.next
         }

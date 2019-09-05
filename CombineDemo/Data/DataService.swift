@@ -70,12 +70,22 @@ class DataService {
                         
         filterStreamModel.operatorItem = OperatorItem(type: .filter, value: 3, expression: "%d != %d", next: nil)
         
+        var dropStreamModel = StreamModel(id: UUID(), name: "Drop Stream", description: "dropFirst(2)",
+                                            stream: streamA, isDefault: false)
+                        
+        dropStreamModel.operatorItem = OperatorItem(type: .drop, value: 2, expression: nil, next: nil)
+        
         var newStreams = streams
         newStreams.append(serialStreamA)
         newStreams.append(serialStreamB)
         newStreams.append(filterStreamModel)
+        newStreams.append(dropStreamModel)
         self.storedStreams = newStreams
         return newStreams
+    }
+    
+    func resetStoredStream() {
+        storedStreams = appendDefaultStreamsIfNeeded(streams: [])
     }
 
 }

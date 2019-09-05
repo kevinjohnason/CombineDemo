@@ -87,7 +87,7 @@ extension StreamModel where T == String {
         guard let finalDotIndex = desc.lastIndex(of: ",") else {
             return "Empty()"
         }
-        desc.removeSubrange(finalDotIndex..<desc.endIndex)        
+        desc.removeSubrange(finalDotIndex..<desc.endIndex)
         desc.append(")")
         return desc
     }
@@ -146,6 +146,8 @@ extension OperatorItem  {
             case .filter:
                 return publisher.filter { NSPredicate(format: self.expression ?? "true",
                                                       argumentArray: [$0, String(Int(self.value ?? 0))]).evaluate(with: nil) }.eraseToAnyPublisher()
+            case .drop:
+                return publisher.dropFirst(Int(self.value ?? 0)).eraseToAnyPublisher()
             }
     }
 }

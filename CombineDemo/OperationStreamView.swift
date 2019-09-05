@@ -19,8 +19,8 @@ struct OperationStreamView: View {
     let title: String
     init(title: String, stream1Model: StreamModel<String>, stream2Model: StreamModel<String>, streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
         self.title = title
-        stream1ViewModel = StreamViewModel(title: stream1Model.name ?? "", description: stream1Model.description ?? "",  publisher: stream1Model.toPublisher())
-        stream2ViewModel = StreamViewModel(title: stream2Model.name ?? "", description: stream2Model.description ?? "", publisher: letterPublisher)
+        stream1ViewModel = StreamViewModel(title: stream1Model.name ?? "", description: stream1Model.sequenceDescription,  publisher: stream1Model.toPublisher())
+        stream2ViewModel = StreamViewModel(title: stream2Model.name ?? "", description: stream2Model.sequenceDescription, publisher: letterPublisher)
         operatorPublisher = streamOperator(numberPublisher, letterPublisher)
         operatorStreamViewModel = StreamViewModel(title: title, description: title, publisher: self.operatorPublisher)
     }

@@ -38,6 +38,7 @@ struct StreamItem<T: Codable>: Codable {
 enum OperatorType: String, Codable {
     case delay
     case filter
+    case drop
 }
 
 class OperatorItem: Codable {

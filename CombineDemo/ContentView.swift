@@ -11,45 +11,47 @@ import Combine
 struct ContentView: View {            
     
     @ObservedObject var viewModel = ContentViewModel()
-        
+    
     var body: some View {
-        NavigationView {
-            
-            List {
-                StreamListView(storedStreams: $viewModel.storedStreams)
-                NavigationLink(destination: dropFirstStreamView()
-                    .navigationBarTitle("Drop")) {
-                    MenuRow(detailViewName: "Drop Stream")
+        NavigationView {            
+            VStack {
+                List {
+                    StreamListView(storedStreams: $viewModel.storedStreams)
+                    NavigationLink(destination: DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Map",
+                                                                 operatorDescription: "A.map { $0 * 2 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
+                                                                    publisher.map { Int($0)! }.map { String($0 * 2) }.eraseToAnyPublisher()
+                    })) {
+                        MenuRow(detailViewName: "Map Stream")
+                    }
+                    NavigationLink(destination: OperationStreamView(title: "Merge", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                        Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
+                    }) {
+                        MenuRow(detailViewName: "Merge Stream")
+                    }
+                    NavigationLink(destination: OperationStreamView(title: "FlatMap", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                        numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
+                    }) {
+                        MenuRow(detailViewName: "FlatMap Stream")
+                    }
+                    NavigationLink(destination: zipResultStreamView()) {
+                        MenuRow(detailViewName: "Zip Stream")
+                    }
+                    NavigationLink(destination: OperationStreamView(title: "Append", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
+                        numberPublisher.append(letterPublisher).eraseToAnyPublisher()
+                    }) {
+                        MenuRow(detailViewName: "Append Stream")
+                    }
+                    NavigationLink(destination: scanResultStreamView()) {
+                        MenuRow(detailViewName: "Scan Stream")
+                    }
                 }
-                NavigationLink(destination: DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Map",
-                                                             operatorDescription: "A.map { $0 * 2 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
-                    publisher.map { Int($0)! }.map { String($0 * 2) }.eraseToAnyPublisher()
-                })) {
-                    MenuRow(detailViewName: "Map Stream")
-                }
-                NavigationLink(destination: OperationStreamView(title: "Merge", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
-                    Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
-                }) {
-                    MenuRow(detailViewName: "Merge Stream")
-                }
-                NavigationLink(destination: OperationStreamView(title: "FlatMap", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
-                    numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
-                }) {
-                    MenuRow(detailViewName: "FlatMap Stream")
-                }
-                NavigationLink(destination: zipResultStreamView()) {
-                    MenuRow(detailViewName: "Zip Stream")
-                }
-                NavigationLink(destination: OperationStreamView(title: "Append", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
-                    numberPublisher.append(letterPublisher).eraseToAnyPublisher()
-                }) {
-                    MenuRow(detailViewName: "Append Stream")
-                }
-                NavigationLink(destination: scanResultStreamView()) {
-                    MenuRow(detailViewName: "Scan Stream")
-                }
+                
+                Button("Reset") {
+                    DataService.shared.resetStoredStream()
+                }.frame(maxWidth: .infinity, maxHeight: 25)
+                    .modifier(DemoButton(backgroundColor: .red))
             }.navigationBarTitle("Streams")
-            .navigationBarItems(leading: EditButton(), trailing: createStreamView)
+                .navigationBarItems(leading: EditButton(), trailing: createStreamView)
                 .onAppear(perform: viewModel.refresh)
         }
         
@@ -59,12 +61,6 @@ struct ContentView: View {
         NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: StreamModel<String>.new()))) {
             Image(systemName: "plus.circle").font(Font.system(size: 30))
         }
-    }
-    
-    func dropFirstStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Drop", operatorDescription: "A.dropFirst(2)", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
-            publisher.dropFirst(2).eraseToAnyPublisher()
-        })
     }
     
     func zipResultStreamView() -> CombineResultStreamView {

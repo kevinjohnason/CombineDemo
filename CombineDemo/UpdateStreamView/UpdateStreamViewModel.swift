@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 extension ClosedRange where Bound == Unicode.Scalar {
     static let asciiPrintable: ClosedRange = " "..."~"
@@ -30,13 +31,19 @@ class UpdateStreamViewModel: ObservableObject {
     
     @Published var streamLetterOptions: [BallViewModel]
         
-    var streamName: String
+    @Published var streamName: String
     
-    var streamDescription: String
+    @Published var streamDescription: String
+        
+    var sequenceDescription: String {
+        streamModel.sequenceDescription
+    }
     
     @Published var values: [TimeSeriesValue<String>]
     
-    let streamModel: StreamModel<String>
+    @Published var streamModel: StreamModel<String>
+    
+    private var disposables = Set<AnyCancellable>()
     
     init(streamModel: StreamModel<String>) {
         self.streamModel = streamModel
@@ -49,29 +56,32 @@ class UpdateStreamViewModel: ObservableObject {
             return BallViewModel(value: String($0))
         }
         self.streamName = streamModel.name ?? ""
-        self.streamDescription = streamModel.description ?? ""
+        self.streamDescription = streamModel.sequenceDescription
         self.values = streamModel.stream.map {
             print("adding \($0.value) to tunnel")
             return TimeSeriesValue(value: $0.value)
         }
+        self.setupDataBinding()
     }
     
-    func save() {               
-        let newStream = values.map {
-            StreamItem(value: $0.value, operatorItem: OperatorItem(type: .delay, value: 1))
-        }
-        var storedStreams = DataService.shared.storedStreams
-                        
+    func setupDataBinding() {
+        Publishers.CombineLatest($values, $streamName).map { (values, streamName) -> StreamModel<String> in
+            var newStream = self.streamModel
+            newStream.stream = values.map {
+                StreamItem(value: $0.value, operatorItem: OperatorItem(type: .delay, value: 1))
+            }
+            newStream.name = streamName
+            return newStream
+        }.assign(to: \.streamModel, on: self)
+        .store(in: &disposables)
+    }
+    
+    func save() {
+        var storedStreams = DataService.shared.storedStreams                        
         if let storedStreamIndex = storedStreams.firstIndex(where: { $0.id == self.streamModel.id }) {
-            var updatingStoredStream = storedStreams[storedStreamIndex]
-            updatingStoredStream.description = streamDescription
-            updatingStoredStream.name = streamName
-            updatingStoredStream.stream = newStream
-            storedStreams[storedStreamIndex] = updatingStoredStream
+            storedStreams[storedStreamIndex] = streamModel
         } else {
-            let newStreamModel =
-                StreamModel<String>(id: UUID(), name: streamName, description: streamDescription, stream: newStream)
-            storedStreams.append(newStreamModel)
+            storedStreams.append(streamModel)
         }
         DataService.shared.storedStreams = storedStreams
     }

@@ -28,7 +28,8 @@ class DynamicStreamViewModel: StreamViewModel<String> {
     init(streamModel: StreamModel<String>) {
         self.streamId = streamModel.id
         self.streamModel = streamModel
-        super.init(title: streamModel.name ?? "", description: streamModel.description ?? "",
+        super.init(title: streamModel.name ?? "",
+                   description: streamModel.description ?? streamModel.sequenceDescription,
                    publisher: self.streamModel.toPublisher())
     }
         

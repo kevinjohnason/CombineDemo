@@ -23,7 +23,9 @@ struct DoubleStreamView: View {
     
     init(streamModel: StreamModel<String>, operationItem: OperatorItem) {
         self.operatorTitle = streamModel.name ?? ""
-        streamViewModel1 = DynamicStreamViewModel(streamModel: streamModel)
+        streamViewModel1 = StreamViewModel(title: streamModel.name ?? "",
+                                           description: streamModel.sequenceDescription,
+                                           publisher: streamModel.toPublisher())
         streamViewModel2 = StreamViewModel(title: streamModel.name ?? "",
                                            description: streamModel.description ?? "",
                                            publisher: streamModel.applyOperationPublisher())

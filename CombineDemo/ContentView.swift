@@ -17,9 +17,6 @@ struct ContentView: View {
             
             List {
                 StreamListView(storedStreams: $viewModel.storedStreams)
-                NavigationLink(destination: filterStreamView()) {
-                    MenuRow(detailViewName: "Filter Stream")
-                }
                 NavigationLink(destination: dropFirstStreamView()
                     .navigationBarTitle("Drop")) {
                     MenuRow(detailViewName: "Drop Stream")
@@ -62,12 +59,6 @@ struct ContentView: View {
         NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: StreamModel<String>.new()))) {
             Image(systemName: "plus.circle").font(Font.system(size: 30))
         }
-    }
-    
-    func filterStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Filter", operatorDescription: "A.filter { $0 != 3 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
-            publisher.filter { $0 != "3" }.eraseToAnyPublisher()
-        })
     }
     
     func dropFirstStreamView() -> DoubleStreamView {

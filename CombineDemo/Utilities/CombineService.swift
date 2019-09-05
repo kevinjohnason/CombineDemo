@@ -80,6 +80,18 @@ class SerialNumberPublisher: Publisher {
 
 extension StreamModel where T == String {
     
+    var sequenceDescription: String {
+        var desc = self.stream.reduce("Sequence(") {
+            "\($0)\($1.value), "
+        }
+        guard let finalDotIndex = desc.lastIndex(of: ",") else {
+            return "Empty()"
+        }
+        desc.removeSubrange(finalDotIndex..<desc.endIndex)        
+        desc.append(")")
+        return desc
+    }
+    
     func toPublisher()  -> AnyPublisher<String, Never>  {
         let intervalPublishers =
             self.stream.map { $0.toPublisher() }
@@ -96,8 +108,6 @@ extension StreamModel where T == String {
         
         return publisher ?? Empty().eraseToAnyPublisher()
     }
-    
-
     
 }
 

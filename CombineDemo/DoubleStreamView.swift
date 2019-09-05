@@ -26,7 +26,7 @@ struct DoubleStreamView: View {
         streamViewModel1 = DynamicStreamViewModel(streamModel: streamModel)
         streamViewModel2 = StreamViewModel(title: streamModel.name ?? "",
                                            description: streamModel.description ?? "",
-                                           publisher: streamModel.toPublisher())
+                                           publisher: streamModel.applyOperationPublisher())
     }
     
     var body: some View {

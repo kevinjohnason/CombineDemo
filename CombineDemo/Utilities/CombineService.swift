@@ -78,13 +78,13 @@ class SerialNumberPublisher: Publisher {
 }
 
 
-extension StreamModel where T: Codable {
+extension StreamModel where T == String {
     
-    func toPublisher()  -> AnyPublisher<T, Never>  {
+    func toPublisher()  -> AnyPublisher<String, Never>  {
         let intervalPublishers =
             self.stream.map { $0.toPublisher() }
         
-        var publisher: AnyPublisher<T, Never>?
+        var publisher: AnyPublisher<String, Never>?
         
         for intervalPublisher in intervalPublishers {
             if publisher == nil {
@@ -112,23 +112,17 @@ extension StreamModel where T == String {
     
 }
 
-extension StreamItem where T: Codable {
-    func toPublisher()  -> AnyPublisher<T, Never>  {
-        var publisher: AnyPublisher<T, Never> = Just(value).eraseToAnyPublisher()
+extension StreamItem where T == String {
+    func toPublisher()  -> AnyPublisher<String, Never>  {
+        var publisher: AnyPublisher<String, Never> = Just(value).eraseToAnyPublisher()
         var currentOperator = self.operatorItem
         while currentOperator != nil {
             guard let loopOperator = currentOperator else {
                 break
             }
-            switch loopOperator.type {
-            case .delay:
-                publisher = publisher.delay(for: .seconds(loopOperator.value ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()
-            case .filter:                
-                publisher = publisher.filter { NSPredicate(format: loopOperator.expression ?? "true", argumentArray: [$0 as? String ?? "", String(loopOperator.value ?? 0)]).evaluate(with: nil) }.print().eraseToAnyPublisher()
-            }
+            publisher = loopOperator.applyPublisher(publisher)
             currentOperator = loopOperator.next
         }
-        
         return publisher
     }
 }
@@ -141,7 +135,7 @@ extension OperatorItem  {
                 return publisher.delay(for: .seconds(self.value ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()
             case .filter:
                 return publisher.filter { NSPredicate(format: self.expression ?? "true",
-                                                      argumentArray: [$0, String(self.value ?? 0)]).evaluate(with: nil) }.eraseToAnyPublisher()
+                                                      argumentArray: [$0, String(Int(self.value ?? 0))]).evaluate(with: nil) }.eraseToAnyPublisher()
             }
     }
 }

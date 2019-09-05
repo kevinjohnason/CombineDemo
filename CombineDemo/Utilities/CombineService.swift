@@ -94,11 +94,20 @@ extension StreamModel where T: Codable {
             publisher = publisher?.append(intervalPublisher).eraseToAnyPublisher()
         }
         
-        for operatorModel in self.operatorStreamModels {
-            publisher =  publisher.flatMap { _ in operatorModel.toPublisher() }?.eraseToAnyPublisher()
-        }
-        
         return publisher ?? Empty().eraseToAnyPublisher()
+    }
+    
+
+    
+}
+
+extension StreamModel where T == String {
+    
+    func applyOperationPublisher() -> AnyPublisher<String, Never> {                
+        guard let operatorItem = self.operatorItem else {
+            return toPublisher()
+        }
+        return operatorItem.applyPublisher(toPublisher())
     }
     
 }
@@ -121,5 +130,18 @@ extension StreamItem where T: Codable {
         }
         
         return publisher
+    }
+}
+
+extension OperatorItem  {
+    
+    func applyPublisher(_ publisher: AnyPublisher<String, Never>) -> AnyPublisher<String, Never> {
+        switch self.type {
+            case .delay:
+                return publisher.delay(for: .seconds(self.value ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()
+            case .filter:
+                return publisher.filter { NSPredicate(format: self.expression ?? "true",
+                                                      argumentArray: [$0, String(self.value ?? 0)]).evaluate(with: nil) }.eraseToAnyPublisher()
+            }
     }
 }

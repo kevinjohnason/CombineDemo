@@ -21,10 +21,12 @@ struct DoubleStreamView: View {
                                            publisher: convertingPublisher(publisher))
     }
     
-    init(streamModel: StreamModel<String>, operatorStreamModel: StreamModel<String>) {
-        self.operatorTitle = operatorStreamModel.name ?? ""
+    init(streamModel: StreamModel<String>, operationItem: OperatorItem) {
+        self.operatorTitle = streamModel.name ?? ""
         streamViewModel1 = DynamicStreamViewModel(streamModel: streamModel)
-        streamViewModel2 = DynamicStreamViewModel(streamModel: operatorStreamModel)
+        streamViewModel2 = StreamViewModel(title: streamModel.name ?? "",
+                                           description: streamModel.description ?? "",
+                                           publisher: streamModel.toPublisher())
     }
     
     var body: some View {

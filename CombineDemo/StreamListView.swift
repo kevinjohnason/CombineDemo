@@ -14,17 +14,18 @@ struct StreamListView: View {
     
     @State var deleteAlertInDisplay: Bool = false
     
+    
+    func streamView(streamModel: StreamModel<String>) -> some View {
+        if let operatorItem = streamModel.operatorItem {
+            return AnyView(DoubleStreamView(streamModel: streamModel, operationItem: operatorItem))
+        }
+        return AnyView(SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: streamModel)))
+    }
+    
     var body: some View {
         ForEach(storedStreams) { stream in
-            if stream.operatorStreamModels.count > 0 {
-                NavigationLink(destination: DoubleStreamView(streamModel: stream,
-                                                             operatorStreamModel: stream.operatorStreamModels[0])) {
-                    MenuRow(detailViewName: stream.name ?? "")
-                }
-            } else {
-                NavigationLink(destination: SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: stream))) {
-                    MenuRow(detailViewName: stream.name ?? "")
-                }
+            NavigationLink(destination: self.streamView(streamModel: stream)) {
+                MenuRow(detailViewName: stream.name ?? "")
             }
         }.onDelete { (index) in
             guard let removingIndex = index.first else {

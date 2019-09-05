@@ -14,15 +14,15 @@ struct StreamModel<T: Codable>: Codable, Identifiable {
     var description: String?
     var stream: [StreamItem<T>]
     var isDefault: Bool
-    var operatorStreamModels: [StreamModel<T>]
+    var operatorItem: OperatorItem?
     
-    init(id: UUID = UUID(), name: String? = nil, description: String? = nil, stream: [StreamItem<T>] = [], isDefault: Bool = false, operatorStreamModels: [StreamModel<T>] = []) {
+    init(id: UUID = UUID(), name: String? = nil, description: String? = nil, stream: [StreamItem<T>] = [], isDefault: Bool = false, operatorItem: OperatorItem? = nil) {
         self.id = id
         self.name = name
         self.description = description
         self.stream = stream
         self.isDefault = isDefault
-        self.operatorStreamModels = operatorStreamModels
+        self.operatorItem = operatorItem
     }
     
     static func new<T>() -> StreamModel<T> {

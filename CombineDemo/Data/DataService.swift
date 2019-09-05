@@ -64,25 +64,16 @@ class DataService {
         let streamB = ["A", "B", "C", "D"].map { StreamItem(value: $0, operatorItem: OperatorItem(type: .delay, value: 1, next: nil)) }
         let serialStreamB = StreamModel(id: UUID(), name: "Serial Stream B",
                                        description: "Sequence(A, B, C, D)", stream: streamB, isDefault: true)
-                
         
-        let filterStream = streamA.map { opt -> StreamItem<String> in
-            opt.operatorItem?.next = OperatorItem(type: .filter, value: 3, expression: "%d != %d", next: nil)
-            return opt
-        }
-        
-        let filterStreamModel = StreamModel(id: UUID(), name: "Filter", description: "filter { $0 != 3 )",
-                                            stream: filterStream, isDefault: false)
+        var filterStreamModel = StreamModel(id: UUID(), name: "Filter", description: "filter { $0 != 3 )",
+                                            stream: streamA, isDefault: false)
                         
-        var filterSourceStreamModel = serialStreamA
-        filterSourceStreamModel.id = UUID()
-        filterSourceStreamModel.name = filterStreamModel.name
-        filterSourceStreamModel.operatorStreamModels = [filterStreamModel]
+        filterStreamModel.operatorItem = OperatorItem(type: .filter, value: 3, expression: "%d != %d", next: nil)
         
         var newStreams = streams
         newStreams.append(serialStreamA)
         newStreams.append(serialStreamB)
-        newStreams.append(filterSourceStreamModel)
+        newStreams.append(filterStreamModel)
         self.storedStreams = newStreams
         return newStreams
     }

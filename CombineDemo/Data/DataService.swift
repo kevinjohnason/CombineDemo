@@ -75,11 +75,18 @@ class DataService {
                         
         dropStreamModel.operatorItem = OperatorItem(type: .drop, value: 2, expression: nil, next: nil)
         
+        var mapStreamModel = StreamModel(id: UUID(), name: "Map Stream", description: "map { $0 * 2 }",
+                                            stream: streamA, isDefault: false)
+                        
+        mapStreamModel.operatorItem = OperatorItem(type: .map, value: 2, expression: "%d * %d", next: nil)
+        
+        
         var newStreams = streams
         newStreams.append(serialStreamA)
         newStreams.append(serialStreamB)
         newStreams.append(filterStreamModel)
         newStreams.append(dropStreamModel)
+        newStreams.append(mapStreamModel)
         self.storedStreams = newStreams
         return newStreams
     }

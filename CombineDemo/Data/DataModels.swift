@@ -39,6 +39,7 @@ enum OperatorType: String, Codable {
     case delay
     case filter
     case drop
+    case map
 }
 
 class OperatorItem: Codable {

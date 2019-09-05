@@ -17,12 +17,6 @@ struct ContentView: View {
             VStack {
                 List {
                     StreamListView(storedStreams: $viewModel.storedStreams)
-                    NavigationLink(destination: DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Map",
-                                                                 operatorDescription: "A.map { $0 * 2 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
-                                                                    publisher.map { Int($0)! }.map { String($0 * 2) }.eraseToAnyPublisher()
-                    })) {
-                        MenuRow(detailViewName: "Map Stream")
-                    }
                     NavigationLink(destination: OperationStreamView(title: "Merge", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                         Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
                     }) {

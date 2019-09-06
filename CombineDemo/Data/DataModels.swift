@@ -73,6 +73,7 @@ enum GroupOperationType: String, Codable {
 
 enum CombineGroupOperationType: String, Codable {
     case zip
+    case combineLatest
 }
 
 struct GroupOperationStreamModel: Codable, Identifiable {

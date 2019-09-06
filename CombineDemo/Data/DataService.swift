@@ -113,7 +113,7 @@ class DataService {
         let serialStreamA = StreamModel(id: UUID(), name: "Serial Stream A",
                                         description: nil, stream: streamA, isDefault: true)
         
-        let streamB = ["A", "B", "C", "D"].map { StreamItem(value: $0, operatorItem: OperatorItem(type: .delay, value: 1, next: nil)) }
+        let streamB = ["A", "B", "C", "D"].map { StreamItem(value: $0, operatorItem: OperatorItem(type: .delay, value: 2, next: nil)) }
         let serialStreamB = StreamModel(id: UUID(), name: "Serial Stream B",
                                         description: nil, stream: streamB, isDefault: true)
         
@@ -192,7 +192,9 @@ class DataService {
                 
         let zipStreamModel = CombineGroupOperationStreamModel(id: UUID(), name: "Zip Stream", description: "Publishers.Zip(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorType: .zip)
         
-        return [zipStreamModel]
+        let combineLatestStreamModel = CombineGroupOperationStreamModel(id: UUID(), name: "CombineLatest Stream", description: "Publishers.CombineLatest(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorType: .combineLatest)
+        
+        return [zipStreamModel, combineLatestStreamModel]
     }
     
     func resetStoredStream() {

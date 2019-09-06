@@ -173,12 +173,14 @@ extension GroupOperationType {
 
 extension CombineGroupOperationType {
     func applyPublishers(_ publishers: [AnyPublisher<String, Never>]) -> AnyPublisher<(String, String), Never> {
+        guard publishers.count > 1 else {
+            return Empty().eraseToAnyPublisher()
+        }
         switch self {
         case .zip:
-            guard publishers.count > 1 else {
-                return Empty().eraseToAnyPublisher()
-            }
             return Publishers.Zip(publishers[0], publishers[1]).eraseToAnyPublisher()
+        case .combineLatest:
+            return Publishers.CombineLatest(publishers[0], publishers[1]).eraseToAnyPublisher()
         }
     }
 }

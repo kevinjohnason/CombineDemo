@@ -71,10 +71,22 @@ enum GroupOperationType: String, Codable {
     case append
 }
 
+enum CombineGroupOperationType: String, Codable {
+    case zip
+}
+
 struct GroupOperationStreamModel: Codable, Identifiable {
     var id: UUID
     var name: String?
     var description: String?
     var streamModelIds: [UUID]
-    var operatorItem: GroupOperationType
+    var operationType: GroupOperationType
+}
+
+struct CombineGroupOperationStreamModel: Codable, Identifiable {
+    var id: UUID
+    var name: String?
+    var description: String?
+    var streamModelIds: [UUID]
+    var operatorType: CombineGroupOperationType
 }

@@ -24,6 +24,15 @@ struct CombineResultStreamView: View {
         resultStreamViewModel = StreamViewModel(title: title, publisher: self.operatorPublisher)
     }
     
+    init(title: String, stream1Model: StreamModel<String>, stream2Model: StreamModel<String>, combineStreamModel: CombineGroupOperationStreamModel) {
+        self.title = title
+        numberStreamViewModel = DynamicStreamViewModel(streamModel: stream1Model)
+        letterStreamViewModel = DynamicStreamViewModel(streamModel: stream2Model)
+        operatorPublisher = combineStreamModel.operatorType.applyPublishers([stream1Model.toPublisher(), stream2Model.toPublisher()])
+        resultStreamViewModel = StreamViewModel(title: combineStreamModel.name ?? "", description: combineStreamModel.description ?? "", publisher: self.operatorPublisher)
+    }
+    
+    
     var body: some View {
         VStack {
             SingleStreamView(viewModel: numberStreamViewModel, displayActionButtons: false)

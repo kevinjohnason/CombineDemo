@@ -18,10 +18,8 @@ struct ContentView: View {
                 List {
                     StreamListView(storedStreams: $viewModel.storedStreams)
                     OperationStreamListView(storedOperationStreams: $viewModel.storedOperationStreams, storedStreams: $viewModel.storedStreams)
-                    GroupOperationListStreamView(storedGroupOperationStreams: $viewModel.storedGroupOperationStreams, storedStreams: $viewModel.storedStreams)                
-                    NavigationLink(destination: zipResultStreamView()) {
-                        MenuRow(detailViewName: "Zip Stream")
-                    }
+                    GroupOperationListStreamView(storedGroupOperationStreams: $viewModel.storedGroupOperationStreams, storedStreams: $viewModel.storedStreams)
+                    CombineGroupOperationListStreamView(storedCombineGroupOperationStreams: $viewModel.storedCombineGroupOperationStreams, storedStreams: $viewModel.storedStreams)
                 }
                 
                 Button("Reset") {
@@ -38,12 +36,6 @@ struct ContentView: View {
     var createStreamView: some View {
         NavigationLink(destination: UpdateStreamView(viewModel: UpdateStreamViewModel(streamModel: StreamModel<String>.new()))) {
             Image(systemName: "plus.circle").font(Font.system(size: 30))
-        }
-    }
-    
-    func zipResultStreamView() -> CombineResultStreamView {
-        CombineResultStreamView(title: "Zip", stream1Model: self.viewModel.streamAModel, stream2Model: self.viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in
-            Publishers.Zip(numberPublisher, letterPublisher).eraseToAnyPublisher()
         }
     }
 }

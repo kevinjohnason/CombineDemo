@@ -71,12 +71,29 @@ class DataService {
         }
     }
     
+    var storedCombineGroupOperationStreams: [CombineGroupOperationStreamModel] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "storedCombineGroupOperationStreams") else {
+                return self.appendDefaultCombineGroupOperationStreamsIfNeeded(streams: [])
+            }
+            guard let streams = try? JSONDecoder().decode([CombineGroupOperationStreamModel].self, from: data) else {
+                return self.appendDefaultCombineGroupOperationStreamsIfNeeded(streams: [])
+            }
+            return self.appendDefaultCombineGroupOperationStreamsIfNeeded(streams: streams)
+        } set {
+            UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "storedCombineGroupOperationStreams")
+            storedCombineGroupOperationStreamUpdated.send(newValue)
+        }
+    }
+    
     
     let storedStreamUpdated: PassthroughSubject<[StreamModel<String>], Never> = PassthroughSubject()
     
     let storedOperationStreamUpdated: PassthroughSubject<[OperationStreamModel], Never> = PassthroughSubject()
     
     let storedGroupOperationStreamUpdated: PassthroughSubject<[GroupOperationStreamModel], Never> = PassthroughSubject()
+    
+    let storedCombineGroupOperationStreamUpdated: PassthroughSubject<[CombineGroupOperationStreamModel], Never> = PassthroughSubject()
     
     func loadStream(id: UUID) -> StreamModel<String> {
         guard let stream = DataService.shared.storedStreams.first(where: {
@@ -151,18 +168,38 @@ class DataService {
             return streams
         }
         
-        let mergeStreamModel = GroupOperationStreamModel(id: UUID(), name: "Merge Stream", description: "Publishers.merge(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: .merge)
+        let mergeStreamModel = GroupOperationStreamModel(id: UUID(), name: "Merge Stream", description: "Publishers.merge(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operationType: .merge)
         
-        let flatMapStreamModel = GroupOperationStreamModel(id: UUID(), name: "FlatMap Stream", description: "A.flatMap { _ in B }", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: .flatMap)
+        let flatMapStreamModel = GroupOperationStreamModel(id: UUID(), name: "FlatMap Stream", description: "A.flatMap { _ in B }", streamModelIds: [sourceStream1.id, sourceStream2.id], operationType: .flatMap)
         
-        let appendStreamModel = GroupOperationStreamModel(id: UUID(), name: "Append Stream", description: "A.append(B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: .append)
+        let appendStreamModel = GroupOperationStreamModel(id: UUID(), name: "Append Stream", description: "A.append(B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operationType: .append)
                         
         return [mergeStreamModel, flatMapStreamModel, appendStreamModel]
+    }
+    
+    func appendDefaultCombineGroupOperationStreamsIfNeeded(streams: [CombineGroupOperationStreamModel]) -> [CombineGroupOperationStreamModel] {
+        guard streams.count == 0 else {
+            return streams
+        }
+        
+        guard let sourceStream1 = storedStreams.first(where: { $0.isDefault }) else {
+            return streams
+        }
+        
+        guard let sourceStream2 = storedStreams.last(where: { $0.isDefault }) else {
+            return streams
+        }
+                
+        let zipStreamModel = CombineGroupOperationStreamModel(id: UUID(), name: "Zip Stream", description: "Publishers.Zip(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorType: .zip)
+        
+        return [zipStreamModel]
     }
     
     func resetStoredStream() {
         storedStreams = appendDefaultStreamsIfNeeded(streams: [])
         storedOperationStreams = appendDefaultOperationStreamsIfNeeded(streams: [])
+        storedGroupOperationStreams = appendDefaultGroupOperationStreamsIfNeeded(streams: [])
+        storedCombineGroupOperationStreams = appendDefaultCombineGroupOperationStreamsIfNeeded(streams: [])
     }
     
 }

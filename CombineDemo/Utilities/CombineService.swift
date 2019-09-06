@@ -111,17 +111,6 @@ extension StreamModel where T == String {
     
 }
 
-extension StreamModel where T == String {
-    
-    func applyOperationPublisher() -> AnyPublisher<String, Never> {                
-        guard let operatorItem = self.operatorItem else {
-            return toPublisher()
-        }
-        return operatorItem.applyPublisher(toPublisher())
-    }
-    
-}
-
 extension StreamItem where T == String {
     func toPublisher()  -> AnyPublisher<String, Never>  {
         var publisher: AnyPublisher<String, Never> = Just(value).eraseToAnyPublisher()

@@ -14,15 +14,13 @@ struct StreamModel<T: Codable>: Codable, Identifiable {
     var description: String?
     var stream: [StreamItem<T>]
     var isDefault: Bool
-    var operatorItem: OperatorItem?
     
-    init(id: UUID = UUID(), name: String? = nil, description: String? = nil, stream: [StreamItem<T>] = [], isDefault: Bool = false, operatorItem: OperatorItem? = nil) {
+    init(id: UUID = UUID(), name: String? = nil, description: String? = nil, stream: [StreamItem<T>] = [], isDefault: Bool = false) {
         self.id = id
         self.name = name
         self.description = description
         self.stream = stream
         self.isDefault = isDefault
-        self.operatorItem = operatorItem
     }
     
     static func new<T>() -> StreamModel<T> {
@@ -55,4 +53,18 @@ class OperatorItem: Codable {
         self.expression = expression
     }
     
+}
+
+struct OperationStreamModel: Codable, Identifiable {
+    var id: UUID
+    var name: String?
+    var description: String?
+    var streamModelId: UUID
+    var operatorItem: OperatorItem
+}
+
+struct GroupStreamModel<T: Codable>: Codable, Identifiable {
+    var id: UUID
+    var streamModelIds: [UUID]
+    var operatorItem: OperatorItem
 }

@@ -11,7 +11,7 @@ import Combine
 class DataService {
     static let shared = DataService()    
     var currentStream: StreamModel<String>
-        {
+    {
         get {
             let defaullModel = StreamModel<String>(id: UUID(), name: "default stream", description: nil, stream: [])
             guard let data = UserDefaults.standard.data(forKey: "currentStream") else {
@@ -41,7 +41,27 @@ class DataService {
         }
     }
     
+    var storedOperationStreams: [OperationStreamModel] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "storedOperationStreams") else {
+                return self.appendDefaultOperationStreamsIfNeeded(streams: [])
+            }
+            guard let streams = try? JSONDecoder().decode([OperationStreamModel].self, from: data) else {
+                return self.appendDefaultOperationStreamsIfNeeded(streams: [])
+            }
+            return self.appendDefaultOperationStreamsIfNeeded(streams: streams)
+        } set {
+            UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "storedOperationStreams")
+            storedOperationStreamUpdated.send(newValue)
+        }
+    }
+    
+    
+    
     let storedStreamUpdated: PassthroughSubject<[StreamModel<String>], Never> = PassthroughSubject()
+    
+    let storedOperationStreamUpdated: PassthroughSubject<[OperationStreamModel], Never> = PassthroughSubject()
+    
     
     func loadStream(id: UUID) -> StreamModel<String> {
         guard let stream = DataService.shared.storedStreams.first(where: {
@@ -56,43 +76,53 @@ class DataService {
         guard (streams.filter { $0.isDefault }).count == 0 else {
             return streams
         }
-                                        
+        
         let streamA = (1...4).map { StreamItem(value: String($0), operatorItem: OperatorItem(type: .delay, value: 1, next: nil)) }
         let serialStreamA = StreamModel(id: UUID(), name: "Serial Stream A",
-                                       description: nil, stream: streamA, isDefault: true)
+                                        description: nil, stream: streamA, isDefault: true)
         
         let streamB = ["A", "B", "C", "D"].map { StreamItem(value: $0, operatorItem: OperatorItem(type: .delay, value: 1, next: nil)) }
         let serialStreamB = StreamModel(id: UUID(), name: "Serial Stream B",
-                                       description: nil, stream: streamB, isDefault: true)
-        
-        var filterStreamModel = StreamModel(id: UUID(), name: "Filter Stream", description: "filter { $0 != 3 )",
-                                            stream: streamA, isDefault: false)
-                        
-        filterStreamModel.operatorItem = OperatorItem(type: .filter, value: 3, expression: "%d != %d", next: nil)
-        
-        var dropStreamModel = StreamModel(id: UUID(), name: "Drop Stream", description: "dropFirst(2)",
-                                            stream: streamA, isDefault: false)
-                        
-        dropStreamModel.operatorItem = OperatorItem(type: .drop, value: 2, expression: nil, next: nil)
-        
-        var mapStreamModel = StreamModel(id: UUID(), name: "Map Stream", description: "map { $0 * 2 }",
-                                            stream: streamA, isDefault: false)
-                        
-        mapStreamModel.operatorItem = OperatorItem(type: .map, value: 2, expression: "%d * %d", next: nil)
-        
+                                        description: nil, stream: streamB, isDefault: true)
         
         var newStreams = streams
         newStreams.append(serialStreamA)
         newStreams.append(serialStreamB)
+        self.storedStreams = newStreams
+        return newStreams
+    }
+    
+    func appendDefaultOperationStreamsIfNeeded(streams: [OperationStreamModel]) -> [OperationStreamModel] {
+        guard streams.count == 0 else {
+            return streams
+        }
+        guard let sourceStream = storedStreams.first(where: { $0.isDefault }) else {
+            return streams
+        }
+        
+        let filterStreamModel = OperationStreamModel(id: UUID(),
+                                                     name: "Filter Stream", description: "filter { $0 != 3 )",
+                                                     streamModelId: sourceStream.id,
+                                                     operatorItem: OperatorItem(type: .filter, value: 3, expression: "%d != %d", next: nil))
+        
+        
+        let dropStreamModel = OperationStreamModel(id: UUID(), name: "Drop Stream", description: "dropFirst(2)",
+                                                   streamModelId: sourceStream.id, operatorItem: OperatorItem(type: .drop, value: 2, expression: nil, next: nil))
+        
+        
+        let mapStreamModel = OperationStreamModel(id: UUID(), name: "Map Stream", description: "map { $0 * 2 }",
+                                                  streamModelId: sourceStream.id, operatorItem: OperatorItem(type: .map, value: 2, expression: "%d * %d", next: nil))
+        
+        var newStreams = streams
         newStreams.append(filterStreamModel)
         newStreams.append(dropStreamModel)
         newStreams.append(mapStreamModel)
-        self.storedStreams = newStreams
         return newStreams
     }
     
     func resetStoredStream() {
         storedStreams = appendDefaultStreamsIfNeeded(streams: [])
+        storedOperationStreams = appendDefaultOperationStreamsIfNeeded(streams: [])
     }
-
+    
 }

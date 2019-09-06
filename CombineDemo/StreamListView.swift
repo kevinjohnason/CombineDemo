@@ -13,12 +13,8 @@ struct StreamListView: View {
     @Binding var storedStreams: [StreamModel<String>]
     
     @State var deleteAlertInDisplay: Bool = false
-    
-    
+        
     func streamView(streamModel: StreamModel<String>) -> some View {
-        if let operatorItem = streamModel.operatorItem {
-            return AnyView(DoubleStreamView(streamModel: streamModel, operationItem: operatorItem))
-        }
         return AnyView(SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: streamModel)))
     }
     

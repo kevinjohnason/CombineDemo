@@ -17,6 +17,7 @@ struct ContentView: View {
             VStack {
                 List {
                     StreamListView(storedStreams: $viewModel.storedStreams)
+                    OperationStreamListView(storedOperationStreams: $viewModel.storedOperationStreams, storedStreams: $viewModel.storedStreams)
                     NavigationLink(destination: OperationStreamView(title: "Merge", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
                         Publishers.Merge(numberPublisher, letterPublisher).eraseToAnyPublisher()
                     }) {

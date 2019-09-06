@@ -21,14 +21,15 @@ struct DoubleStreamView: View {
                                            publisher: convertingPublisher(publisher))
     }
     
-    init(streamModel: StreamModel<String>, operationItem: OperatorItem) {
-        self.operatorTitle = streamModel.name ?? ""
+    init(streamModel: StreamModel<String>, operationModel: OperationStreamModel) {
+        self.operatorTitle = operationModel.name ?? operationModel.description ?? ""
         streamViewModel1 = StreamViewModel(title: streamModel.name ?? "",
                                            description: streamModel.sequenceDescription,
                                            publisher: streamModel.toPublisher())
-        streamViewModel2 = StreamViewModel(title: streamModel.name ?? "",
-                                           description: streamModel.description ?? "",
-                                           publisher: streamModel.applyOperationPublisher())
+        
+        streamViewModel2 = StreamViewModel(title: operationModel.name ?? "",
+                                           description: operationModel.description ?? "",
+                                           publisher: operationModel.operatorItem.applyPublisher(streamViewModel1.publisher))
     }
     
     var body: some View {

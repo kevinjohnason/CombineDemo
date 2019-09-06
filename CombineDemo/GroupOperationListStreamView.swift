@@ -9,13 +9,32 @@
 import SwiftUI
 
 struct GroupOperationListStreamView: View {
+    
+    @Binding var storedGroupOperationStreams: [GroupOperationStreamModel]
+    
+    @Binding var storedStreams: [StreamModel<String>]
+    
+    
+    func streamView(streamModel: GroupOperationStreamModel) -> some View {
+        let sourceStreams = storedStreams.filter { $0.isDefault }
+        guard sourceStreams.count > 1 else {
+            return AnyView(EmptyView())
+        }
+        let operationStreamView = OperationStreamView(title: streamModel.name ?? "", stream1Model: sourceStreams[0], stream2Model: sourceStreams[1], operatorType: streamModel.operatorItem)
+        return AnyView(operationStreamView)
+     }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello World!"/*@END_MENU_TOKEN@*/)
+        ForEach(storedGroupOperationStreams) { stream in
+                NavigationLink(destination: self.streamView(streamModel: stream)) {
+                    MenuRow(detailViewName: stream.name ?? "")
+            }
+        }
     }
 }
 
 struct GroupOperationListStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupOperationListStreamView()
+        GroupOperationListStreamView(storedGroupOperationStreams: .constant([]), storedStreams: .constant([]))
     }
 }

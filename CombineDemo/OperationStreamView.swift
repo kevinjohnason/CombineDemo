@@ -25,6 +25,16 @@ struct OperationStreamView: View {
         operatorStreamViewModel = StreamViewModel(title: title, description: title, publisher: self.operatorPublisher)
     }
     
+    init(title: String, stream1Model: StreamModel<String>, stream2Model: StreamModel<String>, operatorType: GroupOperationType) {
+           self.title = title
+           stream1ViewModel = StreamViewModel(title: stream1Model.name ?? "", description: stream1Model.sequenceDescription,  publisher: stream1Model.toPublisher())
+        stream2ViewModel = StreamViewModel(title: stream2Model.name ?? "", description: stream2Model.sequenceDescription, publisher: stream2Model.toPublisher())
+                            
+        operatorPublisher = operatorType.applyPublishers([stream1Model.toPublisher(), stream2Model.toPublisher()])
+        operatorStreamViewModel = StreamViewModel(title: title, description: title, publisher: self.operatorPublisher)
+       }
+    
+    
     var body: some View {
         VStack {
             SingleStreamView(viewModel: stream1ViewModel, displayActionButtons: false)

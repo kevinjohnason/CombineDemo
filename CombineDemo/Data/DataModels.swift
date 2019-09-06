@@ -42,7 +42,6 @@ enum OperatorType: String, Codable {
     case scan
 }
 
-
 class OperatorItem: Codable {
     let type: OperatorType
     let value: Double?
@@ -66,10 +65,15 @@ struct OperationStreamModel: Codable, Identifiable {
     var operatorItem: OperatorItem
 }
 
+enum GroupOperationType: String, Codable {
+    case merge
+    case flatMap
+}
+
 struct GroupOperationStreamModel: Codable, Identifiable {
     var id: UUID
     var name: String?
     var description: String?
     var streamModelIds: [UUID]
-    var operatorItem: OperatorItem
+    var operatorItem: GroupOperationType
 }

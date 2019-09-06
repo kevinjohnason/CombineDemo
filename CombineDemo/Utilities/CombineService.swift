@@ -147,3 +147,14 @@ extension OperatorItem  {
         }
     }
 }
+
+extension GroupOperationType {
+    func applyPublishers(_ publishers: [AnyPublisher<String, Never>]) -> AnyPublisher<String, Never> {
+        switch self {
+        case .merge:
+            return Publishers.MergeMany(publishers).eraseToAnyPublisher()
+        case .flatMap:
+            return Empty().eraseToAnyPublisher()
+        }
+    }
+}

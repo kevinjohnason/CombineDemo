@@ -17,6 +17,8 @@ class ContentViewModel: ObservableObject {
     
     @Published var storedOperationStreams: [OperationStreamModel] = DataService.shared.storedOperationStreams
              
+    @Published var storedGroupOperationStreams: [GroupOperationStreamModel] = DataService.shared.storedGroupOperationStreams
+    
     var streamAModel: StreamModel<String> {
         storedStreams.first(where: { $0.isDefault }) ?? StreamModel<String>.new()
     }
@@ -45,8 +47,12 @@ class ContentViewModel: ObservableObject {
         }.store(in: &disposables)
         
         DataService.shared.storedOperationStreamUpdated.sink { (newStream) in
-                self.storedOperationStreams = newStream
-             }.store(in: &disposables)
+            self.storedOperationStreams = newStream
+        }.store(in: &disposables)
+        
+        DataService.shared.storedGroupOperationStreamUpdated.sink { (newStream) in
+            self.storedGroupOperationStreams = newStream
+        }.store(in: &disposables)
     }
     
 }

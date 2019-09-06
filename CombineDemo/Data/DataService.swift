@@ -151,7 +151,7 @@ class DataService {
             return streams
         }
         
-        let mergeStreamModel = GroupOperationStreamModel(id: UUID(), name: "Merge Stream", description: "Publishers.merge(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: OperatorItem(type: .map, value: nil, expression: nil, next: nil))
+        let mergeStreamModel = GroupOperationStreamModel(id: UUID(), name: "Merge Stream", description: "Publishers.merge(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: .merge)
                         
         return [mergeStreamModel]
     }

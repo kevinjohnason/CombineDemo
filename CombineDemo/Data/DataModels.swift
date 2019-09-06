@@ -68,6 +68,7 @@ struct OperationStreamModel: Codable, Identifiable {
 enum GroupOperationType: String, Codable {
     case merge
     case flatMap
+    case append
 }
 
 struct GroupOperationStreamModel: Codable, Identifiable {

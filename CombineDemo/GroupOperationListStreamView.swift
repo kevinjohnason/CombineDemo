@@ -20,7 +20,7 @@ struct GroupOperationListStreamView: View {
         guard sourceStreams.count > 1 else {
             return AnyView(EmptyView())
         }
-        let operationStreamView = OperationStreamView(title: streamModel.name ?? "", stream1Model: sourceStreams[0], stream2Model: sourceStreams[1], operatorType: streamModel.operatorItem)
+        let operationStreamView = OperationStreamView(title: streamModel.name ?? "", stream1Model: sourceStreams[0], stream2Model: sourceStreams[1], groupStreamModel: streamModel)
         return AnyView(operationStreamView)
      }
     

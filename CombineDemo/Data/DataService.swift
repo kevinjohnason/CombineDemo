@@ -154,8 +154,10 @@ class DataService {
         let mergeStreamModel = GroupOperationStreamModel(id: UUID(), name: "Merge Stream", description: "Publishers.merge(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: .merge)
         
         let flatMapStreamModel = GroupOperationStreamModel(id: UUID(), name: "FlatMap Stream", description: "A.flatMap { _ in B }", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: .flatMap)
+        
+        let appendStreamModel = GroupOperationStreamModel(id: UUID(), name: "Append Stream", description: "A.append(B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: .append)
                         
-        return [mergeStreamModel, flatMapStreamModel]
+        return [mergeStreamModel, flatMapStreamModel, appendStreamModel]
     }
     
     func resetStoredStream() {

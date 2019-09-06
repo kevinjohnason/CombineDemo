@@ -160,6 +160,13 @@ extension GroupOperationType {
                      next
                 }.eraseToAnyPublisher()
             }
+        case .append:
+            guard let initialPublisher = publishers.first else {
+                return Empty().eraseToAnyPublisher()
+            }
+            return publishers[1...].reduce(initialPublisher) {
+                $0.append($1).eraseToAnyPublisher()
+            }
         }
     }
 }

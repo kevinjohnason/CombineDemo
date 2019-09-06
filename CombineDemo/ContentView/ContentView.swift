@@ -18,15 +18,9 @@ struct ContentView: View {
                 List {
                     StreamListView(storedStreams: $viewModel.storedStreams)
                     OperationStreamListView(storedOperationStreams: $viewModel.storedOperationStreams, storedStreams: $viewModel.storedStreams)
-                    GroupOperationListStreamView(storedGroupOperationStreams: $viewModel.storedGroupOperationStreams, storedStreams: $viewModel.storedStreams)
-                
+                    GroupOperationListStreamView(storedGroupOperationStreams: $viewModel.storedGroupOperationStreams, storedStreams: $viewModel.storedStreams)                
                     NavigationLink(destination: zipResultStreamView()) {
                         MenuRow(detailViewName: "Zip Stream")
-                    }
-                    NavigationLink(destination: OperationStreamView(title: "Append", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
-                        numberPublisher.append(letterPublisher).eraseToAnyPublisher()
-                    }) {
-                        MenuRow(detailViewName: "Append Stream")
                     }
                 }
                 

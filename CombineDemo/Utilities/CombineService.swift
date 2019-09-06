@@ -154,7 +154,12 @@ extension GroupOperationType {
         case .merge:
             return Publishers.MergeMany(publishers).eraseToAnyPublisher()
         case .flatMap:
-            return Empty().eraseToAnyPublisher()
+            let initialPublisher: AnyPublisher<String, Never> = Just("").eraseToAnyPublisher()
+            return publishers.reduce(initialPublisher) { (initial, next) -> AnyPublisher<String, Never> in
+                initial.flatMap { _ in
+                     next
+                }.eraseToAnyPublisher()
+            }
         }
     }
 }

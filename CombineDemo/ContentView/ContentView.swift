@@ -19,12 +19,7 @@ struct ContentView: View {
                     StreamListView(storedStreams: $viewModel.storedStreams)
                     OperationStreamListView(storedOperationStreams: $viewModel.storedOperationStreams, storedStreams: $viewModel.storedStreams)
                     GroupOperationListStreamView(storedGroupOperationStreams: $viewModel.storedGroupOperationStreams, storedStreams: $viewModel.storedStreams)
-                    
-                    NavigationLink(destination: OperationStreamView(title: "FlatMap", stream1Model: viewModel.streamAModel, stream2Model: viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<String, Never> in
-                        numberPublisher.flatMap { _ in letterPublisher }.eraseToAnyPublisher()
-                    }) {
-                        MenuRow(detailViewName: "FlatMap Stream")
-                    }
+                
                     NavigationLink(destination: zipResultStreamView()) {
                         MenuRow(detailViewName: "Zip Stream")
                     }

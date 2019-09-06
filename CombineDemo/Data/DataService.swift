@@ -56,12 +56,27 @@ class DataService {
         }
     }
     
+    var storedGroupOperationStreams: [GroupOperationStreamModel] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "storedGroupOperationStreams") else {
+                return self.appendDefaultGroupOperationStreamsIfNeeded(streams: [])
+            }
+            guard let streams = try? JSONDecoder().decode([GroupOperationStreamModel].self, from: data) else {
+                return self.appendDefaultGroupOperationStreamsIfNeeded(streams: [])
+            }
+            return self.appendDefaultGroupOperationStreamsIfNeeded(streams: streams)
+        } set {
+            UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "storedGroupOperationStreams")
+            storedGroupOperationStreamUpdated.send(newValue)
+        }
+    }
     
     
     let storedStreamUpdated: PassthroughSubject<[StreamModel<String>], Never> = PassthroughSubject()
     
     let storedOperationStreamUpdated: PassthroughSubject<[OperationStreamModel], Never> = PassthroughSubject()
     
+    let storedGroupOperationStreamUpdated: PassthroughSubject<[GroupOperationStreamModel], Never> = PassthroughSubject()
     
     func loadStream(id: UUID) -> StreamModel<String> {
         guard let stream = DataService.shared.storedStreams.first(where: {
@@ -113,11 +128,32 @@ class DataService {
         let mapStreamModel = OperationStreamModel(id: UUID(), name: "Map Stream", description: "map { $0 * 2 }",
                                                   streamModelId: sourceStream.id, operatorItem: OperatorItem(type: .map, value: 2, expression: "%d * %d", next: nil))
         
+        let scanStreamModel = OperationStreamModel(id: UUID(), name: "Scan Stream", description: "scan(0) { $0 + $1 }",
+                                                       streamModelId: sourceStream.id, operatorItem: OperatorItem(type: .scan, value: nil, expression: "%d + %d", next: nil))
+        
         var newStreams = streams
         newStreams.append(filterStreamModel)
         newStreams.append(dropStreamModel)
         newStreams.append(mapStreamModel)
+        newStreams.append(scanStreamModel)
         return newStreams
+    }
+    
+    func appendDefaultGroupOperationStreamsIfNeeded(streams: [GroupOperationStreamModel]) -> [GroupOperationStreamModel] {
+        guard streams.count == 0 else {
+            return streams
+        }
+        guard let sourceStream1 = storedStreams.first(where: { $0.isDefault }) else {
+            return streams
+        }
+        
+        guard let sourceStream2 = storedStreams.last(where: { $0.isDefault }) else {
+            return streams
+        }
+        
+        let mergeStreamModel = GroupOperationStreamModel(id: UUID(), name: "Merge Stream", description: "Publishers.merge(A, B)", streamModelIds: [sourceStream1.id, sourceStream2.id], operatorItem: OperatorItem(type: .map, value: nil, expression: nil, next: nil))
+                        
+        return [mergeStreamModel]
     }
     
     func resetStoredStream() {

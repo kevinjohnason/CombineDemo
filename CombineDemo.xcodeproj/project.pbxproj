@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3111351D2322CC37005A2619 /* OperationStreamListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111351C2322CC37005A2619 /* OperationStreamListView.swift */; };
+		3111351F2322D29D005A2619 /* GroupOperationListStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3111351E2322D29D005A2619 /* GroupOperationListStreamView.swift */; };
 		31157DFD2315AD7600CEFE3C /* UpdateStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31157DFC2315AD7600CEFE3C /* UpdateStreamView.swift */; };
 		31157DFF2315D35A00CEFE3C /* UpdateStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31157DFE2315D35A00CEFE3C /* UpdateStreamViewModel.swift */; };
 		3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		3111351C2322CC37005A2619 /* OperationStreamListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStreamListView.swift; sourceTree = "<group>"; };
+		3111351E2322D29D005A2619 /* GroupOperationListStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOperationListStreamView.swift; sourceTree = "<group>"; };
 		31157DFC2315AD7600CEFE3C /* UpdateStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStreamView.swift; sourceTree = "<group>"; };
 		31157DFE2315D35A00CEFE3C /* UpdateStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStreamViewModel.swift; sourceTree = "<group>"; };
 		3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStreamView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				3111351B2321BABE005A2619 /* ContentView */,
 				31A9655323199EA7009C2C16 /* StreamListView.swift */,
 				3111351C2322CC37005A2619 /* OperationStreamListView.swift */,
+				3111351E2322D29D005A2619 /* GroupOperationListStreamView.swift */,
 				316518B022FBE8A100C8535D /* SingleBallViews */,
 				31826A8022F3AC1300A163A6 /* StreamViewModel.swift */,
 				31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */,
@@ -306,6 +309,7 @@
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				31F1DFCD2317916400347B55 /* DynamicStreamViewModel.swift in Sources */,
+				3111351F2322D29D005A2619 /* GroupOperationListStreamView.swift in Sources */,
 				31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
 				3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */,

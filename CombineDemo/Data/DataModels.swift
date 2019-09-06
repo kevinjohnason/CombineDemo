@@ -28,6 +28,7 @@ struct StreamModel<T: Codable>: Codable, Identifiable {
     }
 }
 
+
 struct StreamItem<T: Codable>: Codable {
     let value: T
     var operatorItem: OperatorItem? = nil
@@ -38,7 +39,9 @@ enum OperatorType: String, Codable {
     case filter
     case drop
     case map
+    case scan
 }
+
 
 class OperatorItem: Codable {
     let type: OperatorType
@@ -63,8 +66,10 @@ struct OperationStreamModel: Codable, Identifiable {
     var operatorItem: OperatorItem
 }
 
-struct GroupStreamModel<T: Codable>: Codable, Identifiable {
+struct GroupOperationStreamModel: Codable, Identifiable {
     var id: UUID
+    var name: String?
+    var description: String?
     var streamModelIds: [UUID]
     var operatorItem: OperatorItem
 }

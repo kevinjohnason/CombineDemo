@@ -36,9 +36,6 @@ struct ContentView: View {
                     }) {
                         MenuRow(detailViewName: "Append Stream")
                     }
-                    NavigationLink(destination: scanResultStreamView()) {
-                        MenuRow(detailViewName: "Scan Stream")
-                    }
                 }
                 
                 Button("Reset") {
@@ -62,14 +59,6 @@ struct ContentView: View {
         CombineResultStreamView(title: "Zip", stream1Model: self.viewModel.streamAModel, stream2Model: self.viewModel.streamBModel) { (numberPublisher, letterPublisher) -> AnyPublisher<(String, String), Never> in
             Publishers.Zip(numberPublisher, letterPublisher).eraseToAnyPublisher()
         }
-    }
-    
-    func scanResultStreamView() -> DoubleStreamView {
-        DoubleStreamView(streamModel: viewModel.streamAModel, operatorTitle: "Scan",operatorDescription: "A.scan(0) { $0 + $1 }", publisher: self.viewModel.streamA, convertingPublisher: { (publisher) -> AnyPublisher<String, Never> in
-            publisher.map { Int($0)! }.scan(0) {
-                $0 + $1
-            }.map { String($0) }.eraseToAnyPublisher()
-        })
     }
 }
 

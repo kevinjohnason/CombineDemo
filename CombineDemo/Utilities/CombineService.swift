@@ -139,6 +139,11 @@ extension OperatorItem  {
             return publisher.dropFirst(Int(self.value ?? 0)).eraseToAnyPublisher()
         case .map:
             return publisher.map { NSExpression(format: self.expression ?? "0", argumentArray: [Int($0) ?? 0, Int(self.value ?? 0)]).expressionValue(with: nil, context: nil) as? Int }.map { String($0 ?? 0) }.eraseToAnyPublisher()
+            
+        case .scan:
+            return publisher.scan(0) { NSExpression(format: self.expression ?? "0",
+                                                    argumentArray: [$0, Int($1) ?? 0]).expressionValue(with: nil, context: nil) as? Int ?? 0 }.map { String($0) }.eraseToAnyPublisher()
+            
         }
     }
 }

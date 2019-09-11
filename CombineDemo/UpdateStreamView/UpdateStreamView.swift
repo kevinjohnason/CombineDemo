@@ -58,7 +58,7 @@ struct UpdateStreamView: View {
         }
     }
     
-    func dragBallGesture(reader: GeometryProxy, ballViewModel:  BallViewModel) -> some Gesture {
+    func dragBallGesture(reader: GeometryProxy, ballViewModel: BallViewModel) -> some Gesture {
         DragGesture(coordinateSpace: .global)
             .onChanged({ (gestureValue) in
                 ballViewModel.offset = CGSize(width: gestureValue.translation.width,

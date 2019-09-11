@@ -15,17 +15,16 @@ struct BallView: View {
     @ObservedObject var viewModel: BallViewModel    
     
     var body: some View {
-        GeometryReader { reader in
-            Text(self.viewModel.value)
-                .font(.system(size: 14))
-                .bold()
-                .foregroundColor(self.forgroundColor)
-                .padding()
-                .background(self.backgroundColor)
-                .clipShape(Circle())
-                .shadow(radius: 1)
-                .offset(self.viewModel.offset)
-        }.opacity(viewModel.isHidden ? 0 : 1)
+        Text(self.viewModel.value)
+            .font(.system(size: 14))
+            .bold()
+            .foregroundColor(self.forgroundColor)
+            .padding()
+            .background(self.backgroundColor)
+            .clipShape(Circle())
+            .shadow(radius: 1)
+            .offset(self.viewModel.offset)
+            .opacity(viewModel.isHidden ? 0 : 1)
     }
 }
 

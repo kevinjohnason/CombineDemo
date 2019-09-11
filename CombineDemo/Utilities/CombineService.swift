@@ -51,7 +51,6 @@ class CombineService {
     
 }
 
-
 // Not Cancellable
 class SerialNumberPublisher: Publisher {
     static func == (lhs: SerialNumberPublisher, rhs: SerialNumberPublisher) -> Bool {
@@ -63,7 +62,8 @@ class SerialNumberPublisher: Publisher {
     
     let numbers: [Int] = [1, 2, 3, 4]
     
-    func receive<S>(subscriber: S) where S : Subscriber, SerialNumberPublisher.Failure == S.Failure, SerialNumberPublisher.Output == S.Input {
+    func receive<S>(subscriber: S) where S: Subscriber,
+        SerialNumberPublisher.Failure == S.Failure, SerialNumberPublisher.Output == S.Input {
         numbers.enumerated().forEach { (arg) in
             let (offset, element) = arg
             DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(offset * 2)) {
@@ -76,7 +76,6 @@ class SerialNumberPublisher: Publisher {
         }
     }
 }
-
 
 extension StreamModel where T == String {
     
@@ -92,7 +91,7 @@ extension StreamModel where T == String {
         return desc
     }
     
-    func toPublisher()  -> AnyPublisher<String, Never>  {
+    func toPublisher()  -> AnyPublisher<String, Never> {
         let intervalPublishers =
             self.stream.map { $0.toPublisher() }
         
@@ -112,7 +111,7 @@ extension StreamModel where T == String {
 }
 
 extension StreamItem where T == String {
-    func toPublisher()  -> AnyPublisher<String, Never>  {
+    func toPublisher()  -> AnyPublisher<String, Never> {
         var publisher: AnyPublisher<String, Never> = Just(value).eraseToAnyPublisher()
         var currentOperator = self.operatorItem
         while currentOperator != nil {
@@ -126,24 +125,28 @@ extension StreamItem where T == String {
     }
 }
 
-extension OperatorItem  {
-    
+extension OperatorItem {
     func applyPublisher(_ publisher: AnyPublisher<String, Never>) -> AnyPublisher<String, Never> {
         switch self.type {
         case .delay:
             return publisher.delay(for: .seconds(self.value ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()
         case .filter:
-            return publisher.filter { NSPredicate(format: self.expression ?? "true",
-                                                  argumentArray: [$0, String(Int(self.value ?? 0))]).evaluate(with: nil) }.eraseToAnyPublisher()
+            return publisher.filter {
+                NSPredicate(format: self.expression ?? "true",
+                            argumentArray: [$0, String(Int(self.value ?? 0))])
+                .evaluate(with: nil) }.eraseToAnyPublisher()
         case .drop:
             return publisher.dropFirst(Int(self.value ?? 0)).eraseToAnyPublisher()
         case .map:
-            return publisher.map { NSExpression(format: self.expression ?? "0", argumentArray: [Int($0) ?? 0, Int(self.value ?? 0)]).expressionValue(with: nil, context: nil) as? Int }.map { String($0 ?? 0) }.eraseToAnyPublisher()
-            
+            return publisher.map { NSExpression(format: self.expression ?? "0",
+                                                argumentArray: [Int($0) ?? 0, Int(self.value ?? 0)])
+                .expressionValue(with: nil, context: nil) as? Int }
+                .map { String($0 ?? 0) }.eraseToAnyPublisher()
         case .scan:
             return publisher.scan(0) { NSExpression(format: self.expression ?? "0",
-                                                    argumentArray: [$0, Int($1) ?? 0]).expressionValue(with: nil, context: nil) as? Int ?? 0 }.map { String($0) }.eraseToAnyPublisher()
-            
+                                                    argumentArray: [$0, Int($1) ?? 0])
+                                        .expressionValue(with: nil, context: nil) as? Int ?? 0 }
+                .map { String($0) }.eraseToAnyPublisher()
         }
     }
 }

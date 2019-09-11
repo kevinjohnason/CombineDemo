@@ -20,14 +20,16 @@ struct OperationStreamView: View {
     
     init(title: String, stream1Model: StreamModel<String>, stream2Model: StreamModel<String>, groupStreamModel: GroupOperationStreamModel) {
            self.title = title
-           stream1ViewModel = StreamViewModel(title: stream1Model.name ?? "", description: stream1Model.sequenceDescription,  publisher: stream1Model.toPublisher())
-        stream2ViewModel = StreamViewModel(title: stream2Model.name ?? "", description: stream2Model.sequenceDescription, publisher: stream2Model.toPublisher())
+           stream1ViewModel = StreamViewModel(title: stream1Model.name ?? "",
+                                              description: stream1Model.sequenceDescription, publisher: stream1Model.toPublisher())
+        stream2ViewModel = StreamViewModel(title: stream2Model.name ?? "",
+                                           description: stream2Model.sequenceDescription, publisher: stream2Model.toPublisher())
                             
         operatorPublisher = groupStreamModel.operationType.applyPublishers([stream1Model.toPublisher(), stream2Model.toPublisher()])
-        operatorStreamViewModel = StreamViewModel(title: groupStreamModel.name ?? "", description: groupStreamModel.description ?? "", publisher: self.operatorPublisher)
+        operatorStreamViewModel = StreamViewModel(title: groupStreamModel.name ?? "",
+                                                  description: groupStreamModel.description ?? "", publisher: self.operatorPublisher)
        }
-    
-    
+        
     var body: some View {
         VStack {
             SingleStreamView(viewModel: stream1ViewModel, displayActionButtons: false)
@@ -53,7 +55,12 @@ struct OperationStreamView: View {
 #if DEBUG
 struct FlatMapStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        OperationStreamView(title: "", stream1Model: StreamModel<String>.new(), stream2Model: StreamModel<String>.new(), groupStreamModel: GroupOperationStreamModel(id: UUID(), name: nil, description: nil, streamModelIds: [], operationType: .append))
+        OperationStreamView(title: "", stream1Model: StreamModel<String>.new(),
+                            stream2Model: StreamModel<String>.new(),
+                            groupStreamModel: GroupOperationStreamModel(id: UUID(),
+                                                                        name: nil,
+                                                                        description: nil,
+                                                                        streamModelIds: [], operationType: .append))
     }
 }
 #endif

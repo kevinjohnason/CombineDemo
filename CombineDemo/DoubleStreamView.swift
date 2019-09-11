@@ -12,9 +12,11 @@ struct DoubleStreamView: View {
     let streamViewModel1: StreamViewModel<String>
     let streamViewModel2: StreamViewModel<String>
     let operatorTitle: String
-    
-    
-    init(streamModel: StreamModel<String>, operatorTitle: String, operatorDescription: String, publisher: AnyPublisher<String, Never>,  convertingPublisher: (AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
+        
+    init(streamModel: StreamModel<String>, operatorTitle: String,
+         operatorDescription: String,
+         publisher: AnyPublisher<String, Never>,
+         convertingPublisher: (AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
         self.operatorTitle = operatorTitle
         streamViewModel1 = DynamicStreamViewModel(streamModel: streamModel)
         streamViewModel2 = StreamViewModel(title: operatorTitle, description: operatorDescription,
@@ -29,7 +31,8 @@ struct DoubleStreamView: View {
         
         streamViewModel2 = StreamViewModel(title: operationModel.name ?? "",
                                            description: operationModel.description ?? "",
-                                           publisher: operationModel.operatorItem.applyPublisher(streamViewModel1.publisher))
+                                           publisher: operationModel.operatorItem
+                                                                .applyPublisher(streamViewModel1.publisher))
     }
     
     var body: some View {
@@ -53,7 +56,8 @@ struct DoubleStreamView: View {
 #if DEBUG
 struct DoubleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        DoubleStreamView(streamModel: StreamModel<String>.new(), operatorTitle: "", operatorDescription: "", publisher: Just("").eraseToAnyPublisher()) { (_) -> AnyPublisher<String, Never> in
+        DoubleStreamView(streamModel: StreamModel<String>.new(), operatorTitle: "",
+                         operatorDescription: "", publisher: Just("").eraseToAnyPublisher()) { (_) -> AnyPublisher<String, Never> in
             Just("").eraseToAnyPublisher()
         }
     }

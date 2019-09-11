@@ -18,8 +18,10 @@ struct ContentView: View {
                 List {
                     StreamListView(storedStreams: $viewModel.storedStreams)
                     OperationStreamListView(storedOperationStreams: $viewModel.storedOperationStreams, storedStreams: $viewModel.storedStreams)
-                    GroupOperationListStreamView(storedGroupOperationStreams: $viewModel.storedGroupOperationStreams, storedStreams: $viewModel.storedStreams)
-                    CombineGroupOperationListStreamView(storedCombineGroupOperationStreams: $viewModel.storedCombineGroupOperationStreams, storedStreams: $viewModel.storedStreams)
+                    GroupOperationListStreamView(storedGroupOperationStreams: $viewModel.storedGroupOperationStreams,
+                                                 storedStreams: $viewModel.storedStreams)
+                    CombineGroupOperationListStreamView(storedCombineGroupOperationStreams: $viewModel.storedCombineGroupOperationStreams,
+                                                        storedStreams: $viewModel.storedStreams)
                 }
                 
                 Button("Reset") {

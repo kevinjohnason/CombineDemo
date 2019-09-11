@@ -13,8 +13,7 @@ struct DoubleBallView: View {
     var backgroundColor: Color
     @Binding var ballViewModel1: BallViewModel
     @Binding var ballViewModel2: BallViewModel
-        
-    
+            
     var body: some View {
         HStack(spacing: 0) {
             BallView(forgroundColor: forgroundColor, backgroundColor: backgroundColor, viewModel: ballViewModel1)

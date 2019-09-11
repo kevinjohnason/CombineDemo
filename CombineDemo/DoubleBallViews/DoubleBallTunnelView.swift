@@ -21,12 +21,18 @@ struct DoubleBallTunnelView: View {
             HStack(spacing: 0) {
                 Spacer()
                 ForEach(self.values.reversed()) { value in
-                    DoubleBallView(forgroundColor: .white, backgroundColor: self.color, ballViewModel1: .constant(BallViewModel(value: value.value.0)), ballViewModel2: .constant(BallViewModel(value: value.value.1)))
+                    DoubleBallView(forgroundColor: .white, backgroundColor: self.color,
+                                   ballViewModel1: .constant(BallViewModel(value: value.value.0)),
+                                   ballViewModel2: .constant(BallViewModel(value: value.value.1)))
                         .frame(width: self.ballRadius * 2, height: self.ballRadius, alignment: .center)
-                        .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
+                        .transition(.asymmetric(insertion:
+                            .offset(x: -tunnelGeometry.size.width, y: 0),
+                                                removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }
             }
-            .frame(minWidth: max(tunnelGeometry.size.width, self.ballRadius * 2 * CGFloat(self.values.count)), minHeight: self.ballRadius, alignment: .trailing)
+            .frame(minWidth: max(tunnelGeometry.size.width,
+                                 self.ballRadius * 2 * CGFloat(self.values.count)),
+                   minHeight: self.ballRadius, alignment: .trailing)
             .padding([.top, .bottom], 5)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
             .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))

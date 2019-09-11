@@ -17,8 +17,7 @@ struct OperationStreamListView: View {
     func sourceStream(with id: UUID) -> StreamModel<String>? {
         storedStreams.first(where: { $0.id == id })
     }
-    
-    
+        
     func streamView(streamModel: OperationStreamModel) -> some View {
         guard let sourceStream = sourceStream(with: streamModel.streamModelId) else {
             return AnyView(EmptyView())

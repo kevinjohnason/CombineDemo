@@ -10,7 +10,6 @@ import Foundation
 import SwiftUI
 import Combine
 
-
 class StreamViewModel<T>: ObservableObject {
     
     var title: String {
@@ -30,7 +29,7 @@ class StreamViewModel<T>: ObservableObject {
     var publisher: AnyPublisher<T, Never>
     @Published var values: [TimeSeriesValue<T>] = []
     let animationSeconds: Double = 1.5
-    var cancellable: Cancellable? = nil
+    var cancellable: Cancellable?
     
     init(title: String, description: String = "", publisher: AnyPublisher<T, Never>) {
         self.title = title
@@ -57,7 +56,6 @@ class StreamViewModel<T>: ObservableObject {
     }
     
 }
-
 
 struct TimeSeriesValue<T>: Identifiable {
     var value: T

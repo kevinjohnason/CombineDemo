@@ -34,8 +34,7 @@ struct CombineSingleStreamView: View {
                     }
                 }.padding()
             }
-            
-            
+                        
             Spacer()
         }
     }

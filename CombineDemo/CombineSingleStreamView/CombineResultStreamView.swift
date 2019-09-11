@@ -14,9 +14,11 @@ struct CombineResultStreamView: View {
     let letterStreamViewModel: StreamViewModel<String>
     let resultStreamViewModel: StreamViewModel<(String, String)>
     let title: String
-    
-    
-    init(title: String, stream1Model: StreamModel<String>, stream2Model: StreamModel<String>, streamOperator: (AnyPublisher<String, Never>, AnyPublisher<String, Never>) -> AnyPublisher<(String, String), Never>) {
+        
+    init(title: String, stream1Model: StreamModel<String>,
+         stream2Model: StreamModel<String>,
+         streamOperator: (AnyPublisher<String, Never>,
+        AnyPublisher<String, Never>) -> AnyPublisher<(String, String), Never>) {
         self.title = title
         numberStreamViewModel = DynamicStreamViewModel(streamModel: stream1Model)
         letterStreamViewModel = DynamicStreamViewModel(streamModel: stream2Model)
@@ -24,15 +26,16 @@ struct CombineResultStreamView: View {
         resultStreamViewModel = StreamViewModel(title: title, publisher: self.operatorPublisher)
     }
     
-    init(title: String, stream1Model: StreamModel<String>, stream2Model: StreamModel<String>, combineStreamModel: CombineGroupOperationStreamModel) {
+    init(title: String, stream1Model: StreamModel<String>,
+         stream2Model: StreamModel<String>, combineStreamModel: CombineGroupOperationStreamModel) {
         self.title = title
         numberStreamViewModel = DynamicStreamViewModel(streamModel: stream1Model)
         letterStreamViewModel = DynamicStreamViewModel(streamModel: stream2Model)
         operatorPublisher = combineStreamModel.operatorType.applyPublishers([stream1Model.toPublisher(), stream2Model.toPublisher()])
-        resultStreamViewModel = StreamViewModel(title: combineStreamModel.name ?? "", description: combineStreamModel.description ?? "", publisher: self.operatorPublisher)
+        resultStreamViewModel = StreamViewModel(title: combineStreamModel.name ?? "",
+                                                description: combineStreamModel.description ?? "", publisher: self.operatorPublisher)
     }
-    
-    
+        
     var body: some View {
         VStack {
             SingleStreamView(viewModel: numberStreamViewModel, displayActionButtons: false)
@@ -59,7 +62,9 @@ struct CombineResultStreamView: View {
 #if DEBUG
 struct CombineResultStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        CombineResultStreamView(title: "", stream1Model: StreamModel<String>.new(), stream2Model: StreamModel<String>.new()) { (_, _) -> AnyPublisher<(String, String), Never> in
+        CombineResultStreamView(title: "", stream1Model: StreamModel<String>.new(),
+                                stream2Model: StreamModel<String>.new()) { (_, _) ->
+                                    AnyPublisher<(String, String), Never> in
             return Empty().eraseToAnyPublisher()
         }
     }

@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 struct BoundsPreferenceData {
     let bounds: Anchor<CGRect>?
 }
@@ -39,7 +38,8 @@ struct BallTunnelView: View {
                 ForEach(self.values.reversed()) { value in
                     BallView(forgroundColor: .white, backgroundColor: self.color, viewModel: BallViewModel(value: value.value))
                         .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
-                        .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0), removal: .offset(x: tunnelGeometry.size.width, y: 0)))
+                        .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0),
+                                                removal: .offset(x: tunnelGeometry.size.width, y: 0)))
                 }
             }
             .frame(minWidth: self.tunnelWidth(with: tunnelGeometry.size.width),

@@ -12,10 +12,10 @@ import Combine
 
 extension ClosedRange where Bound == Unicode.Scalar {
     static let asciiPrintable: ClosedRange = " "..."~"
-    var range: ClosedRange<UInt32>  { return lowerBound.value...upperBound.value }
-    var scalars: [Unicode.Scalar]   { return range.compactMap(Unicode.Scalar.init) }
-    var characters: [Character]     { return scalars.map(Character.init) }
-    var string: String              { return String(scalars) }
+    var range: ClosedRange<UInt32> { return lowerBound.value...upperBound.value }
+    var scalars: [Unicode.Scalar] { return range.compactMap(Unicode.Scalar.init) }
+    var characters: [Character] { return scalars.map(Character.init) }
+    var string: String { return String(scalars) }
 }
 
 extension String {
@@ -23,7 +23,6 @@ extension String {
         self.init(UnicodeScalarView(sequence))
     }
 }
-
 
 class UpdateStreamViewModel: ObservableObject {
     

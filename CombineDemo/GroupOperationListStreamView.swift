@@ -13,14 +13,14 @@ struct GroupOperationListStreamView: View {
     @Binding var storedGroupOperationStreams: [GroupOperationStreamModel]
     
     @Binding var storedStreams: [StreamModel<String>]
-    
-    
+        
     func streamView(streamModel: GroupOperationStreamModel) -> some View {
         let sourceStreams = storedStreams.filter { $0.isDefault }
         guard sourceStreams.count > 1 else {
             return AnyView(EmptyView())
         }
-        let operationStreamView = OperationStreamView(title: streamModel.name ?? "", stream1Model: sourceStreams[0], stream2Model: sourceStreams[1], groupStreamModel: streamModel)
+        let operationStreamView = OperationStreamView(title: streamModel.name ?? "",
+                                                      stream1Model: sourceStreams[0], stream2Model: sourceStreams[1], groupStreamModel: streamModel)
         return AnyView(operationStreamView)
      }
     

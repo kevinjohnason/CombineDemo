@@ -175,15 +175,19 @@ extension GroupOperationType {
 }
 
 extension CombineGroupOperationType {
-    func applyPublishers(_ publishers: [AnyPublisher<String, Never>]) -> AnyPublisher<(String, String), Never> {
+    func applyPublishers(_ publishers: [AnyPublisher<String, Never>]) -> AnyPublisher<[String], Never> {
         guard publishers.count > 1 else {
             return Empty().eraseToAnyPublisher()
         }
         switch self {
         case .zip:
-            return Publishers.Zip(publishers[0], publishers[1]).eraseToAnyPublisher()
+            return Publishers.Zip(publishers[0], publishers[1]).map {
+                [$0, $1]
+            }.eraseToAnyPublisher()
         case .combineLatest:
-            return Publishers.CombineLatest(publishers[0], publishers[1]).eraseToAnyPublisher()
+            return Publishers.CombineLatest(publishers[0], publishers[1]).map {
+                [$0, $1]
+            }.eraseToAnyPublisher()
         }
     }
 }

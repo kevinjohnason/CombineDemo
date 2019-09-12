@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 struct CombineSingleStreamView: View {
     
-    @ObservedObject var viewModel: StreamViewModel<(String, String)>
+    @ObservedObject var viewModel: StreamViewModel<[String]>
     
     var displayActionButtons: Bool = true
     
@@ -21,7 +21,7 @@ struct CombineSingleStreamView: View {
             .font(.system(.headline, design: .monospaced))
             .lineLimit(nil).padding()
             
-            DoubleBallTunnelView(values: $viewModel.values, color: .green, animationSecond: viewModel.animationSeconds)
+            MultiBallTunnelView(values: $viewModel.values, color: .green, animationSecond: viewModel.animationSeconds)
             
             if displayActionButtons {
                 HStack {
@@ -43,7 +43,7 @@ struct CombineSingleStreamView: View {
 #if DEBUG
 struct CombineSingleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        CombineSingleStreamView(viewModel: StreamViewModel<(String, String)>(title: "", publisher: Empty().eraseToAnyPublisher()))
+        CombineSingleStreamView(viewModel: StreamViewModel<[String]>(title: "", publisher: Empty().eraseToAnyPublisher()))
     }
 }
 #endif

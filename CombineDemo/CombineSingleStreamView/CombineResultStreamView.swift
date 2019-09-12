@@ -9,10 +9,10 @@
 import SwiftUI
 import Combine
 struct CombineResultStreamView: View {
-    let operatorPublisher: AnyPublisher<(String, String), Never>
+    let operatorPublisher: AnyPublisher<[String], Never>
     let numberStreamViewModel: StreamViewModel<String>
     let letterStreamViewModel: StreamViewModel<String>
-    let resultStreamViewModel: StreamViewModel<(String, String)>
+    let resultStreamViewModel: StreamViewModel<[String]>
     let title: String
         
     init(title: String, stream1Model: StreamModel<String>,
@@ -22,7 +22,9 @@ struct CombineResultStreamView: View {
         self.title = title
         numberStreamViewModel = DynamicStreamViewModel(streamModel: stream1Model)
         letterStreamViewModel = DynamicStreamViewModel(streamModel: stream2Model)
-        operatorPublisher = streamOperator(numberStreamViewModel.publisher, letterStreamViewModel.publisher)
+        operatorPublisher = streamOperator(numberStreamViewModel.publisher, letterStreamViewModel.publisher).map {
+            [$0, $1]
+        }.eraseToAnyPublisher()
         resultStreamViewModel = StreamViewModel(title: title, publisher: self.operatorPublisher)
     }
     

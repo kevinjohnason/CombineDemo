@@ -9,9 +9,7 @@
 import SwiftUI
 import Combine
 
-struct OperationStreamView: View {
-    let numberPublisher = CombineService.shared.commonPublisher.eraseToAnyPublisher()
-    let letterPublisher = CombineService.shared.serialLetterPublisher(seconds: 1).eraseToAnyPublisher()
+struct OperationStreamView: View {    
     let operatorPublisher: AnyPublisher<String, Never>
     let stream1ViewModel: StreamViewModel<String>
     let stream2ViewModel: StreamViewModel<String>

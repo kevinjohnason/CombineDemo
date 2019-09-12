@@ -55,7 +55,7 @@ struct SingleStreamView: View {
 #if DEBUG
 struct SingleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleStreamView(viewModel: StreamViewModel(title: "", publisher: CombineService.shared.commonPublisher))
+        SingleStreamView(viewModel: StreamViewModel(title: "", publisher: Empty().eraseToAnyPublisher()))
         //.previewDevice(PreviewDevice(rawValue: "iPad Pro (9.7-inch)"))
     }
 }

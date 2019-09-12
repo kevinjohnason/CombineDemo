@@ -41,11 +41,11 @@ struct SingleStreamView: View {
     }
     
     var trailingBarItem: some View {
-        guard let dynamicStreamViewModel = viewModel as? DynamicStreamViewModel else {
+        guard let dataStreamViewModel = viewModel as? DataStreamViewModel else {
             return AnyView(EmptyView())
         }
         let navigationLink = NavigationLink(destination: UpdateStreamView(viewModel:
-            UpdateStreamViewModel(streamModel: dynamicStreamViewModel.streamModel))) {
+            UpdateStreamViewModel(streamModel: dataStreamViewModel.streamModel))) {
             Text("Edit")
         }        
         return AnyView(navigationLink)

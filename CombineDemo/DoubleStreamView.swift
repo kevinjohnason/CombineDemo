@@ -18,7 +18,7 @@ struct DoubleStreamView: View {
          publisher: AnyPublisher<String, Never>,
          convertingPublisher: (AnyPublisher<String, Never>) -> AnyPublisher<String, Never>) {
         self.operatorTitle = operatorTitle
-        streamViewModel1 = DynamicStreamViewModel(streamModel: streamModel)
+        streamViewModel1 = DataStreamViewModel(streamModel: streamModel)
         streamViewModel2 = StreamViewModel(title: operatorTitle, description: operatorDescription,
                                            publisher: convertingPublisher(publisher))
     }

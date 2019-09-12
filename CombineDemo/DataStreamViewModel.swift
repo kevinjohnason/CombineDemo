@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DynamicStreamViewModel: StreamViewModel<String> {
+class DataStreamViewModel: StreamViewModel<String> {
     
     let streamId: UUID
     

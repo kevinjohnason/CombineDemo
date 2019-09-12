@@ -15,7 +15,7 @@ struct StreamListView: View {
     @State var deleteAlertInDisplay: Bool = false
         
     func streamView(streamModel: StreamModel<String>) -> some View {
-        return AnyView(SingleStreamView(viewModel: DynamicStreamViewModel(streamModel: streamModel)))
+        return AnyView(SingleStreamView(viewModel: DataStreamViewModel(streamModel: streamModel)))
     }
     
     var body: some View {

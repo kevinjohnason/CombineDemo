@@ -29,7 +29,7 @@
 		31A965572319D5D3009C2C16 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A965562319D5D3009C2C16 /* DataModels.swift */; };
 		31A9655B2319D849009C2C16 /* ButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A9655A2319D849009C2C16 /* ButtonModifier.swift */; };
 		31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCA23175BBF00347B55 /* DataService.swift */; };
-		31F1DFCD2317916400347B55 /* DynamicStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */; };
+		31F1DFCD2317916400347B55 /* DataStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1DFCC2317916400347B55 /* DataStreamViewModel.swift */; };
 		7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F1C2122F295860018DDA5 /* MenuRow.swift */; };
 		7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58A22F254350062EE99 /* SingleStreamView.swift */; };
 		7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C38B58C22F255F40062EE99 /* CombineService.swift */; };
@@ -66,7 +66,7 @@
 		31A965562319D5D3009C2C16 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		31A9655A2319D849009C2C16 /* ButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifier.swift; sourceTree = "<group>"; };
 		31F1DFCA23175BBF00347B55 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicStreamViewModel.swift; sourceTree = "<group>"; };
+		31F1DFCC2317916400347B55 /* DataStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStreamViewModel.swift; sourceTree = "<group>"; };
 		7C1F1C2122F295860018DDA5 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
 		7C38B58A22F254350062EE99 /* SingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStreamView.swift; sourceTree = "<group>"; };
 		7C38B58C22F255F40062EE99 /* CombineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineService.swift; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 				316518B022FBE8A100C8535D /* SingleBallViews */,
 				311AB9D4232AB91600027E15 /* MultiBallViews */,
 				31826A8022F3AC1300A163A6 /* StreamViewModel.swift */,
-				31F1DFCC2317916400347B55 /* DynamicStreamViewModel.swift */,
+				31F1DFCC2317916400347B55 /* DataStreamViewModel.swift */,
 				7C38B58A22F254350062EE99 /* SingleStreamView.swift */,
 				3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */,
 				3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */,
@@ -337,7 +337,7 @@
 				31157DFF2315D35A00CEFE3C /* UpdateStreamViewModel.swift in Sources */,
 				7C38B58D22F255F40062EE99 /* CombineService.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
-				31F1DFCD2317916400347B55 /* DynamicStreamViewModel.swift in Sources */,
+				31F1DFCD2317916400347B55 /* DataStreamViewModel.swift in Sources */,
 				3111351F2322D29D005A2619 /* GroupOperationListStreamView.swift in Sources */,
 				31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,

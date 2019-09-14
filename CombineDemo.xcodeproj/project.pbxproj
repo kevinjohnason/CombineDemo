@@ -116,6 +116,25 @@
 			path = MultiBallViews;
 			sourceTree = "<group>";
 		};
+		314E9334232D748F00FF84ED /* SingleStreamView */ = {
+			isa = PBXGroup;
+			children = (
+				31826A8022F3AC1300A163A6 /* StreamViewModel.swift */,
+				31F1DFCC2317916400347B55 /* DataStreamViewModel.swift */,
+				7C38B58A22F254350062EE99 /* SingleStreamView.swift */,
+			);
+			path = SingleStreamView;
+			sourceTree = "<group>";
+		};
+		314E9335232D749E00FF84ED /* MultiStreamView */ = {
+			isa = PBXGroup;
+			children = (
+				316518B622FBEA6900C8535D /* MultiValueStreamView.swift */,
+				311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */,
+			);
+			name = MultiStreamView;
+			sourceTree = "<group>";
+		};
 		3163E60B22F8B66B00E0FDF2 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,11 +224,8 @@
 				311135222323071B005A2619 /* CombineGroupOperationListStreamView.swift */,
 				316518B022FBE8A100C8535D /* SingleBallViews */,
 				311AB9D4232AB91600027E15 /* MultiBallViews */,
-				31826A8022F3AC1300A163A6 /* StreamViewModel.swift */,
-				31F1DFCC2317916400347B55 /* DataStreamViewModel.swift */,
-				7C38B58A22F254350062EE99 /* SingleStreamView.swift */,
-				311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */,
-				316518B622FBEA6900C8535D /* MultiValueStreamView.swift */,
+				314E9334232D748F00FF84ED /* SingleStreamView */,
+				314E9335232D749E00FF84ED /* MultiStreamView */,
 				31157E002315D36200CEFE3C /* UpdateStreamView */,
 				313841742302202700D45341 /* TestView.swift */,
 			);

@@ -22,8 +22,9 @@ struct OperationStreamListView: View {
         guard let sourceStream = sourceStream(with: streamModel.streamModelId) else {
             return AnyView(EmptyView())
         }
-        return AnyView(DoubleStreamView(streamModel: sourceStream,
-                                        operationModel: streamModel))
+        return AnyView(MultiStreamView(streamTitle: streamModel.name ?? "",
+                                       sourceStreamModel: sourceStream,
+                                       operatorItem: streamModel.operatorItem))
      }
     
     var body: some View {

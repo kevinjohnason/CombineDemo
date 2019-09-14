@@ -58,6 +58,21 @@ extension StreamItem where T == String {
 }
 
 extension OperatorItem {
+    var description: String {
+        switch self.type {
+        case .delay:
+            return ".delay(for: .seconds(\(self.value ?? 0)), scheduler: DispatchQueue.main)"
+        case .filter:
+            return ".filter { $0 != \(self.value ?? 0) }"
+        case .drop:
+            return ".dropFirst(\(Int(self.value ?? 0)))"
+        case .map:
+            return ".map { $0 * \(Int(self.value ?? 0)) }"
+        case .scan:
+            return ".scan(0) { $0 + $1 }"
+        }
+    }
+        
     func applyPublisher(_ publisher: AnyPublisher<String, Never>) -> AnyPublisher<String, Never> {
         switch self.type {
         case .delay:

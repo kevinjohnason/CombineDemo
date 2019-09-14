@@ -46,7 +46,7 @@ class OperatorItem: Codable {
     let value: Double?
     var next: OperatorItem?
     let expression: String?
-    
+
     init(type: OperatorType, value: Double? = nil, expression: String? = nil, next: OperatorItem? = nil) {
         self.type = type
         self.value = value

@@ -12,10 +12,10 @@
 		311135232323071B005A2619 /* CombineGroupOperationListStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311135222323071B005A2619 /* CombineGroupOperationListStreamView.swift */; };
 		31157DFD2315AD7600CEFE3C /* UpdateStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31157DFC2315AD7600CEFE3C /* UpdateStreamView.swift */; };
 		31157DFF2315D35A00CEFE3C /* UpdateStreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31157DFE2315D35A00CEFE3C /* UpdateStreamViewModel.swift */; };
-		3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */; };
 		311AB9D6232AB93000027E15 /* MultiBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AB9D5232AB93000027E15 /* MultiBallView.swift */; };
 		311AB9D8232AB97000027E15 /* MultiBallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AB9D7232AB97000027E15 /* MultiBallViewModel.swift */; };
 		311AB9DC232ABE1F00027E15 /* MultiBallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AB9DB232ABE1F00027E15 /* MultiBallTunnelView.swift */; };
+		311AB9DE232AC6DF00027E15 /* MultiStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */; };
 		312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B0D1E2315DD75004E3C0E /* BallViewModel.swift */; };
 		313841752302202700D45341 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313841742302202700D45341 /* TestView.swift */; };
 		3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */; };
@@ -48,10 +48,10 @@
 		311135222323071B005A2619 /* CombineGroupOperationListStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineGroupOperationListStreamView.swift; sourceTree = "<group>"; };
 		31157DFC2315AD7600CEFE3C /* UpdateStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStreamView.swift; sourceTree = "<group>"; };
 		31157DFE2315D35A00CEFE3C /* UpdateStreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStreamViewModel.swift; sourceTree = "<group>"; };
-		3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStreamView.swift; sourceTree = "<group>"; };
 		311AB9D5232AB93000027E15 /* MultiBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBallView.swift; sourceTree = "<group>"; };
 		311AB9D7232AB97000027E15 /* MultiBallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBallViewModel.swift; sourceTree = "<group>"; };
 		311AB9DB232ABE1F00027E15 /* MultiBallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBallTunnelView.swift; sourceTree = "<group>"; };
+		311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiStreamView.swift; sourceTree = "<group>"; };
 		312B0D1E2315DD75004E3C0E /* BallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallViewModel.swift; sourceTree = "<group>"; };
 		313841742302202700D45341 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStreamView.swift; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 				31826A8022F3AC1300A163A6 /* StreamViewModel.swift */,
 				31F1DFCC2317916400347B55 /* DataStreamViewModel.swift */,
 				7C38B58A22F254350062EE99 /* SingleStreamView.swift */,
-				3116EE1822FBDF6000F75D6F /* DoubleStreamView.swift */,
+				311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */,
 				3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */,
 				316518B822FC892700C8535D /* CombineSingleStreamView */,
 				31157E002315D36200CEFE3C /* UpdateStreamView */,
@@ -336,13 +336,13 @@
 				3111351D2322CC37005A2619 /* OperationStreamListView.swift in Sources */,
 				31157DFF2315D35A00CEFE3C /* UpdateStreamViewModel.swift in Sources */,
 				7C38B58D22F255F40062EE99 /* ModelExtensions.swift in Sources */,
+				311AB9DE232AC6DF00027E15 /* MultiStreamView.swift in Sources */,
 				7C7A761C22F1FF13007B76F9 /* AppDelegate.swift in Sources */,
 				31F1DFCD2317916400347B55 /* DataStreamViewModel.swift in Sources */,
 				3111351F2322D29D005A2619 /* GroupOperationListStreamView.swift in Sources */,
 				31F1DFCB23175BBF00347B55 /* DataService.swift in Sources */,
 				7C7A761E22F1FF13007B76F9 /* SceneDelegate.swift in Sources */,
 				311AB9DC232ABE1F00027E15 /* MultiBallTunnelView.swift in Sources */,
-				3116EE1922FBDF6000F75D6F /* DoubleStreamView.swift in Sources */,
 				316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */,
 				31A965572319D5D3009C2C16 /* DataModels.swift in Sources */,
 				31826A8122F3AC1300A163A6 /* StreamViewModel.swift in Sources */,

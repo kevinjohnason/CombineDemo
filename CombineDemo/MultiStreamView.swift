@@ -57,8 +57,8 @@ struct MultiStreamView: View {
     
     var body: some View {
         VStack {
-            ForEach(streamViewModels, id: \.title) { streamView in                
-                CombineSingleStreamView(viewModel: streamView, displayActionButtons: false)
+            ForEach(streamViewModels, id: \.title) { streamView in
+                MultiValueStreamView(viewModel: streamView, displayActionButtons: false)
             }
             HStack {
                 CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {

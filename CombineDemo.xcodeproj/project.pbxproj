@@ -19,7 +19,7 @@
 		312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B0D1E2315DD75004E3C0E /* BallViewModel.swift */; };
 		313841752302202700D45341 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313841742302202700D45341 /* TestView.swift */; };
 		3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */; };
-		316518B722FBEA6900C8535D /* CombineSingleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518B622FBEA6900C8535D /* CombineSingleStreamView.swift */; };
+		316518B722FBEA6900C8535D /* MultiValueStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518B622FBEA6900C8535D /* MultiValueStreamView.swift */; };
 		316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */; };
 		316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* BallTunnelView.swift */; };
 		318149D72319E3850006EE0C /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318149D62319E3850006EE0C /* ContentViewModel.swift */; };
@@ -54,7 +54,7 @@
 		312B0D1E2315DD75004E3C0E /* BallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallViewModel.swift; sourceTree = "<group>"; };
 		313841742302202700D45341 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoButton.swift; sourceTree = "<group>"; };
-		316518B622FBEA6900C8535D /* CombineSingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineSingleStreamView.swift; sourceTree = "<group>"; };
+		316518B622FBEA6900C8535D /* MultiValueStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiValueStreamView.swift; sourceTree = "<group>"; };
 		316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineResultStreamView.swift; sourceTree = "<group>"; };
 		316A347B22F4DE44002D24AA /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
 		318149D62319E3850006EE0C /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		316518B822FC892700C8535D /* CombineSingleStreamView */ = {
 			isa = PBXGroup;
 			children = (
-				316518B622FBEA6900C8535D /* CombineSingleStreamView.swift */,
+				316518B622FBEA6900C8535D /* MultiValueStreamView.swift */,
 				316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */,
 			);
 			path = CombineSingleStreamView;
@@ -343,7 +343,7 @@
 				316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */,
 				31A965572319D5D3009C2C16 /* DataModels.swift in Sources */,
 				31826A8122F3AC1300A163A6 /* StreamViewModel.swift in Sources */,
-				316518B722FBEA6900C8535D /* CombineSingleStreamView.swift in Sources */,
+				316518B722FBEA6900C8535D /* MultiValueStreamView.swift in Sources */,
 				7C38B58B22F254350062EE99 /* SingleStreamView.swift in Sources */,
 				7C7A762022F1FF13007B76F9 /* ContentView.swift in Sources */,
 				318149D72319E3850006EE0C /* ContentViewModel.swift in Sources */,

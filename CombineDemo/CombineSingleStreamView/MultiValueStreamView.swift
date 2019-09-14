@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-struct CombineSingleStreamView: View {
+struct MultiValueStreamView: View {
     
     @ObservedObject var viewModel: StreamViewModel<[String]>
     
@@ -43,7 +43,7 @@ struct CombineSingleStreamView: View {
 #if DEBUG
 struct CombineSingleStreamView_Previews: PreviewProvider {
     static var previews: some View {
-        CombineSingleStreamView(viewModel: StreamViewModel<[String]>(title: "", publisher: Empty().eraseToAnyPublisher()))
+        MultiValueStreamView(viewModel: StreamViewModel<[String]>(title: "", publisher: Empty().eraseToAnyPublisher()))
     }
 }
 #endif

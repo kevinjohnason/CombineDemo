@@ -43,7 +43,7 @@ struct CombineResultStreamView: View {
             SingleStreamView(viewModel: numberStreamViewModel, displayActionButtons: false)
             SingleStreamView(viewModel: letterStreamViewModel, color: .red, displayActionButtons: false)
             Spacer()
-            CombineSingleStreamView(viewModel: resultStreamViewModel, displayActionButtons: false)
+            MultiValueStreamView(viewModel: resultStreamViewModel, displayActionButtons: false)
             
             HStack {
                 CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {

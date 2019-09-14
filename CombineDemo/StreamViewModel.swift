@@ -66,3 +66,11 @@ struct TimeSeriesValue<T>: Identifiable {
         self.value = value
     }
 }
+
+extension StreamViewModel {
+    
+    func toArrayViewModel() -> StreamViewModel<[T]> {
+        StreamViewModel<[T]>(title: self.title, description: self.description, publisher: self.publisher.map { [$0] }.eraseToAnyPublisher())
+    }
+    
+}

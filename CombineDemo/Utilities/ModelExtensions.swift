@@ -9,6 +9,16 @@
 import Foundation
 import Combine
 
+extension StreamModel {
+    
+    func toArrayStreamModel() -> StreamModel<[T]> {
+        StreamModel<[T]>.init(id: self.id, name: self.name, description: self.description,
+                              stream: self.stream.map { StreamItem(value: [$0.value], operatorItem: $0.operatorItem) },
+                              isDefault: self.isDefault)
+    }
+    
+}
+
 extension StreamModel where T == String {
     
     var sequenceDescription: String {

@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 struct MultiStreamView: View {
-    let streamViewModels: [StreamViewModel<String>]
+    let streamViewModels: [StreamViewModel<[String]>]
     let streamTitle: String
             
     init(streamTitle: String, sourceStreamModel: StreamModel<String>, operatorItem: OperatorItem) {
@@ -18,16 +18,16 @@ struct MultiStreamView: View {
                         
         let sourceViewModel = StreamViewModel(title: sourceStreamModel.name ?? "",
                                               description: sourceStreamModel.sequenceDescription,
-                                              publisher: sourceStreamModel.toPublisher())
+                                              publisher: sourceStreamModel.toPublisher()).toArrayViewModel()
         
-        var streamViewModels: [StreamViewModel<String>] = [sourceViewModel]
+        var streamViewModels: [StreamViewModel<[String]>] = [sourceViewModel]
         
         var currentOperatorItem: OperatorItem?  = operatorItem
         var currentPublisher: AnyPublisher<String, Never>? = sourceStreamModel.toPublisher()
         while currentOperatorItem != nil {
             let newPublisher = currentOperatorItem!.applyPublisher(currentPublisher!)
             streamViewModels.append(StreamViewModel(title:
-                currentOperatorItem!.description, description: currentOperatorItem!.description, publisher: newPublisher))
+                currentOperatorItem!.description, description: currentOperatorItem!.description, publisher: newPublisher).toArrayViewModel())
             currentOperatorItem = currentOperatorItem?.next
             currentPublisher = newPublisher
         }
@@ -40,25 +40,25 @@ struct MultiStreamView: View {
         self.streamTitle = streamTitle
         let stream1ViewModel = StreamViewModel(title: stream1Model.name ?? "",
                                                description: stream1Model.sequenceDescription,
-                                               publisher: stream1Model.toPublisher())
+            publisher: stream1Model.toPublisher()).toArrayViewModel()
             
         let stream2ViewModel = StreamViewModel(title: stream2Model.name ?? "",
                                                description: stream2Model.sequenceDescription,
-                                               publisher: stream2Model.toPublisher())
+            publisher: stream2Model.toPublisher()).toArrayViewModel()
             
         let operatorPublisher = groupStreamModel.operationType.applyPublishers([stream1Model.toPublisher(), stream2Model.toPublisher()])
         
         let resultViewModel = StreamViewModel(title: groupStreamModel.name ?? "",
                                               description: groupStreamModel.description ?? "",
-                                              publisher: operatorPublisher)
+            publisher: operatorPublisher).toArrayViewModel()
         streamViewModels = [stream1ViewModel, stream2ViewModel, resultViewModel]
                     
     }
     
     var body: some View {
         VStack {
-            ForEach(streamViewModels, id: \.title) { streamView in
-                SingleStreamView(viewModel: streamView, color: .green, displayActionButtons: false)
+            ForEach(streamViewModels, id: \.title) { streamView in                
+                CombineSingleStreamView(viewModel: streamView, displayActionButtons: false)
             }
             HStack {
                 CombineDemoButton(text: "Subscribe", backgroundColor: .blue) {

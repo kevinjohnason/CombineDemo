@@ -31,8 +31,28 @@ struct MultiStreamView: View {
             currentOperatorItem = currentOperatorItem?.next
             currentPublisher = newPublisher
         }
-                
+
         self.streamViewModels = streamViewModels
+    }
+        
+    init(streamTitle: String, stream1Model: StreamModel<String>, stream2Model: StreamModel<String>,
+         groupStreamModel: GroupOperationStreamModel) {
+        self.streamTitle = streamTitle
+        let stream1ViewModel = StreamViewModel(title: stream1Model.name ?? "",
+                                               description: stream1Model.sequenceDescription,
+                                               publisher: stream1Model.toPublisher())
+            
+        let stream2ViewModel = StreamViewModel(title: stream2Model.name ?? "",
+                                               description: stream2Model.sequenceDescription,
+                                               publisher: stream2Model.toPublisher())
+            
+        let operatorPublisher = groupStreamModel.operationType.applyPublishers([stream1Model.toPublisher(), stream2Model.toPublisher()])
+        
+        let resultViewModel = StreamViewModel(title: groupStreamModel.name ?? "",
+                                              description: groupStreamModel.description ?? "",
+                                              publisher: operatorPublisher)
+        streamViewModels = [stream1ViewModel, stream2ViewModel, resultViewModel]
+                    
     }
     
     var body: some View {

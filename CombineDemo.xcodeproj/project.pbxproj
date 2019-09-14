@@ -18,7 +18,6 @@
 		311AB9DE232AC6DF00027E15 /* MultiStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */; };
 		312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B0D1E2315DD75004E3C0E /* BallViewModel.swift */; };
 		313841752302202700D45341 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313841742302202700D45341 /* TestView.swift */; };
-		3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */; };
 		3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */; };
 		316518B722FBEA6900C8535D /* CombineSingleStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518B622FBEA6900C8535D /* CombineSingleStreamView.swift */; };
 		316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */; };
@@ -54,7 +53,6 @@
 		311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiStreamView.swift; sourceTree = "<group>"; };
 		312B0D1E2315DD75004E3C0E /* BallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallViewModel.swift; sourceTree = "<group>"; };
 		313841742302202700D45341 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
-		3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationStreamView.swift; sourceTree = "<group>"; };
 		3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoButton.swift; sourceTree = "<group>"; };
 		316518B622FBEA6900C8535D /* CombineSingleStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineSingleStreamView.swift; sourceTree = "<group>"; };
 		316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineResultStreamView.swift; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 				31F1DFCC2317916400347B55 /* DataStreamViewModel.swift */,
 				7C38B58A22F254350062EE99 /* SingleStreamView.swift */,
 				311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */,
-				3163E60922F8A92B00E0FDF2 /* OperationStreamView.swift */,
 				316518B822FC892700C8535D /* CombineSingleStreamView */,
 				31157E002315D36200CEFE3C /* UpdateStreamView */,
 				313841742302202700D45341 /* TestView.swift */,
@@ -353,7 +350,6 @@
 				31A9655B2319D849009C2C16 /* ButtonModifier.swift in Sources */,
 				3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */,
 				7C1F1C2222F295860018DDA5 /* MenuRow.swift in Sources */,
-				3163E60A22F8A92B00E0FDF2 /* OperationStreamView.swift in Sources */,
 				31A9655423199EA7009C2C16 /* StreamListView.swift in Sources */,
 				313841752302202700D45341 /* TestView.swift in Sources */,
 				311AB9D6232AB93000027E15 /* MultiBallView.swift in Sources */,

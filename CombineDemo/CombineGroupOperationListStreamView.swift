@@ -18,9 +18,12 @@ struct CombineGroupOperationListStreamView: View {
         guard sourceStreams.count > 1 else {
             return AnyView(EmptyView())
         }
-        let operationStreamView =  CombineResultStreamView(title: streamModel.name ?? "",
-                                                           stream1Model: sourceStreams[0],
-                                                           stream2Model: sourceStreams[1], combineStreamModel: streamModel)
+        
+        let operationStreamView =
+        MultiStreamView(streamTitle: streamModel.name ?? "",
+                        stream1Model: sourceStreams[0],
+                        stream2Model: sourceStreams[1], combineStreamModel: streamModel)
+                
         return AnyView(operationStreamView)
      }
     

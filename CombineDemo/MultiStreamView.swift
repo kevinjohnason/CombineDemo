@@ -55,6 +55,21 @@ struct MultiStreamView: View {
                     
     }
     
+    init(streamTitle: String, stream1Model: StreamModel<String>,
+         stream2Model: StreamModel<String>, combineStreamModel: CombineGroupOperationStreamModel) {
+        self.streamTitle = streamTitle
+        let stream1ViewModel: StreamViewModel<String> = DataStreamViewModel(streamModel: stream1Model)
+        let stream2ViewModel: StreamViewModel<String> = DataStreamViewModel(streamModel: stream2Model)
+        let operatorPublisher = combineStreamModel.operatorType.applyPublishers([stream1Model.toPublisher(), stream2Model.toPublisher()])
+        let resultStreamViewModel = StreamViewModel(title: combineStreamModel.name ?? "",
+                                                description: combineStreamModel.description ?? "", publisher: operatorPublisher)
+        
+        streamViewModels = [stream1ViewModel.toArrayViewModel(),
+                            stream2ViewModel.toArrayViewModel(),
+                            resultStreamViewModel]
+        
+    }
+    
     var body: some View {
         VStack {
             ForEach(streamViewModels, id: \.title) { streamView in

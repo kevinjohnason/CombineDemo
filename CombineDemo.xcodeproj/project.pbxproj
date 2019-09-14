@@ -20,7 +20,6 @@
 		313841752302202700D45341 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313841742302202700D45341 /* TestView.swift */; };
 		3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */; };
 		316518B722FBEA6900C8535D /* MultiValueStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518B622FBEA6900C8535D /* MultiValueStreamView.swift */; };
-		316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */; };
 		316A347C22F4DE44002D24AA /* BallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A347B22F4DE44002D24AA /* BallTunnelView.swift */; };
 		318149D72319E3850006EE0C /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318149D62319E3850006EE0C /* ContentViewModel.swift */; };
 		31826A8122F3AC1300A163A6 /* StreamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31826A8022F3AC1300A163A6 /* StreamViewModel.swift */; };
@@ -55,7 +54,6 @@
 		313841742302202700D45341 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoButton.swift; sourceTree = "<group>"; };
 		316518B622FBEA6900C8535D /* MultiValueStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiValueStreamView.swift; sourceTree = "<group>"; };
-		316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineResultStreamView.swift; sourceTree = "<group>"; };
 		316A347B22F4DE44002D24AA /* BallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallTunnelView.swift; sourceTree = "<group>"; };
 		318149D62319E3850006EE0C /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		31826A8022F3AC1300A163A6 /* StreamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewModel.swift; sourceTree = "<group>"; };
@@ -137,15 +135,6 @@
 			path = SingleBallViews;
 			sourceTree = "<group>";
 		};
-		316518B822FC892700C8535D /* CombineSingleStreamView */ = {
-			isa = PBXGroup;
-			children = (
-				316518B622FBEA6900C8535D /* MultiValueStreamView.swift */,
-				316518BB22FC9DFD00C8535D /* CombineResultStreamView.swift */,
-			);
-			path = CombineSingleStreamView;
-			sourceTree = "<group>";
-		};
 		31A965552319D5C3009C2C16 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,7 +209,7 @@
 				31F1DFCC2317916400347B55 /* DataStreamViewModel.swift */,
 				7C38B58A22F254350062EE99 /* SingleStreamView.swift */,
 				311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */,
-				316518B822FC892700C8535D /* CombineSingleStreamView */,
+				316518B622FBEA6900C8535D /* MultiValueStreamView.swift */,
 				31157E002315D36200CEFE3C /* UpdateStreamView */,
 				313841742302202700D45341 /* TestView.swift */,
 			);
@@ -355,7 +344,6 @@
 				311AB9D6232AB93000027E15 /* MultiBallView.swift in Sources */,
 				7C7A763022F202C2007B76F9 /* BallView.swift in Sources */,
 				312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */,
-				316518BC22FC9DFD00C8535D /* CombineResultStreamView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

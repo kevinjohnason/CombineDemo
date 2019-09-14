@@ -61,7 +61,7 @@ struct MultiStreamView: View {
         let stream1ViewModel: StreamViewModel<String> = DataStreamViewModel(streamModel: stream1Model)
         let stream2ViewModel: StreamViewModel<String> = DataStreamViewModel(streamModel: stream2Model)
         let operatorPublisher = combineStreamModel.operatorType.applyPublishers([stream1Model.toPublisher(), stream2Model.toPublisher()])
-        let resultStreamViewModel = StreamViewModel(title: combineStreamModel.name ?? "",
+        let resultStreamViewModel = StreamViewModel(title: combineStreamModel.description ?? "",
                                                 description: combineStreamModel.description ?? "", publisher: operatorPublisher)
         
         streamViewModels = [stream1ViewModel.toArrayViewModel(),

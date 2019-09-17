@@ -10,8 +10,6 @@ import Foundation
 
 class DataStreamViewModel: StreamViewModel<String> {
     
-    let streamId: UUID
-    
     var streamModel: StreamModel<String> {
         didSet {
             self.title = self.streamModel.name ?? ""
@@ -20,13 +18,7 @@ class DataStreamViewModel: StreamViewModel<String> {
         }
     }
     
-    convenience init(streamId: UUID) {
-        let streamModel = DataService.shared.loadStream(id: streamId)
-        self.init(streamModel: streamModel)
-    }
-    
-    init(streamModel: StreamModel<String>) {
-        self.streamId = streamModel.id
+    init(streamModel: StreamModel<String>) {        
         self.streamModel = streamModel        
         super.init(title: streamModel.name ?? "",
                    description: streamModel.description ?? streamModel.sequenceDescription,

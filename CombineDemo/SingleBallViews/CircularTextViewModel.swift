@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-class BallViewModel: ObservableObject, Identifiable {
+class CircularTextViewModel: ObservableObject, Identifiable {
     @Published var value: String
     let id: Date = Date()
     @Published var isHidden: Bool = false

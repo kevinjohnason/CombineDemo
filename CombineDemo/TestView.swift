@@ -18,7 +18,7 @@ struct TestView: View {
     
     var body: some View {
         VStack {
-            BallView(forgroundColor: .white, backgroundColor: .green, viewModel: BallViewModel(value: "1"))
+            Text("")
         }
     }
 }

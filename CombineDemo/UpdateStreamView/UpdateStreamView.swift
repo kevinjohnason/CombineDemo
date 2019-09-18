@@ -27,13 +27,13 @@ struct UpdateStreamView: View {
                             VStack(spacing: 30) {
                                 HStack {
                                     ForEach(self.viewModel.streamNumberOptions) { option in
-                                        BallView(forgroundColor: .white, backgroundColor: .red, draggable: true, viewModel: option)
+                                        CircularTextView(forgroundColor: .white, backgroundColor: .red, draggable: true, viewModel: option)
                                             .gesture(self.dragBallGesture(reader: reader, ballViewModel: option))
                                     }
                                 }
                                 HStack {
                                     ForEach(self.viewModel.streamLetterOptions) { option in
-                                        BallView(forgroundColor: .white, backgroundColor: .green, draggable: true, viewModel: option)
+                                        CircularTextView(forgroundColor: .white, backgroundColor: .green, draggable: true, viewModel: option)
                                         .gesture(self.dragBallGesture(reader: reader, ballViewModel: option))
                                     }
                                 }
@@ -58,7 +58,7 @@ struct UpdateStreamView: View {
         }
     }
     
-    func dragBallGesture(reader: GeometryProxy, ballViewModel: BallViewModel) -> some Gesture {
+    func dragBallGesture(reader: GeometryProxy, ballViewModel: CircularTextViewModel) -> some Gesture {
         DragGesture(coordinateSpace: .global)
             .onChanged({ (gestureValue) in
                 ballViewModel.offset = CGSize(width: gestureValue.translation.width,

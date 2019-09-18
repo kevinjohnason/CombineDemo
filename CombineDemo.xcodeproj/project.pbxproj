@@ -16,7 +16,7 @@
 		311AB9D8232AB97000027E15 /* MultiBallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AB9D7232AB97000027E15 /* MultiBallViewModel.swift */; };
 		311AB9DC232ABE1F00027E15 /* MultiBallTunnelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AB9DB232ABE1F00027E15 /* MultiBallTunnelView.swift */; };
 		311AB9DE232AC6DF00027E15 /* MultiStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */; };
-		312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B0D1E2315DD75004E3C0E /* BallViewModel.swift */; };
+		312B0D1F2315DD75004E3C0E /* CircularTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312B0D1E2315DD75004E3C0E /* CircularTextViewModel.swift */; };
 		313841752302202700D45341 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313841742302202700D45341 /* TestView.swift */; };
 		3163E60D22F8B67A00E0FDF2 /* CombineDemoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */; };
 		316518B722FBEA6900C8535D /* MultiValueStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316518B622FBEA6900C8535D /* MultiValueStreamView.swift */; };
@@ -37,7 +37,7 @@
 		7C7A762222F1FF15007B76F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C7A762122F1FF15007B76F9 /* Assets.xcassets */; };
 		7C7A762522F1FF15007B76F9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C7A762422F1FF15007B76F9 /* Preview Assets.xcassets */; };
 		7C7A762822F1FF15007B76F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7A762622F1FF15007B76F9 /* LaunchScreen.storyboard */; };
-		7C7A763022F202C2007B76F9 /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A762F22F202C2007B76F9 /* BallView.swift */; };
+		7C7A763022F202C2007B76F9 /* CircularTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A762F22F202C2007B76F9 /* CircularTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +50,7 @@
 		311AB9D7232AB97000027E15 /* MultiBallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBallViewModel.swift; sourceTree = "<group>"; };
 		311AB9DB232ABE1F00027E15 /* MultiBallTunnelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBallTunnelView.swift; sourceTree = "<group>"; };
 		311AB9DD232AC6DF00027E15 /* MultiStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiStreamView.swift; sourceTree = "<group>"; };
-		312B0D1E2315DD75004E3C0E /* BallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallViewModel.swift; sourceTree = "<group>"; };
+		312B0D1E2315DD75004E3C0E /* CircularTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTextViewModel.swift; sourceTree = "<group>"; };
 		313841742302202700D45341 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3163E60C22F8B67A00E0FDF2 /* CombineDemoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDemoButton.swift; sourceTree = "<group>"; };
 		316518B622FBEA6900C8535D /* MultiValueStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiValueStreamView.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		7C7A762422F1FF15007B76F9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7C7A762722F1FF15007B76F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C7A762922F1FF15007B76F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C7A762F22F202C2007B76F9 /* BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
+		7C7A762F22F202C2007B76F9 /* CircularTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +147,8 @@
 		316518B022FBE8A100C8535D /* SingleBallViews */ = {
 			isa = PBXGroup;
 			children = (
-				7C7A762F22F202C2007B76F9 /* BallView.swift */,
-				312B0D1E2315DD75004E3C0E /* BallViewModel.swift */,
+				7C7A762F22F202C2007B76F9 /* CircularTextView.swift */,
+				312B0D1E2315DD75004E3C0E /* CircularTextViewModel.swift */,
 				316A347B22F4DE44002D24AA /* BallTunnelView.swift */,
 			);
 			path = SingleBallViews;
@@ -358,8 +358,8 @@
 				31A9655423199EA7009C2C16 /* StreamListView.swift in Sources */,
 				313841752302202700D45341 /* TestView.swift in Sources */,
 				311AB9D6232AB93000027E15 /* MultiBallView.swift in Sources */,
-				7C7A763022F202C2007B76F9 /* BallView.swift in Sources */,
-				312B0D1F2315DD75004E3C0E /* BallViewModel.swift in Sources */,
+				7C7A763022F202C2007B76F9 /* CircularTextView.swift in Sources */,
+				312B0D1F2315DD75004E3C0E /* CircularTextViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

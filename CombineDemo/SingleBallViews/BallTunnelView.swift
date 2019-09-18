@@ -36,7 +36,7 @@ struct BallTunnelView: View {
             HStack(spacing: 0) {
                 Spacer()
                 ForEach(self.values.reversed()) { value in
-                    BallView(forgroundColor: .white, backgroundColor: self.color, viewModel: BallViewModel(value: value.value))
+                    CircularTextView(forgroundColor: .white, backgroundColor: self.color, viewModel: CircularTextViewModel(value: value.value))
                         .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
                         .transition(.asymmetric(insertion: .offset(x: -tunnelGeometry.size.width, y: 0),
                                                 removal: .offset(x: tunnelGeometry.size.width, y: 0)))

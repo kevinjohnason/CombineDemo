@@ -16,8 +16,8 @@ struct MultiBallView: View {
     var body: some View {
         HStack(spacing: 0) {
             ForEach(viewModel.values, id: \.self) { value in
-                BallView(forgroundColor: self.forgroundColor,
-                         backgroundColor: self.backgroundColor, viewModel: BallViewModel(value: value))
+                CircularTextView(forgroundColor: self.forgroundColor,
+                         backgroundColor: self.backgroundColor, viewModel: CircularTextViewModel(value: value))
             }
         }
     }

@@ -26,9 +26,9 @@ extension String {
 
 class UpdateStreamViewModel: ObservableObject {
     
-    @Published var streamNumberOptions: [BallViewModel]
+    @Published var streamNumberOptions: [CircularTextViewModel]
     
-    @Published var streamLetterOptions: [BallViewModel]
+    @Published var streamLetterOptions: [CircularTextViewModel]
         
     @Published var streamName: String
     
@@ -48,11 +48,11 @@ class UpdateStreamViewModel: ObservableObject {
         self.streamModel = streamModel
         self.streamNumberOptions = (1...8).map {
             print("generating \($0)")
-            return BallViewModel(value: String($0))
+            return CircularTextViewModel(value: String($0))
         }
         self.streamLetterOptions = ("A"..."H").characters.map {
             print("generating \($0)")
-            return BallViewModel(value: String($0))
+            return CircularTextViewModel(value: String($0))
         }
         self.streamName = streamModel.name ?? ""
         self.streamDescription = streamModel.sequenceDescription

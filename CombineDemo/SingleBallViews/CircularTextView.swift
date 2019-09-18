@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-struct BallView: View {
+struct CircularTextView: View {
     var forgroundColor: Color
     var backgroundColor: Color
     var draggable: Bool = false
-    @ObservedObject var viewModel: BallViewModel    
+    @ObservedObject var viewModel: CircularTextViewModel    
     
     var body: some View {
         Text(self.viewModel.value)
@@ -31,8 +31,8 @@ struct BallView: View {
 #if DEBUG
 struct BallView_Previews: PreviewProvider {
     static var previews: some View {
-        BallView(forgroundColor: .white, backgroundColor: .red,
-                 viewModel: BallViewModel(value: ""))
+        CircularTextView(forgroundColor: .white, backgroundColor: .red,
+                 viewModel: CircularTextViewModel(value: ""))
     }
 }
 #endif

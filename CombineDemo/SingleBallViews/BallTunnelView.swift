@@ -30,11 +30,12 @@ struct BallTunnelView: View {
     var ballRadius: CGFloat = 48
     
     var padding: CGFloat = 5
+    
+    let tunnelColor: Color = Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0)
 
     var body: some View {
         GeometryReader { tunnelGeometry in
             HStack(spacing: 0) {
-                Spacer()
                 ForEach(self.values.reversed()) { value in
                     CircularTextView(forgroundColor: .white, backgroundColor: self.color, viewModel: CircularTextViewModel(value: value.value))
                         .frame(width: self.ballRadius, height: self.ballRadius, alignment: .center)
@@ -43,9 +44,9 @@ struct BallTunnelView: View {
                 }
             }
             .frame(minWidth: self.tunnelWidth(with: tunnelGeometry.size.width),
-                   minHeight: self.ballRadius, alignment: .leading).offset(x: self.tunnelOffset(with: tunnelGeometry.size.width))
+                   minHeight: self.ballRadius, alignment: .trailing).offset(x: self.tunnelOffset(with: tunnelGeometry.size.width))
             .padding([.top, .bottom], self.padding)            
-                .background(Color(red: 242/255.0, green: 242/255.0, blue: 242/255.0))
+                .background(self.tunnelColor)
             .anchorPreference(key: TunnelPreferenceKey.self, value: .bounds, transform: {
                 BoundsPreferenceData(bounds: $0)
             }).animation(.easeInOut(duration: self.animationSecond))

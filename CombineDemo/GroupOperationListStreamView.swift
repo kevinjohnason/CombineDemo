@@ -20,7 +20,8 @@ struct GroupOperationListStreamView: View {
             return AnyView(EmptyView())
         }
         let operationStreamView = MultiStreamView(streamTitle: streamModel.name ?? "",
-                                                  stream1Model: sourceStreams[0], stream2Model: sourceStreams[1], groupStreamModel: streamModel)        
+                                                  stream1Model: sourceStreams[0],
+                                                  stream2Model: sourceStreams[1], groupStreamModel: streamModel)        
         return AnyView(operationStreamView)
      }
     

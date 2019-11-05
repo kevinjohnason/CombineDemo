@@ -23,7 +23,6 @@ struct ContentView: View {
                     CombineGroupOperationListStreamView(storedCombineGroupOperationStreams: $viewModel.storedCombineGroupOperationStreams,
                                                         storedStreams: $viewModel.storedStreams)
                 }
-                
                 Button("Reset") {
                     DataService.shared.resetStoredStream()
                 }.frame(maxWidth: .infinity, maxHeight: 25)
@@ -31,7 +30,7 @@ struct ContentView: View {
             }.navigationBarTitle("Streams")
                 .navigationBarItems(leading: EditButton(), trailing: createStreamView)
                 .onAppear(perform: viewModel.refresh)
-        }
+        }.environmentObject(viewModel)
         
     }
     

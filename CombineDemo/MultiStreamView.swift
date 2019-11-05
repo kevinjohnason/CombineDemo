@@ -13,7 +13,7 @@ struct MultiStreamView: View {
     let streamViewModels: [StreamViewModel<[String]>]
     let streamTitle: String
             
-    init(streamTitle: String, sourceStreamModel: StreamModel<String>, operatorItem: Operator) {
+    init(streamTitle: String, sourceStreamModel: StreamModel<String>, operatorItem: Operator<String>) {
         self.streamTitle = streamTitle
                         
         let sourceViewModel = StreamViewModel(title: sourceStreamModel.name ?? "",

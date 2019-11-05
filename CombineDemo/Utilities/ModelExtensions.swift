@@ -9,16 +9,6 @@
 import Foundation
 import Combine
 
-extension StreamModel {
-    
-    func toArrayStreamModel() -> StreamModel<[T]> {
-        StreamModel<[T]>.init(id: self.id, name: self.name, description: self.description,
-                              stream: self.stream.map { StreamItem(value: [$0.value], operatorItem: $0.operatorItem) },
-                              isDefault: self.isDefault)
-    }
-    
-}
-
 extension StreamModel where T == String {
     
     var sequenceDescription: String {
@@ -104,62 +94,6 @@ extension CombineGroupOperationType {
             return Publishers.CombineLatest(publishers[0], publishers[1]).map {
                 [$0, $1]
             }.eraseToAnyPublisher()
-        }
-    }
-}
-
-extension Operator {
-    var description: String {
-        switch self {
-        case .delay(let seconds, _):
-            return ".delay(for: .seconds(\(seconds)), scheduler: DispatchQueue.main)"
-        case .filter(let expression, _):
-            return ".filter { \(expression) }"
-        case .dropFirst(let count, _):
-            return ".dropFirst(\(count))"
-        case .map(let expression, _):
-            return ".map { \(expression) }"
-        case .scan(let expression, _):
-            return ".scan(0) { \(expression) }"
-        }
-    }
-    
-    func applyPublisher(_ publisher: AnyPublisher<String, Never>) -> AnyPublisher<String, Never> {
-        switch self {
-        case .delay(let seconds, _):
-            return publisher.delay(for: .seconds(seconds), scheduler: DispatchQueue.main).eraseToAnyPublisher()
-        case .filter(let expression, _):
-            return publisher.filter {
-                NSPredicate(format: expression,
-                            argumentArray: [Int($0) ?? 0])
-                .evaluate(with: nil) }.eraseToAnyPublisher()
-        case .dropFirst(let count, _):
-            return publisher.dropFirst(count).eraseToAnyPublisher()
-        case .map(let expression, _):
-            return publisher.map { NSExpression(format: expression,
-                                                argumentArray: [Int($0) ?? 0])
-                .expressionValue(with: nil, context: nil) as? Int }
-                .map { String($0 ?? 0) }.eraseToAnyPublisher()
-        case .scan(let expression, _):
-            return publisher.scan(0) { NSExpression(format: expression,
-                                                    argumentArray: [$0, Int($1) ?? 0])
-                                        .expressionValue(with: nil, context: nil) as? Int ?? 0 }
-                .map { String($0) }.eraseToAnyPublisher()
-        }
-    }
-    
-    var next: Operator? {
-        switch self {
-        case .delay(_, let next):
-            return next
-        case .filter(_, let next):
-            return next
-        case .dropFirst(_, let next):
-            return next
-        case .map(_, let next):
-            return next
-        case .scan(_, let next):
-            return next
         }
     }
 }

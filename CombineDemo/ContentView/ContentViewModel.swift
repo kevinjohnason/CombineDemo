@@ -15,6 +15,10 @@ class ContentViewModel: ObservableObject {
     
     @Published var storedStreams: [StreamModel<String>] = DataService.shared.storedStreams
     
+    @Published var intStreams: [StreamModel<Int>] = DataService.shared.intStreams
+    
+    @Published var stringStreams: [StreamModel<String>] = DataService.shared.stringStreams
+        
     @Published var storedOperationStreams: [OperationStreamModel] = DataService.shared.storedOperationStreams
              
     @Published var storedGroupOperationStreams: [GroupOperationStreamModel] = DataService.shared.storedGroupOperationStreams

@@ -26,6 +26,51 @@ class DataService {
         }
     }
     
+    
+    var defaultStringStream: StreamModel<String> {
+        let streamB = ["A", "B", "C", "D"].map {
+            StreamItem(value: $0, operatorItem: .delay(seconds: 2, next: nil)) }
+        return StreamModel(id: UUID(), name: "Serial Stream B",
+                                        description: nil, stream: streamB, isDefault: true)
+    }
+    
+    var stringStreams: [StreamModel<String>] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "stringStreams") else {
+                return [defaultStringStream]
+            }
+            guard let streams = try? JSONDecoder().decode([StreamModel<String>].self, from: data) else {
+                return [defaultStringStream]
+            }
+            return streams
+        } set {
+            // swiftlint:disable:next force_try
+            UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "stringStreams")
+        }
+    }    
+    
+    var defaultIntStream: StreamModel<Int> {
+        let streamA = (1...4).map { StreamItem(value: $0,
+                                               operatorItem: .delay(seconds: 1, next: nil)) }
+        return StreamModel(id: UUID(), name: "Serial Stream A",
+                                        description: nil, stream: streamA, isDefault: true)
+    }
+    
+    var intStreams: [StreamModel<Int>] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "intStreams") else {
+                return [defaultIntStream]
+            }
+            guard let streams = try? JSONDecoder().decode([StreamModel<Int>].self, from: data) else {
+                return [defaultIntStream]
+            }
+            return streams
+        } set {
+            // swiftlint:disable:next force_try
+            UserDefaults.standard.set(try! JSONEncoder().encode(newValue), forKey: "intStreams")
+        }
+    }
+    
     var storedStreams: [StreamModel<String>] {
         get {
             guard let data = UserDefaults.standard.data(forKey: "storedStreams") else {
@@ -41,6 +86,7 @@ class DataService {
             storedStreamUpdated.send(newValue)
         }
     }
+    
     
     var storedOperationStreams: [OperationStreamModel] {
         get {
@@ -180,6 +226,7 @@ class DataService {
                                                           streamModelIds: [sourceStream1.id, sourceStream2.id], operationType: .append)
         return [mergeStreamModel, flatMapStreamModel, appendStreamModel]
     }
+    
     func appendDefaultCombineGroupOperationStreamsIfNeeded(streams: [CombineGroupOperationStreamModel]) -> [CombineGroupOperationStreamModel] {
         guard streams.count == 0 else {
             return streams

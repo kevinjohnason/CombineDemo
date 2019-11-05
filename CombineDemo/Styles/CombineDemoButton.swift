@@ -25,7 +25,7 @@ struct CombineDemoButton: View {
 #if DEBUG
 struct CombineDemoButton_Previews: PreviewProvider {
     static var previews: some View {
-        CombineDemoButton(text: "", backgroundColor: .blue) {
+        CombineDemoButton(text: "T", backgroundColor: .blue) {
             
         }
     }

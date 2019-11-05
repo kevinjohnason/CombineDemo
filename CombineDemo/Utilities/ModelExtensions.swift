@@ -67,47 +67,6 @@ extension StreamItem where T == String {
     }
 }
 
-extension OperatorItem {
-    var description: String {
-        switch self.type {
-        case .delay:
-            return ".delay(for: .seconds(\(self.value ?? 0)), scheduler: DispatchQueue.main)"
-        case .filter:
-            return ".filter { $0 != \(self.value ?? 0) }"
-        case .drop:
-            return ".dropFirst(\(Int(self.value ?? 0)))"
-        case .map:
-            return ".map { $0 * \(Int(self.value ?? 0)) }"
-        case .scan:
-            return ".scan(0) { $0 + $1 }"
-        }
-    }
-        
-    func applyPublisher(_ publisher: AnyPublisher<String, Never>) -> AnyPublisher<String, Never> {
-        switch self.type {
-        case .delay:
-            return publisher.delay(for: .seconds(self.value ?? 0), scheduler: DispatchQueue.main).eraseToAnyPublisher()
-        case .filter:
-            return publisher.filter {
-                NSPredicate(format: self.expression ?? "true",
-                            argumentArray: [$0, String(Int(self.value ?? 0))])
-                .evaluate(with: nil) }.eraseToAnyPublisher()
-        case .drop:
-            return publisher.dropFirst(Int(self.value ?? 0)).eraseToAnyPublisher()
-        case .map:
-            return publisher.map { NSExpression(format: self.expression ?? "0",
-                                                argumentArray: [Int($0) ?? 0, Int(self.value ?? 0)])
-                .expressionValue(with: nil, context: nil) as? Int }
-                .map { String($0 ?? 0) }.eraseToAnyPublisher()
-        case .scan:
-            return publisher.scan(0) { NSExpression(format: self.expression ?? "0",
-                                                    argumentArray: [$0, Int($1) ?? 0])
-                                        .expressionValue(with: nil, context: nil) as? Int ?? 0 }
-                .map { String($0) }.eraseToAnyPublisher()
-        }
-    }
-}
-
 extension GroupOperationType {
     func applyPublishers(_ publishers: [AnyPublisher<String, Never>]) -> AnyPublisher<String, Never> {
         switch self {
@@ -172,7 +131,7 @@ extension Operator {
         case .filter(let expression, _):
             return publisher.filter {
                 NSPredicate(format: expression,
-                            argumentArray: [$0])
+                            argumentArray: [Int($0) ?? 0])
                 .evaluate(with: nil) }.eraseToAnyPublisher()
         case .dropFirst(let count, _):
             return publisher.dropFirst(count).eraseToAnyPublisher()

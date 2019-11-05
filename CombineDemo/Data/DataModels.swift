@@ -41,27 +41,13 @@ enum OperatorType: String, Codable {
     case scan
 }
 
-class OperatorItem: Codable {
-    let type: OperatorType
-    let value: Double?
-    var next: OperatorItem?
-    let expression: String?
-
-    init(type: OperatorType, value: Double? = nil, expression: String? = nil, next: OperatorItem? = nil) {
-        self.type = type
-        self.value = value
-        self.next = next
-        self.expression = expression
-    }
-    
-}
 
 struct OperationStreamModel: Codable, Identifiable {
     var id: UUID
     var name: String?
     var description: String?
     var streamModelId: UUID
-    var operatorItem: OperatorItem
+    var operatorItem: Operator
 }
 
 enum GroupOperationType: String, Codable {

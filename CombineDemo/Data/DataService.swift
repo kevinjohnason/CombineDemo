@@ -135,26 +135,20 @@ class DataService {
         let filterStreamModel = OperationStreamModel(id: UUID(),
                                                      name: "Filter Stream", description: "filter { $0 != 3 )",
                                                      streamModelId: sourceStream.id,
-                                                     operatorItem: OperatorItem(type: .filter,
-                                                                                value: 3,
-                                                                                expression: "%d != %d", next: nil))
+                                                     operatorItem: .filter(expression: "%d != 3", next: nil))
                 
         let dropStreamModel = OperationStreamModel(id: UUID(), name: "Drop Stream", description: "dropFirst(2)",
                                                    streamModelId: sourceStream.id,
-                                                   operatorItem: OperatorItem(type: .drop,
-                                                                              value: 2, expression: nil, next: nil))
+                                                   operatorItem: .dropFirst(count: 2, next: nil))
                 
         let mapStreamModel = OperationStreamModel(id: UUID(), name: "Map Stream", description: "map { $0 * 2 }",
                                                   streamModelId: sourceStream.id,
-                                                  operatorItem: OperatorItem(type: .map,
-                                                                             value: 2,
-                                                                             expression: "%d * %d", next: nil))
+                                                  operatorItem: .map(expression: "%d * 2", next: nil))
         
         let scanStreamModel = OperationStreamModel(id: UUID(), name: "Scan Stream",
                                                    description: "scan(0) { $0 + $1 }",
                                                    streamModelId: sourceStream.id,
-                                                   operatorItem: OperatorItem(type: .scan,
-                                                                              value: nil, expression: "%d + %d", next: nil))
+                                                   operatorItem: .scan(expression: "%d + %d", next: nil))
         
         var newStreams = streams
         newStreams.append(filterStreamModel)

@@ -13,7 +13,7 @@ struct MultiStreamView: View {
     let streamViewModels: [StreamViewModel<[String]>]
     let streamTitle: String
             
-    init(streamTitle: String, sourceStreamModel: StreamModel<String>, operatorItem: OperatorItem) {
+    init(streamTitle: String, sourceStreamModel: StreamModel<String>, operatorItem: Operator) {
         self.streamTitle = streamTitle
                         
         let sourceViewModel = StreamViewModel(title: sourceStreamModel.name ?? "",
@@ -22,7 +22,7 @@ struct MultiStreamView: View {
         
         var streamViewModels: [StreamViewModel<[String]>] = [sourceViewModel]
         
-        var currentOperatorItem: OperatorItem?  = operatorItem
+        var currentOperatorItem: Operator?  = operatorItem
         var currentPublisher: AnyPublisher<String, Never>? = sourceStreamModel.toPublisher()
         while currentOperatorItem != nil {
             let newPublisher = currentOperatorItem!.applyPublisher(currentPublisher!)
@@ -95,6 +95,6 @@ struct MultiStreamView_Previews: PreviewProvider {
     static var previews: some View {
         MultiStreamView(streamTitle: "",
                         sourceStreamModel: StreamModel<String>.new(),
-                        operatorItem: OperatorItem(type: .delay))
+                        operatorItem: .delay(seconds: 1, next: nil))
     }
 }

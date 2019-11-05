@@ -30,7 +30,7 @@ struct StreamModel<T: Codable>: Codable, Identifiable {
 
 struct StreamItem<T: Codable>: Codable {
     let value: T
-    var operatorItem: OperatorItem?
+    var operatorItem: Operator?
 }
 
 enum OperatorType: String, Codable {

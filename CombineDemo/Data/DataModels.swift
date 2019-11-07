@@ -76,6 +76,12 @@ indirect enum Operator<T: Codable>: Codable {
     }
     case delay(seconds: Double, next: Operator?)
     
+    case dropFirst(count: Int, next: Operator?)
+
+    case map(expression: String, next: Operator?)
+    
+    case scan(expression: String, next: Operator?)
+    
     private struct ExpressionParameters: Codable {
            let expression: String
            let next: Operator?
@@ -86,11 +92,6 @@ indirect enum Operator<T: Codable>: Codable {
         let count: Int
         let next: Operator?
     }
-    case dropFirst(count: Int, next: Operator?)
-
-    case map(expression: String, next: Operator?)
-    
-    case scan(expression: String, next: Operator?)
     
     enum CodingKeys: CodingKey {
         case delay
@@ -156,7 +157,7 @@ extension Operator {
         }
     }
     
-    func applyPublisher(_ publisher: AnyPublisher<T, Never>) -> AnyPublisher<T, Never> {
+    func apply(to publisher: AnyPublisher<T, Never>) -> AnyPublisher<T, Never> {
         switch self {
         case .delay(let seconds, _):
             return publisher.delay(for: .seconds(seconds), scheduler: DispatchQueue.main).eraseToAnyPublisher()
@@ -178,9 +179,8 @@ extension Operator {
                 .map { $0! }
                 .eraseToAnyPublisher()
         case .scan(let expression, _):
-            return publisher.scan(0) { NSExpression(format: expression,
-                                                    argumentArray: [$0, $1])
-                                        .expressionValue(with: nil, context: nil) }                                
+            return publisher.scan(0) { NSExpression(format: expression, argumentArray: [$0, $1])
+                                        .expressionValue(with: nil, context: nil) }                    
                 .map { $0 as? T }
                 .filter { $0 != nil }
                 // swiftlint:disable:next force_cast
